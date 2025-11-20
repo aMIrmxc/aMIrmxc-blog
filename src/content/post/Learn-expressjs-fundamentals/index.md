@@ -8,16 +8,16 @@ tags: ["expressjs", "nodejs", "backend", "javascript"]
 
 
 
-# آموزش کامل Express.js: از مبانی تا قابلیت‌های پیشرفته
+# آموزش پایه ای Express.js
 
 اگه داری با JavaScript بک اند می‌سازی، احتمالاً  از Express.js استفاده می کنی. تو این راهنمای کامل، همه چیزی که باید در مورد Express بدونی رو دوره می کنیم، و حتی چند تا فیچر پیشرفته‌ای که کم تو آموزش‌های دیگه دیده میشه.
 
 
 
-## شروع کار با Express.js {#getting-started}
+## شروع کار با Express.js
 
 ### پیش نیازها
-قبل از اینکه تو Express.js فرو بری، باید Node.js رو روی سیستمت نصب کنی. اگه هنوز نصبش نکردی، از سایت رسمی Node.js دانلودش کن.
+ابتدا باید Node.js رو روی سیستمت نصب کنی. اگه هنوز نصبش نکردی، از سایت رسمی Node.js دانلودش کن.
 
 ### راه‌اندازی پروژه
 اول یه پروژه جدید بساز و dependency های لازم رو نصب کن:
@@ -46,7 +46,7 @@ npm install --save-dev nodemon
 
 حالا می‌تونی `npm run dev` رو اجرا کنی تا server ات با restart خودکار شروع شه.
 
-## ساخت اولین سرور {#first-server}
+## ساخت اولین سرور
 
 یه فایل `server.js` تو root پروژه‌ت بساز:
 
@@ -62,9 +62,20 @@ app.listen(3000, () => {
 
 این کد یه server پایه Express می‌سازه که روی port 3000 گوش می‌ده. اما هنوز هیچ route ای نداره.
 
-## درک کردن Route ها {#routes}
 
-Route ها مشخص می‌کنن که app تو چطور به request های مختلف client پاسخ بده. Express از همه HTTP method ها پشتیبانی می‌کنه:
+
+## Route ها
+
+**Route** ها در Express مشخص می‌کنند که برنامه‌ی ما چگونه به درخواست‌های مختلف **کاربر (client)** پاسخ بدهد. به زبان ساده، Route ها مثل تابلوهای راهنمایی هستند که به برنامه می‌گویند وقتی کاربر به آدرس مشخصی مراجعه کرد، چه کاری انجام بدهد.
+
+Express از تمام **HTTP method** های رایج پشتیبانی می‌کند:
+
+* **GET:** دریافت اطلاعات از سرور
+* **POST:** ارسال اطلاعات به سرور برای ایجاد چیزی جدید
+* **PUT:** بروزرسانی اطلاعات موجود
+* **DELETE:** حذف اطلاعات
+
+مثال:
 
 ```javascript
 // GET route
@@ -72,56 +83,80 @@ app.get('/', (req, res) => {
   console.log('Home page accessed');
   res.send('Hello World!');
 });
+```
 
+> این مسیر وقتی کاربر وارد صفحه اصلی سایت (`/`) می‌شود، یک پیام "Hello World!" به او می‌فرستد.
+
+```javascript
 // POST route
 app.post('/users', (req, res) => {
   res.send('Create a new user');
 });
+```
 
+> وقتی کاربر اطلاعاتی برای ایجاد کاربر جدید ارسال کند، سرور این پیام را برمی‌گرداند.
+
+```javascript
 // PUT route
 app.put('/users/:id', (req, res) => {
   res.send('Update user');
 });
+```
 
+> مسیرهای PUT معمولا برای بروزرسانی اطلاعات هستند. `:id` یعنی سرور انتظار دارد یک **شناسه کاربر** دریافت کند.
+
+```javascript
 // DELETE route
 app.delete('/users/:id', (req, res) => {
   res.send('Delete user');
 });
 ```
 
+> مسیر DELETE برای حذف اطلاعات کاربر با شناسه مشخص استفاده می‌شود.
+
 ### Route Parameter ها
-`req` و `res` parameter ها به ترتیب request object و response object رو نشون می‌دن. بیشتر وقت‌ها parameter سوم (`next`) رو نمی‌خوای که برای middleware استفاده میشه.
 
-## کار با Response Methods {#responses}
+در route ها، پارامترهای مهم وجود دارند:
 
-Express چندین method برای ارسال response به client ها داره:
+* `req`: **request object**، شامل اطلاعاتی است که کاربر ارسال کرده است (مثلا فرم‌ها یا URL params)
+* `res`: **response object**، برای پاسخ دادن به کاربر استفاده می‌شود
+* `next`: معمولاً برای **middleware** استفاده می‌شود و در اکثر route ها لازم نیست
+
+---
+
+## کار با Response Methods
+
+Express چندین روش برای ارسال پاسخ به کاربر دارد. به طور خلاصه:
 
 ### Response Method های پایه
 
 ```javascript
 app.get('/basic', (req, res) => {
-  // ارسال متن ساده
-  res.send('Hello World');
+  res.send('Hello World'); // ارسال متن ساده
 });
+```
 
+```javascript
 app.get('/status', (req, res) => {
-  // ارسال status code همراه با پیام
-  res.status(500).send('Server Error');
+  res.status(500).send('Server Error'); // ارسال کد وضعیت به همراه پیام
 });
+```
 
+```javascript
 app.get('/json', (req, res) => {
-  // ارسال JSON response
-  res.json({ message: 'Hello World', status: 'success' });
+  res.json({ message: 'Hello World', status: 'success' }); // ارسال JSON
 });
+```
 
+```javascript
 app.get('/download', (req, res) => {
-  // فعال کردن دانلود فایل
-  res.download('./server.js');
+  res.download('./server.js'); // دانلود فایل از سرور
 });
 ```
 
 ### زنجیره کردن Response Method ها
-می‌تونی چند response method رو با هم زنجیر کنی:
+
+می‌توان چند method را پشت سر هم استفاده کرد:
 
 ```javascript
 app.get('/error', (req, res) => {
@@ -129,68 +164,23 @@ app.get('/error', (req, res) => {
 });
 ```
 
-## استفاده از View Engine ها با EJS {#view-engines}
+> این کار شبیه یک خط تولید است: ابتدا **وضعیت پاسخ** مشخص می‌شود و بعد **محتوا** ارسال می‌شود.
 
-View engine ها بهت اجازه می‌دن صفحات HTML پویا رندر کنی. EJS (Embedded JavaScript) یکی از محبوب‌ترین گزینه‌هاست چون شبیه HTML هست.
 
-### راه‌اندازی EJS
+## سازماندهی کد با Router ها
 
-```bash
-npm install ejs
-```
-
-Express رو طوری تنظیم کن که از EJS استفاده کنه:
-
-```javascript
-const express = require('express');
-const app = express();
-
-// EJS رو به عنوان view engine تنظیم کن
-app.set('view engine', 'ejs');
-
-app.get('/', (req, res) => {
-  res.render('index', { text: 'World' });
-});
-```
-
-### ساخت پوشه Views
-یه پوشه `views` تو root پروژه‌ت بساز و فایل `index.ejs` رو اضافه کن:
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Express App</title>
-</head>
-<body>
-    <h1>Hello <%= text %></h1>
-    <!-- می‌تونی کد JavaScript هم بنویسی -->
-    <p>2 + 2 = <%= 2 + 2 %></p>
-
-    <!-- variable های undefined رو ایمن handle کن -->
-    <p>Name: <%= locals.name || 'Default Name' %></p>
-</body>
-</html>
-```
-
-### نکات EJS Syntax
-- `<%= %>` - مقدار رو تو HTML output می‌کنه
-- `<% %>` - کد JavaScript اجرا می‌کنه بدون output
-- `locals` - object ای که همیشه تعریف شده و شامل داده‌های پاس شده
-- از `locals.variableName` برای دسترسی ایمن به variable های احتمالاً undefined استفاده کن
-
-## سازماندهی کد با Router ها {#routers}
-
-وقتی app تو بزرگ میشه، نگه داشتن همه route ها تو یه فایل سخت میشه. Express router ها کمک می‌کنن کدت رو به route handler های modular تبدیل کنی.
+وقتی پروژه Express بزرگ می‌شود، **همه route ها را در یک فایل نگه داشتن سخت و شلوغ می‌شود**.
+**Router ها** به ما کمک می‌کنند تا route ها را **ماژولار و جداگانه** کنیم، یعنی هر گروه route در فایل مخصوص خودش باشد.
 
 ### ساخت فایل Router
-یه پوشه `routes` بساز و فایل `users.js` رو اضافه کن:
+
+ابتدا یک پوشه به نام `routes` بساز و فایل `users.js` را داخل آن اضافه کن:
 
 ```javascript
 const express = require('express');
 const router = express.Router();
 
-// Route ها نسبت به mounted path هستن
+// Route ها نسبت به mounted path هستند
 router.get('/', (req, res) => {
   res.send('User list');
 });
@@ -203,32 +193,40 @@ router.post('/', (req, res) => {
   res.send('Create user');
 });
 
-// router رو export کن
+// router را export کن
 module.exports = router;
 ```
 
+> توضیح ساده: این فایل فقط route های مربوط به کاربران را نگه می‌دارد. هر route نسبت به **مسیر نصب شده** (`/users`) است.
+
+
 ### استفاده از Router تو Main Server
-تو `server.js`ت:
+
+در `server.js`:
 
 ```javascript
 const express = require('express');
 const userRouter = require('./routes/users');
 const app = express();
 
-// router رو روی /users mount کن
+// router را روی /users mount کن
 app.use('/users', userRouter);
 
 app.listen(3000);
 ```
 
-این کار route هایی مثل اینا می‌سازه:
-- GET `/users/` → User list
-- GET `/users/new` → New user form
-- POST `/users/` → Create user
+> با این کار، مسیرهای زیر ساخته می‌شوند:
 
-## Route های پویا و Parameter ها {#dynamic-routes}
+* GET `/users/` → نمایش لیست کاربران
+* GET `/users/new` → نمایش فرم ایجاد کاربر جدید
+* POST `/users/` → ایجاد کاربر جدید
 
-Dynamic route ها بهت اجازه می‌دن قسمت‌های متغیر URL رو capture کنی:
+به زبان ساده: هر route داخل فایل Router به `/users` اضافه می‌شود.
+
+
+## Route های پویا و Parameter ها
+
+**Dynamic route** ها به شما اجازه می‌دهند بخش‌هایی از URL را متغیر تعریف کنید و آن‌ها را دریافت کنید.
 
 ```javascript
 // Dynamic parameter با دونقطه
@@ -244,8 +242,11 @@ router.get('/:id/posts/:postId', (req, res) => {
 });
 ```
 
+> مثال ساده: اگر URL `/5/posts/10` باشد، `id = 5` و `postId = 10` است.
+
 ### مهم: ترتیب Route ها مهمه
-Route های static باید قبل از dynamic route ها بیان:
+
+Route های **static** باید قبل از dynamic route ها نوشته شوند، چون dynamic route می‌تواند مسیرهای static را هم بگیرد.
 
 ```javascript
 // ✅ ترتیب درست
@@ -256,14 +257,21 @@ router.get('/new', (req, res) => {
 router.get('/:id', (req, res) => {
   res.send(`User ${req.params.id}`);
 });
-
-// ❌ ترتیب اشتباه - /:id میتونه /new رو بگیره
 ```
+
+```javascript
+// ❌ ترتیب اشتباه
+router.get('/:id', (req, res) => { ... }); // ممکن است مسیر /new را بگیرد
+router.get('/new', (req, res) => { ... });
+```
+
+---
 
 ## تکنیک‌های پیشرفته Routing {#advanced-routing}
 
 ### Route Chaining
-وقتی چند HTTP method مسیر یکسانی دارن، از route chaining استفاده کن:
+
+اگر چند method برای یک مسیر مشابه داریم، می‌توانیم آن‌ها را با هم **زنجیره کنیم**:
 
 ```javascript
 router.route('/:id')
@@ -278,8 +286,13 @@ router.route('/:id')
   });
 ```
 
+> به جای تعریف جداگانه هر method، همه آن‌ها را یک جا تعریف می‌کنیم.
+
+---
+
 ### Router Parameters Middleware
-Method `router.param()` middleware رو برای parameter های خاص اجرا می‌کنه:
+
+با `router.param()` می‌توان **middleware مخصوص یک parameter** تعریف کرد.
 
 ```javascript
 const users = [
@@ -287,11 +300,11 @@ const users = [
   { name: 'Sally' }
 ];
 
-// هروقت parameter :id پیدا شد اجرا میشه
+// هروقت parameter :id پیدا شد اجرا می‌شود
 router.param('id', (req, res, next, id) => {
   console.log(`Looking for user with ID: ${id}`);
 
-  // user رو از database/array بگیر
+  // user را از آرایه/دیتابیس می‌گیریم
   req.user = users[id];
 
   // به middleware/route بعدی برو
@@ -299,47 +312,68 @@ router.param('id', (req, res, next, id) => {
 });
 
 router.get('/:id', (req, res) => {
-  // req.user حالا در دسترسه
+  // req.user حالا در دسترس است
   console.log(req.user);
   res.json(req.user);
 });
 ```
 
-این middleware قبل از هر route ای که parameter `:id` داره اجرا میشه و بهت اجازه می‌ده:
-- Parameter ها رو validate کنی
-- داده رو از database بگیری
-- داده رو به request object اضافه کنی
-- منطق مشترک parameter ها رو در یه جا handle کنی
+> این middleware قبل از هر route که parameter `:id` دارد اجرا می‌شود و اجازه می‌دهد:
 
-## درک کردن Middleware {#middleware}
+* مقدار parameter را **بررسی و اعتبارسنجی** کنیم
+* **داده را از دیتابیس** یا آرایه بگیریم
+* داده را به **request object اضافه کنیم**
+* منطق مشترک parameter ها را یکجا مدیریت کنیم
 
-Function های Middleware در طول چرخه request-response اجرا میشن. اونا به request object (`req`)، response object (`res`)، و function middleware بعدی (`next`) دسترسی دارن.
+
+
+## Middleware
+
+**Middleware** در Express مثل یک **میانجی بین درخواست کاربر و پاسخ سرور** عمل می‌کند. این function ها در طول چرخه **request-response** اجرا می‌شوند و به سه چیز دسترسی دارند:
+
+* `req` → اطلاعات درخواست کاربر
+* `res` → پاسخ به کاربر
+* `next` → برای رفتن به middleware بعدی
+
+به زبان ساده، Middleware می‌تواند:
+
+* درخواست‌ها را بررسی کند
+* داده‌ها را آماده کند
+* یا محدودیت‌های دسترسی اعمال کند
+
+---
 
 ### ساخت Custom Middleware
 
+مثال: یک middleware برای **ثبت لاگ** درخواست‌ها:
+
 ```javascript
-// function middleware برای log کردن
 function logger(req, res, next) {
   console.log(`${req.method} ${req.originalUrl}`);
-  next(); // برای ادامه به middleware بعدی next رو صدا کن
+  next(); // برای ادامه به middleware بعدی
 }
 
-// استفاده global از middleware
+// استفاده global
 app.use(logger);
 
-// استفاده از middleware روی route های خاص
+// استفاده روی route خاص
 app.get('/', logger, (req, res) => {
   res.send('Home page');
 });
 
-// چند function middleware
+// چند middleware پشت سر هم
 app.get('/protected', auth, logger, (req, res) => {
   res.send('Protected route');
 });
 ```
 
+> توضیح ساده: `next()` باعث می‌شود که بعد از middleware، کدهای بعدی اجرا شوند. بدون `next()`، درخواست متوقف می‌شود.
+
+---
+
 ### Router-Level Middleware
-middleware رو روی router های خاص اعمال کن:
+
+می‌توان Middleware را **فقط روی یک router خاص** اعمال کرد:
 
 ```javascript
 // تو routes/users.js
@@ -348,32 +382,41 @@ function userLogger(req, res, next) {
   next();
 }
 
-// روی همه route های این router اعمال کن
+// اعمال روی همه route های این router
 router.use(userLogger);
 ```
 
+> این یعنی هر بار که route ای از `users.js` اجرا شود، ابتدا `userLogger` اجرا می‌شود.
+
+
+
 ### ترتیب اجرای Middleware
-Middleware ها به ترتیب تعریف شدنشون اجرا میشن:
+
+Middleware ها **به ترتیب تعریفشان اجرا می‌شوند**:
 
 ```javascript
-app.use(middleware1); // اول اجرا میشه
-app.use(middleware2); // دوم اجرا میشه
+app.use(middleware1); // اول اجرا می‌شود
+app.use(middleware2); // دوم اجرا می‌شود
 app.get('/', middleware3, handler); // middleware3 سوم، بعدش handler
 ```
 
-## Middleware های داخلی {#built-in-middleware}
+> پس ترتیب نوشتن middleware خیلی مهم است.
 
-Express چندین function middleware داخلی داره:
+
+## Middleware های داخلی
+
+Express چند middleware **داخلی و کاربردی** دارد که کارها را راحت‌تر می‌کند.
 
 ### سرو کردن Static File ها
-فایل‌های static (HTML، CSS، JavaScript، عکس) رو از یه پوشه سرو کن:
+
+می‌توان فایل‌های static مثل HTML، CSS، JavaScript یا عکس‌ها را از یک پوشه سرو کرد:
 
 ```javascript
-// فایل‌ها رو از پوشه 'public' سرو کن
 app.use(express.static('public'));
 ```
 
-یه پوشه `public` بساز و فایل‌ها رو اضافه کن:
+> ساختار پوشه `public`:
+
 ```
 public/
   ├── index.html
@@ -383,26 +426,36 @@ public/
       └── logo.png
 ```
 
-فایل‌ها اینجا در دسترس هستن:
-- `http://localhost:3000/index.html`
-- `http://localhost:3000/style.css`
-- `http://localhost:3000/images/logo.png`
+> این فایل‌ها به آدرس‌های زیر قابل دسترسی هستند:
+
+* `http://localhost:3000/index.html`
+* `http://localhost:3000/style.css`
+* `http://localhost:3000/images/logo.png`
+
+
 
 ### Parse کردن Request Body ها
-داده‌های form و JSON رو handle کن:
+
+Middleware داخلی می‌تواند داده‌های فرم و JSON را به object قابل استفاده تبدیل کند:
 
 ```javascript
-// Parse کردن داده‌های URL-encoded form
+// داده‌های URL-encoded فرم‌ها
 app.use(express.urlencoded({ extended: true }));
 
-// Parse کردن داده‌های JSON
+// داده‌های JSON
 app.use(express.json());
 ```
 
-## کار با داده‌های Form {#form-data}
+> مثال: اگر کاربر یک فرم ارسال کند یا JSON بفرستد، با این middleware می‌توانیم آن‌ها را مستقیم از `req.body` بخوانیم.
+
+
+## کار با داده‌های Form
+
+Form ها ابزاری هستند که به کاربران اجازه می‌دهند **اطلاعات را از طریق مرورگر به سرور ارسال کنند**. در Express، می‌توانیم این داده‌ها را با middleware هایی مثل `express.urlencoded()` دریافت و پردازش کنیم.
 
 ### ساخت Form
-فایل `views/users/new.ejs` رو بساز:
+
+مثال فایل `views/users/new.ejs`:
 
 ```html
 <!DOCTYPE html>
@@ -420,8 +473,14 @@ app.use(express.json());
 </html>
 ```
 
+> نکات ساده:
+
+* `action="/users"` → آدرس ارسال داده‌ها
+* `method="POST"` → از HTTP POST استفاده می‌کنیم چون داده‌ها ایجاد می‌شوند
+* `<%= locals.firstName || '' %>` → اگر فرم قبلا پر شده باشد و خطایی رخ داده باشد، مقدار قبلی حفظ می‌شود
+
+
 ### پردازش داده‌های Form
-submit شدن form رو handle کن:
 
 ```javascript
 const users = [];
@@ -431,20 +490,15 @@ router.get('/new', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const isValid = true; // منطق validation تو اینجا
+  const isValid = true; // منطق validation اینجا قرار می‌گیرد
 
   if (isValid) {
-    // user رو بساز
-    const newUser = {
-      firstName: req.body.firstName
-    };
+    const newUser = { firstName: req.body.firstName };
     users.push(newUser);
 
-    // به صفحه user redirect کن
     const userId = users.length - 1;
     res.redirect(`/users/${userId}`);
   } else {
-    // form رو دوباره با error و حفظ input نمایش بده
     res.render('users/new', {
       firstName: req.body.firstName,
       error: 'Invalid input'
@@ -453,16 +507,30 @@ router.post('/', (req, res) => {
 });
 ```
 
+> نکات ساده:
+
+* `req.body.firstName` → مقدار وارد شده توسط کاربر
+* اگر داده معتبر باشد → **کاربر ساخته می‌شود و redirect** می‌کنیم
+* اگر نامعتبر باشد → فرم دوباره نمایش داده می‌شود و input کاربر حفظ می‌شود
+
+
 ### مفاهیم کلیدی Form Handling
-1. **حفظ Input در صورت Error**: داده‌های form رو برگردون تا input کاربر حفظ بشه
-2. **Validation**: همیشه server-side validate کن، صرف نظر از client-side validation
-3. **Redirect بعد از POST**: از الگوی Post-Redirect-Get برای جلوگیری از submit های تکراری استفاده کن
-4. **Error Handling**: feedback واضح به کاربرها بده
 
-## Query Parameter ها {#query-parameters}
+1. **حفظ Input در صورت Error** → کاربر مجبور نباشد دوباره همه فرم را پر کند
+2. **Validation** → همیشه server-side validation داشته باش، حتی اگر client-side validation وجود دارد
+3. **Redirect بعد از POST** → استفاده از الگوی **Post-Redirect-Get** برای جلوگیری از submit دوباره
+4. **Error Handling** → به کاربر بازخورد واضح بده
 
-Query parameter ها بخشی از URL بعد از علامت `?` هستن:
-`http://localhost:3000/users?name=Kyle&age=25`
+
+## Query Parameter ها
+
+**Query parameter** ها بخشی از URL هستند که بعد از `?` می‌آیند و معمولا برای **فیلتر، جستجو، صفحه‌بندی و مرتب‌سازی** استفاده می‌شوند.
+
+مثال URL:
+
+```
+http://localhost:3000/users?name=Kyle&age=25
+```
 
 ### دسترسی به Query Parameter ها
 
@@ -471,7 +539,7 @@ router.get('/', (req, res) => {
   const name = req.query.name;
   const age = req.query.age;
 
-  // یا با استفاده از destructuring
+  // یا با destructuring
   const { name, age } = req.query;
 
   console.log(`Name: ${name}, Age: ${age}`);
@@ -480,11 +548,26 @@ router.get('/', (req, res) => {
 });
 ```
 
+> نکته ساده: `req.query` یک object است که همه query parameter ها را دارد.
+
+
 ### موارد استفاده Query Parameter ها
-- **فیلتر کردن**: `GET /products?category=electronics&price_max=100`
-- **Pagination**: `GET /users?page=2&limit=10`
-- **جستجو**: `GET /search?q=express.js`
-- **مرتب سازی**: `GET /posts?sort=date&order=desc`
+
+* **فیلتر کردن:**
+  `GET /products?category=electronics&price_max=100`
+
+* **Pagination:**
+  `GET /users?page=2&limit=10`
+
+* **جستجو:**
+  `GET /search?q=express.js`
+
+* **مرتب سازی:**
+  `GET /posts?sort=date&order=desc`
+
+> به زبان ساده: Query parameter ها باعث می‌شوند کاربر بتواند **اطلاعات را شخصی‌سازی یا محدود** کند بدون اینکه مسیر اصلی تغییر کند.
+
+
 
 ## مثال کامل: سیستم مدیریت کاربر
 
@@ -571,7 +654,7 @@ router.route('/:id')
 module.exports = router;
 ```
 
-## بهترین روش‌ها و نکات
+## نکات
 
 ### 1. Error Handling
 همیشه error ها رو به درستی handle کن:

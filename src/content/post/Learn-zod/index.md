@@ -3,7 +3,7 @@ title: "برسی Zod: TypeScript Schema Validation"
 description: "یاد بگیرید چطور با Zod validation قدرتمند و type-safe برای TypeScript بسازید؛ با مثال‌های عملی"
 publishDate: "14 Sep 2024"
 updatedDate: "03 Mar 2025"
-tags: ["typescript", "zod", "validation", "schema", "type-safety"]
+tags: ["typescript", "zod", "validation"]
 ---
 
 
@@ -51,7 +51,7 @@ import { z } from 'zod';
 }
 ```
 
-## اولین Schema تون با Zod
+## اولین Schema با Zod
 
 بیاید با یه مثال ساده شروع کنیم تا ببینیم Zod چجوری کار میکنه:
 
@@ -289,7 +289,7 @@ const combinedSchema = personalSchema.merge(contactSchema);
 
 ### مدیریت Key های ناشناخته
 
-به طور پیش‌فرض، Zod key های ناشناخته رو حذف میکنه:
+zod به طور پیش‌فرض، key های ناشناخته رو حذف میکنه:
 
 ```typescript
 // رفتار پیش‌فرض - key های ناشناخته حذف میشن
@@ -660,7 +660,7 @@ Zod یه ابزار قدرتمنده که شکاف بین runtime validation و 
 نکات کلیدی:
 
 1. **ساده شروع کنید** - با schema های پایه شروع کنید و به تدریج پیچیدگی اضافه کنید
-2. **از type inference استفاده کنید** - بذارید Zod TypeScript type هاتون رو تولید کنه
+2. **از type inference استفاده کنید** - بذارید Zod تولید کنه TypeScript type هاتون رو
 3. **از safe parsing استفاده کنید** - در کد هایی که به کاربر نمایش داده میشه، validation error ها رو به آرامی handle کنید
 4. **schema ها رو compose کنید** - validation پیچیده رو از قطعات کوچکتر و قابل استفاده مجدد بسازید
 5. **validation سفارشی** - از `refine()` برای validation منطق کسب‌وکار استفاده کنید

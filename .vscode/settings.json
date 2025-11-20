@@ -24,5 +24,10 @@
 		"activityBar.background": "#4F1647",
 		"titleBar.activeBackground": "#6F1F63",
 		"titleBar.activeForeground": "#FDF8FC"
-	}
+	},
+	"vscode_custom_css_silent.imports": [
+		"file:///home/amirmxc/.vscode/extensions/alirezakay.rtltextdocuments-0.1.4/assets/cascadia.css",
+		"file:///home/amirmxc/.vscode/extensions/alirezakay.rtltextdocuments-0.1.4/assets/rtl.css",
+		"file:///home/amirmxc/.vscode/extensions/alirezakay.rtltextdocuments-0.1.4/assets/rtl.js"
+	]
 }
