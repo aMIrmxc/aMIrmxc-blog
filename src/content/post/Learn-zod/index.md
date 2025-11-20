@@ -655,13 +655,6 @@ const env = envSchema.parse(process.env);
 
 ## سخن پایانی
 
-Zod یه ابزار قدرتمنده که شکاف بین runtime validation و compile-time type safety رو در TypeScript پر میکنه. با تعریف schema هاتون یه بار با Zod، هم validation و هم type ها رو دریافت میکنید و نیازی به نگهداری جداگانه منطق validation و تعاریف type نیست.
+Zod یه ابزار قدرتمنده که شکاف بین runtime validation و compile-time type safety رو در TypeScript پر میکنه. با تعریف schema ها با Zod، هم validation و هم type ها رو دریافت میکنید و نیازی به نگهداری جداگانه منطق validation و تعاریف type نیست.
 
-نکات کلیدی:
-
-1. **ساده شروع کنید** - با schema های پایه شروع کنید و به تدریج پیچیدگی اضافه کنید
-2. **از type inference استفاده کنید** - بذارید Zod تولید کنه TypeScript type هاتون رو
-3. **از safe parsing استفاده کنید** - در کد هایی که به کاربر نمایش داده میشه، validation error ها رو به آرامی handle کنید
-4. **schema ها رو compose کنید** - validation پیچیده رو از قطعات کوچکتر و قابل استفاده مجدد بسازید
-5. **validation سفارشی** - از `refine()` برای validation منطق کسب‌وکار استفاده کنید
 

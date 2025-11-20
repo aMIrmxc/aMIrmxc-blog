@@ -122,7 +122,6 @@ app.delete('/users/:id', (req, res) => {
 * `res`: **response object**، برای پاسخ دادن به کاربر استفاده می‌شود
 * `next`: معمولاً برای **middleware** استفاده می‌شود و در اکثر route ها لازم نیست
 
----
 
 ## کار با Response Methods
 
@@ -153,18 +152,6 @@ app.get('/download', (req, res) => {
   res.download('./server.js'); // دانلود فایل از سرور
 });
 ```
-
-### زنجیره کردن Response Method ها
-
-می‌توان چند method را پشت سر هم استفاده کرد:
-
-```javascript
-app.get('/error', (req, res) => {
-  res.status(500).json({ message: 'Internal Server Error' });
-});
-```
-
-> این کار شبیه یک خط تولید است: ابتدا **وضعیت پاسخ** مشخص می‌شود و بعد **محتوا** ارسال می‌شود.
 
 
 ## سازماندهی کد با Router ها
@@ -197,7 +184,7 @@ router.post('/', (req, res) => {
 module.exports = router;
 ```
 
-> توضیح ساده: این فایل فقط route های مربوط به کاربران را نگه می‌دارد. هر route نسبت به **مسیر نصب شده** (`/users`) است.
+> این فایل فقط route های مربوط به کاربران را نگه می‌دارد. هر route نسبت به **مسیر نصب شده** (`/users`) است.
 
 
 ### استفاده از Router تو Main Server
@@ -265,9 +252,9 @@ router.get('/:id', (req, res) => { ... }); // ممکن است مسیر /new را
 router.get('/new', (req, res) => { ... });
 ```
 
----
 
-## تکنیک‌های پیشرفته Routing {#advanced-routing}
+
+## تکنیک‌های پیشرفته Routing
 
 ### Route Chaining
 
@@ -288,42 +275,6 @@ router.route('/:id')
 
 > به جای تعریف جداگانه هر method، همه آن‌ها را یک جا تعریف می‌کنیم.
 
----
-
-### Router Parameters Middleware
-
-با `router.param()` می‌توان **middleware مخصوص یک parameter** تعریف کرد.
-
-```javascript
-const users = [
-  { name: 'Kyle' },
-  { name: 'Sally' }
-];
-
-// هروقت parameter :id پیدا شد اجرا می‌شود
-router.param('id', (req, res, next, id) => {
-  console.log(`Looking for user with ID: ${id}`);
-
-  // user را از آرایه/دیتابیس می‌گیریم
-  req.user = users[id];
-
-  // به middleware/route بعدی برو
-  next();
-});
-
-router.get('/:id', (req, res) => {
-  // req.user حالا در دسترس است
-  console.log(req.user);
-  res.json(req.user);
-});
-```
-
-> این middleware قبل از هر route که parameter `:id` دارد اجرا می‌شود و اجازه می‌دهد:
-
-* مقدار parameter را **بررسی و اعتبارسنجی** کنیم
-* **داده را از دیتابیس** یا آرایه بگیریم
-* داده را به **request object اضافه کنیم**
-* منطق مشترک parameter ها را یکجا مدیریت کنیم
 
 
 
@@ -341,7 +292,7 @@ router.get('/:id', (req, res) => {
 * داده‌ها را آماده کند
 * یا محدودیت‌های دسترسی اعمال کند
 
----
+
 
 ### ساخت Custom Middleware
 
@@ -369,7 +320,6 @@ app.get('/protected', auth, logger, (req, res) => {
 
 > توضیح ساده: `next()` باعث می‌شود که بعد از middleware، کدهای بعدی اجرا شوند. بدون `next()`، درخواست متوقف می‌شود.
 
----
 
 ### Router-Level Middleware
 
@@ -401,6 +351,38 @@ app.get('/', middleware3, handler); // middleware3 سوم، بعدش handler
 ```
 
 > پس ترتیب نوشتن middleware خیلی مهم است.
+
+
+### Router Parameters Middleware
+
+با `router.param()` می‌توان **middleware مخصوص یک parameter** تعریف کرد.
+
+```javascript
+const users = [
+  { name: 'Kyle' },
+  { name: 'Sally' }
+];
+
+// هروقت parameter :id پیدا شد اجرا می‌شود
+router.param('id', (req, res, next, id) => {
+  console.log(`Looking for user with ID: ${id}`);
+
+  // user را از آرایه/دیتابیس می‌گیریم
+  req.user = users[id];
+
+  // به middleware/route بعدی برو
+  next();
+});
+
+router.get('/:id', (req, res) => {
+  // req.user حالا در دسترس است
+  console.log(req.user);
+  res.json(req.user);
+});
+```
+
+> این middleware قبل از هر route که parameter `:id` دارد اجرا می‌شود و اجازه می‌دهد:
+
 
 
 ## Middleware های داخلی
@@ -654,48 +636,6 @@ router.route('/:id')
 module.exports = router;
 ```
 
-## نکات
-
-### 1. Error Handling
-همیشه error ها رو به درستی handle کن:
-
-```javascript
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-```
-
-### 2. Environment Variables
-برای configuration از environment variable ها استفاده کن:
-
-```javascript
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-```
-
-### 3. امنیت
-Security middleware ها رو نصب و پیکربندی کن:
-
-```bash
-npm install helmet cors
-```
-
-```javascript
-const helmet = require('helmet');
-const cors = require('cors');
-
-app.use(helmet());
-app.use(cors());
-```
-
-### 4. Validation
-برای validation محکم input ها از کتابخونه‌هایی مثل Joi یا express-validator استفاده کن.
-
-### 5. یکپارچگی Database
-در حالی که این آموزش از array استفاده می‌کنه، تو production باید با database هایی مثل MongoDB، PostgreSQL، یا MySQL یکپارچه بشی.
 
 ## نتیجه‌گیری
 
