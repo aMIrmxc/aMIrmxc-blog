@@ -18,7 +18,7 @@ pinned: true
 
 
 
-### Astro چیست؟
+## Astro چیست؟
 
 Astro یک **Static Site Builder** و در عین حال یک **SSR Framework** است. یعنی:
 

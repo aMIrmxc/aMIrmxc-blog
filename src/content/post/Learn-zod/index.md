@@ -1,15 +1,15 @@
 ---
-title: "برسی Zod: TypeScript Schema Validation"
+title: "برسی Zod : راهنمای جامع TypeScript Schema Validation"
 description: "یاد بگیرید چطور با Zod validation قدرتمند و type-safe برای TypeScript بسازید؛ با مثال‌های عملی"
 publishDate: "14 Sep 2024"
 updatedDate: "03 Mar 2025"
-tags: ["typescript", "zod", "validation", "schema", "type-safety"]
+tags: ["typescript", "zod", "validation"]
 ---
 
 
 
 
-# برسی کامل Zod : راهنمای جامع TypeScript Schema Validation
+# Zod: TypeScript Schema Validation
 
 Zod داره به سرعت تبدیل به اول انتخاب توسعه‌دهنده‌های TypeScript میشه، و دلیلش هم مشخصه. این TypeScript-first schema validation library قدرت runtime validation رو با compile-time type safety ترکیب میکنه و یه ابزار فوق‌العاده ارزشمند برای web development مدرن محسوب میشه.
 
@@ -51,7 +51,7 @@ import { z } from 'zod';
 }
 ```
 
-## اولین Schema تون با Zod
+## اولین Schema با Zod
 
 بیاید با یه مثال ساده شروع کنیم تا ببینیم Zod چجوری کار میکنه:
 
@@ -289,7 +289,7 @@ const combinedSchema = personalSchema.merge(contactSchema);
 
 ### مدیریت Key های ناشناخته
 
-به طور پیش‌فرض، Zod key های ناشناخته رو حذف میکنه:
+zod به طور پیش‌فرض، key های ناشناخته رو حذف میکنه:
 
 ```typescript
 // رفتار پیش‌فرض - key های ناشناخته حذف میشن
@@ -655,13 +655,6 @@ const env = envSchema.parse(process.env);
 
 ## سخن پایانی
 
-Zod یه ابزار قدرتمنده که شکاف بین runtime validation و compile-time type safety رو در TypeScript پر میکنه. با تعریف schema هاتون یه بار با Zod، هم validation و هم type ها رو دریافت میکنید و نیازی به نگهداری جداگانه منطق validation و تعاریف type نیست.
+Zod یه ابزار قدرتمنده که شکاف بین runtime validation و compile-time type safety رو در TypeScript پر میکنه. با تعریف schema ها با Zod، هم validation و هم type ها رو دریافت میکنید و نیازی به نگهداری جداگانه منطق validation و تعاریف type نیست.
 
-نکات کلیدی:
-
-1. **ساده شروع کنید** - با schema های پایه شروع کنید و به تدریج پیچیدگی اضافه کنید
-2. **از type inference استفاده کنید** - بذارید Zod TypeScript type هاتون رو تولید کنه
-3. **از safe parsing استفاده کنید** - در کد هایی که به کاربر نمایش داده میشه، validation error ها رو به آرامی handle کنید
-4. **schema ها رو compose کنید** - validation پیچیده رو از قطعات کوچکتر و قابل استفاده مجدد بسازید
-5. **validation سفارشی** - از `refine()` برای validation منطق کسب‌وکار استفاده کنید
 

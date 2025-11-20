@@ -1,4 +1,4 @@
-# aMIrmxc-dev Blog
+# aMIrmxc Blog
 
 
 <div align="center">

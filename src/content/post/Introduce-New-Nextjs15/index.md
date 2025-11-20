@@ -3,36 +3,205 @@ title: "Next.js 15 برسی "
 description: "هر آنچه برای ارتقاء به Next.js 15 نیاز دارید؛ از Codemod خودکار تا breaking changeهای caching و async APIها"
 publishDate: "14 Aug 2024"
 updatedDate: "03 Mar 2025"
-tags: ["Nextjs", "Migration", "React19"]
+tags: ["Nextjs", "Migration", "React"]
 ---
 
 
 
-# Next.js 15: هر چیزی که باید بدونی
+# Next.js 15 — راهنمای جامع و کامل برای آموزش
 
-Next.js 15 بالاخره منتشر شد و یه سری تغییرات فوق‌العاده مهم و breaking change داره که واقعاً ارزش upgrade کردن رو داره. تو این راهنمای کامل قراره همه چیز رو بگم - از نحوه upgrade گرفته تا feature های جدید و تغییراتی که روی workflow شما تاثیر میذاره.
+Next.js 15 منتشر شده و مانند هر نسخه اصلی دیگر، شامل **قابلیت‌های مهم جدید** و **breaking change‌ های تأثیرگذار** است. این نسخه روی عملکرد، DX (Developer Experience)، و مدل رندرینگ تغییرات بنیادی ایجاد کرده که دانستن آن‌ها برای هر توسعه‌دهنده ضروری است.
 
-## Migration آسون با Codemod
+در این آموزش، موارد زیر را به‌صورت کامل پوشش می‌دهیم:
 
-قبل از اینکه برم سراغ تغییرات، خوشبختانه Next.js یه ابزار خودکار داره که خودش بیشتر breaking change ها رو برای شما حل میکنه:
+* سازوکار upgrade کردن پروژه‌ها
+* ابزار رسمی Next.js برای مهاجرت
+* لیست کامل breaking change‌ها
+* مثال‌های توضیحی برای درک بهتر
+* دلیل ایجاد هر تغییر و تأثیر آن روی workflow توسعه
 
-```bash
-npx @next/codemod@canary upgrade latest
+
+
+
+
+
+
+
+
+
+## Breaking Change‌ های مهم Next.js 15
+
+در ادامه مهم‌ترین breaking change این نسخه را کاملاً بررسی می‌کنیم.
+
+
+### تغییرات Caching — بزرگترین اصلاح در Next.js 15
+
+یکی از جدی‌ترین شکایت‌ها از Next.js 14، **caching بیش از حد تهاجمی (aggressive caching)** بود. این موضوع باعث رفتارهای غیرقابل پیش‌بینی، باگ‌های پنهان و مشکلات در زمان توسعه می‌شد.
+
+Next.js 15 این مشکل را **به‌صورت بنیادی اصلاح کرده** و کنترل کامل را دوباره به توسعه‌دهنده برگردانده است.
+
+برای همین بسیاری این تغییر را **بزرگ‌ترین پیروزی نسخه 15** می‌دانند.
+
+
+
+  رفتار جدید Fetch — بدون Cache پیش‌فرض
+
+در Next.js 14، `fetch()` در Server Components در حالت **cache-first** عمل می‌کرد.
+یعنی حتی اگر شما چنین قصدی نداشتید، Next.js داده را cache می‌کرد و همان داده را برای تمام رندرهای بعدی برمی‌گرداند.
+
+
+ مشکل نسخه 14:
+
+* آپدیت‌های API دیده نمی‌شدند
+* دیتا stale می‌شد
+* رفتار پروژه غیرقابل پیش‌بینی بود
+* توسعه‌دهندگان مجبور بودند دائماً `cache: 'no-store'` اضافه کنند
+
+ Next.js 15 این رفتار را اصلاح کرد:
+
+**دیگر fetch به‌صورت پیش‌فرض cache نمی‌شود.**
+
+
+
+ قبل (Next.js 14):
+
+```javascript
+// این درخواست به صورت خودکار cache می‌شد
+const data = await fetch('https://api.example.com/data');
 ```
 
-این command:
-- Version های Next.js و React رو update میکنه
-- کدهای شما رو طوری تغییر میده که با breaking change های جدید سازگار باشه
-- ESLint و dependency های دیگه رو هم update میکنه
-- تنظیمات لازم رو اعمال میکنه
+ بعد (Next.js 15):
 
-## Breaking Change های اصلی
+```javascript
+// دیگر به‌صورت پیش‌فرض cache نمی‌شود
+const data = await fetch('https://api.example.com/data');
+```
 
-### 1. Async Request APIs
+ اگر همچنان بخواهید cache کنید:
 
-**تغییر چیه؟**: Headers، cookies، params و searchParams حالا asynchronous شدن و promise برمیگردونن.
+```javascript
+const cachedData = await fetch('https://api.example.com/data', {
+  cache: 'force-cache'
+});
+```
 
-**قبلاً (Next.js 14):**
+* حالا caching اختیاری شده، نه اجباری
+* شما کاملاً کنترل دارید که چه چیزی cache شود
+* رفتار fetch اکنون بسیار شفاف‌تر و قابل‌پیش‌بینی است
+
+
+
+#### API Route و Route Handler ها — دیگر Cache نمی‌شوند
+
+در نسخه قبلی، بسیاری از توسعه‌دهندگان گزارش می‌دادند که API Route ها (مثل `/api/...`) به‌طور ناخواسته cache می‌شدند.
+این رفتار غیرمعمول و مشکل‌ساز بود، مخصوصاً زمانی که API قرار بود داده جدید را برگرداند.
+
+در Next.js 15 این مشکل حل شده:
+
+
+
+
+ نسخه 14:
+
+```javascript
+// app/api/users/route.js
+export async function GET() {
+  // این response ناخواسته cache می‌شد
+  return Response.json({ users: await getUsers() });
+}
+```
+
+ نسخه 15 (رفتار صحیح):
+
+```javascript
+// app/api/users/route.js
+export async function GET() {
+  // دیگر cache نمی‌شود
+  return Response.json({ users: await getUsers() });
+}
+```
+
+ اگر بخواهید cache را فعال کنید:
+
+```javascript
+export async function GET() {
+  return Response.json(
+    { users: await getUsers() },
+    {
+      headers: {
+        'Cache-Control': 'max-age=60' // 60 ثانیه cache
+      }
+    }
+  );
+}
+```
+
+
+* رفتار API Routes حالا کاملاً استاندارد است
+* هیچ caching ناخواسته یا پنهان وجود ندارد
+* شما تصمیم می‌گیرید، نه فریم‌ورک
+
+
+### کاهش Cache در Client Router
+
+در Next.js 14، وقتی کاربر در کلاینت بین صفحات جابه‌جا می‌شد، Router caching برای route های dynamic تا **30 ثانیه** فعال بود.
+این رفتار باعث می‌شد صفحه دیر به‌روزرسانی شود یا داده جدید نمایش داده نشود.
+
+ Next.js 15 این مقدار را به 0 ثانیه کاهش داد.
+
+یعنی:
+
+* همه navigation‌های dynamic همیشه fresh هستند
+* صفحه از داده‌های جدید استفاده می‌کند
+* تجربه کاربری قابل‌پیش‌بینی‌تر است
+
+
+ اگر بخواهید رفتار قبلی را برگردانید:
+
+```javascript
+// next.config.js
+module.exports = {
+  experimental: {
+    staleTimes: {
+      dynamic: 30 // seconds
+    }
+  }
+}
+```
+
+ نکات مهم:
+
+* این مقدار در حالت پیش‌فرض 0 است
+* فقط در صورت نیاز باید آن را افزایش دهید
+* افزایش stale time برای static-like pages مناسب است
+
+
+
+
+### Async Request APIs
+
+در Next.js 15، تمام APIهای مرتبط با درخواست (Request APIs) **async** شده‌اند:
+
+* headers()
+* cookies()
+* params
+* searchParams
+
+
+ هدف: **Static Rendering بیشتر و هوشمندتر**
+
+وقتی این APIها async باشند، Next.js می‌تواند:
+
+* بفهمد کدام صفحات واقعاً به داده‌های dynamic نیاز دارند
+* کدام صفحات کاملاً static هستند و می‌توانند cache شوند
+* محاسبات را deferred کند تا performance بهتر شود
+
+این تغییر در آینده برای **Partial Rendering** و **Streaming بهتر** نیز اهمیت دارد.
+
+
+
+ قبل (Next.js 14):
+
 ```javascript
 import { headers } from 'next/headers';
 
@@ -42,7 +211,8 @@ export default function Page() {
 }
 ```
 
-**حالا (Next.js 15):**
+ بعد (Next.js 15):
+
 ```javascript
 import { headers } from 'next/headers';
 
@@ -52,7 +222,11 @@ export default async function Page() {
 }
 ```
 
-**مثال Dynamic Route:**
+
+### Dynamic Route
+
+در Next.js 15، حتی `params` نیز دیگر یک object ساده نیست و باید `await` شود.
+
 ```javascript
 // app/blog/[id]/page.js
 export default async function BlogPost({ params }) {
@@ -66,127 +240,49 @@ export default async function BlogPost({ params }) {
 }
 ```
 
-**چرا این تغییر؟**
-این تغییر باعث میشه static rendering بهتر کار کنه. صفحاتی که از این API های dynamic استفاده نمیکنن، میتونن راحت‌تر static render بشن.
 
-### 2. تغییرات Caching - بزرگترین پیروزی!
+* این تغییر روی تقریبا تمام صفحات dynamic تأثیر می‌گذارد
+* تمامی page‌های دارای route parameters باید async شوند
+* اگر await نکنید، با type error یا undefined مواجه خواهید شد
 
-Next.js 15 بدترین قسمت Next.js 14 رو درست کرده: اون caching مزاحمی که همه ازش شاکی بودن.
 
-#### Fetch Request ها دیگه به صورت پیش‌فرض Cache نمیشن
 
-**قبلاً (Next.js 14):**
-```javascript
-// این به صورت پیش‌فرض cache میشد
-const data = await fetch('https://api.example.com/data');
-```
 
-**حالا (Next.js 15):**
-```javascript
-// دیگه به صورت پیش‌فرض cache نمیشه
-const data = await fetch('https://api.example.com/data');
 
-// برای cache کردن، باید صراحتاً بگی:
-const cachedData = await fetch('https://api.example.com/data', {
-  cache: 'force-cache'
-});
-```
 
-#### Route Handler ها دیگه Cache نمیشن
 
-**قبلاً (Next.js 14):**
-```javascript
-// app/api/users/route.js
-export async function GET() {
-  // این به صورت پیش‌فرض cache میشد (مشکل‌ساز!)
-  return Response.json({ users: await getUsers() });
-}
-```
+##  Feature های جدید و بهبودها
 
-**حالا (Next.js 15):**
-```javascript
-// app/api/users/route.js
-export async function GET() {
-  // دیگه به صورت پیش‌فرض cache نمیشه (خیلی بهتره!)
-  return Response.json({ users: await getUsers() });
-}
+### پشتیبانی از React 19
 
-// برای cache کردن، باید صراحتاً بگی:
-export async function GET() {
-  return Response.json(
-    { users: await getUsers() },
-    {
-      headers: {
-        'Cache-Control': 'max-age=60'
-      }
-    }
-  );
-}
-```
-
-#### Client Router Cache کم شد
-
-Client-side router cache حالا برای dynamic route ها به جای 30 ثانیه، 0 ثانیه پیش‌فرض شده.
-
-**تنظیمات (اگه رفتار قدیمی رو میخوای):**
-```javascript
-// next.config.js
-module.exports = {
-  experimental: {
-    staleTimes: {
-      dynamic: 30 // seconds
-    }
-  }
-}
-```
-
-## Feature های جدید و بهبودها
-
-### 1. پشتیبانی از React 19
-
-Next.js 15 با React 19 Release Candidate میاد و feature های جدیدش رو داری:
+React 19 RC حالا کاملاً در Next.js 15 پشتیبانی میشه.
+**مثال hook جدید `use` برای promiseها:**
 
 ```javascript
-// React 19 features حالا در دسترسه
 import { use } from 'react';
 
 function UserProfile({ userPromise }) {
-  // hook جدید 'use' برای promise ها
   const user = use(userPromise);
   return <div>{user.name}</div>;
 }
 ```
 
-### 2. Turbopack (حالت Dev)
 
-برای build های سریع‌تر تو development از Turbopack استفاده کن:
+### Turbopack برای Dev
 
 ```bash
-# Turbopack رو برای development فعال کن
 npm run dev -- --turbo
-
-# یا تو package.json اضافه کن
-{
-  "scripts": {
-    "dev": "next dev --turbo"
-  }
-}
 ```
 
-**بهبود performance:**
-- تا 10 برابر سریع‌تر startup
-- تا 99.8% سریع‌تر code update ها با Fast Refresh
+**مزایا:**
 
-### 3. Static Route Indicator
+* تا 10 برابر سریع‌تر startup
+* تا 99.8٪ سریع‌تر code updateها
 
-یه ابزار جدید تو development که بهت میگه کدوم صفحه static هست کدوم dynamic:
 
-```javascript
-// این indicator تو پایین صفحاتت تو development ظاهر میشه
-// نشون میده صفحه فعلی static هست یا dynamic
-```
+### Static Route Indicator
 
-میتونی تو config تنظیمش کنی:
+ابزاری برای نمایش static/dynamic بودن صفحات در development:
 
 ```javascript
 // next.config.js
@@ -198,19 +294,17 @@ module.exports = {
 }
 ```
 
-### 4. API جدید `after()` (تجربی)
 
-کد رو بعد از اینکه response به client فرستاده شد اجرا کن:
+### API جدید `after()`
+
+اجرای کد بعد از ارسال response به client:
 
 ```javascript
-// app/actions.js
 import { unstable_after as after } from 'next/server';
 
 export async function saveUser(userData) {
-  // این فوری اجرا میشه و response رو block میکنه
   const user = await createUser(userData);
 
-  // این بعد از فرستادن response اجرا میشه (non-blocking)
   after(async () => {
     await sendWelcomeEmail(user.email);
     await logUserCreation(user.id);
@@ -221,21 +315,61 @@ export async function saveUser(userData) {
 }
 ```
 
-**تو next.config.js فعالش کن:**
+**فعال‌سازی:**
+
 ```javascript
-module.exports = {
-  experimental: {
-    after: true
-  }
+module.exports = { experimental: { after: true } }
+```
+
+
+### Async Request APIs
+
+Headers، cookies، params و searchParams حالا **آسنکرون هستند** و promise برمی‌گردانند.
+
+قبل (Next.js 14):
+
+```javascript
+import { headers } from 'next/headers';
+
+export default function Page() {
+  const headerValues = headers();
+  return <div>...</div>;
 }
 ```
 
-### 5. کامپوننت `<Form>` بهبود یافته
-
-یه Form component جدید برای client-side navigation بین صفحات:
+حالا (Next.js 15):
 
 ```javascript
-// app/search-form.js
+import { headers } from 'next/headers';
+
+export default async function Page() {
+  const headerValues = await headers();
+  return <div>...</div>;
+}
+```
+
+مثال Dynamic Route:
+
+```javascript
+// app/blog/[id]/page.js
+export default async function BlogPost({ params }) {
+  const { id } = await params;
+
+  return (
+    <div>
+      <h1>Blog Post ID: {id}</h1>
+    </div>
+  );
+}
+```
+
+این تغییر اجازه میده static rendering بهتر و بهینه‌تر انجام بشه و استفاده از dynamic API ها بدون blocking کار کنه.
+
+
+
+### کامپوننت `<Form>` بهبود یافته
+
+```javascript
 import Form from 'next/form';
 
 export default function SearchForm() {
@@ -248,239 +382,102 @@ export default function SearchForm() {
 }
 ```
 
-این form:
-- Client-side navigation میکنه به `/search?query=...`
-- صفحه مقصد رو prefetch میکنه برای navigation سریع‌تر
-- بدون JavaScript هم کار میکنه (progressive enhancement)
+**ویژگی‌ها:**
 
-**کی ازش استفاده کن:**
-- وقتی میخوای از یه صفحه به صفحه دیگه بری
-- وقتی میخوای form data رو به عنوان search parameter بفرستی
-- وقتی performance benefit های client-side routing رو میخوای
+* Navigation داخلی بدون ریفرش
+* Prefetch صفحه مقصد
+* Progressive enhancement
 
-**کی استفاده نکن:**
-- Form هایی که به API route ها submit میکنن
-- Validation پیچیده
-- آپلود فایل
+**نکته:** برای فرم‌های API call پیچیده یا آپلود فایل استفاده نکنید.
 
-### 6. پشتیبانی از TypeScript Configuration
 
-حالا config فایل Next.js از TypeScript پشتیبانی میکنه:
+### پشتیبانی از TypeScript در Config
 
 ```typescript
-// next.config.ts
 import type { NextConfig } from 'next';
 
 const config: NextConfig = {
-  experimental: {
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
-  },
+  experimental: { turbo: { rules: { '*.svg': { loaders: ['@svgr/webpack'], as: '*.js' } } } },
 };
 
 export default config;
 ```
 
-### 7. امنیت بهتر برای Server Actions
 
-Server Action ها حالا امنیت بهتری دارن:
+### امنیت Server Actions
 
 ```javascript
-// app/actions/user.js
 'use server';
 
 export async function createUser(formData) {
-  // این یه action ID منحصربفرد و متغیر برای امنیت میگیره
   const name = formData.get('name');
   const email = formData.get('email');
 
-  // همیشه input ها رو validate و sanitize کن!
-  // Server action ها هنوز هم public API هستن
-  if (!name || !email) {
-    throw new Error('Missing required fields');
-  }
-
-  // منطق امن شما اینجا
+  if (!name || !email) throw new Error('Missing required fields');
   return await saveUser({ name, email });
 }
 ```
 
-**بهبودهای امنیتی شامل:**
-- Server action های استفاده‌نشده خودکار از bundle حذف میشن
-- Action ID ها به صورت دوره‌ای rotate میشن
-- جداسازی بهتر action ها
+**توصیه:** همیشه inputها رو validate و sanitize کنید.
 
-**یادت باشه:** Server Action ها هنوز هم public API هستن. همیشه input ها رو validate کن و اقدامات امنیتی مناسب رو پیاده کن.
 
-### 8. پیام های خطای بهتر برای Hydration
-
-بهبود تجربه development برای debug کردن hydration mismatch ها:
+### پیام‌های خطای بهتر برای Hydration
 
 ```javascript
-// قبلاً: خطای کلی hydration
-// حالا: مکان دقیق source code و جزئیات mismatch
-
 function ProblematicComponent() {
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
-  // حالا پیام های خطای واضح‌تری نشون میده
   return <div>{mounted ? 'Client' : 'Server'}</div>;
 }
 ```
 
-## بهبودهای دیگر
 
-### پشتیبانی از ESLint 9
+### بهبودهای دیگر
 
-```json
-{
-  "devDependencies": {
-    "eslint": "^9.0.0"
-  }
-}
+* پشتیبانی از ESLint 9
+* اضافه شدن خودکار `.env*` به `.gitignore`
+* بهبود Docker و standalone buildها
+
+
+
+## مهاجرت آسان با Codemod
+
+قبل از بررسی تغییرات مهم، Next.js یک ابزار رسمی و خودکار ارائه کرده که فرآیند upgrade را بسیار ساده می‌کند.
+
+ دستور اجرا:
+
+```bash
+npx @next/codemod@canary upgrade latest
 ```
 
-### امنیت فایل های Environment
+### این دستور چه کار می‌کند؟
 
-پروژه های جدید خودکار `.env*` فایل ها رو به `.gitignore` اضافه میکنن:
+ 1. به‌روزرسانی نسخه‌های اصلی
 
-```
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-```
+* Next.js
+* React
+* React DOM
 
-### بهبودهای Self-hosting
+ 2. اعمال خودکار تغییرات در کد
 
-پشتیبانی بهتر برای self-hosting با:
-- پشتیبانی بهتر از Docker
-- بهتر شدن standalone build ها
-- سازگاری بهتر با custom server
+Codemod بخش‌هایی از کد پروژه را برای سازگاری با Next.js 15 اصلاح می‌کند، بدون اینکه نیاز باشد خودتان فایل‌ها را یک‌به‌یک اصلاح کنید.
 
-```dockerfile
-# بهبودهای Dockerfile برای Next.js 15
-FROM node:18-alpine AS base
-FROM base AS deps
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+ 3. به‌روزرسانی ESLint و وابستگی‌های ضروری
 
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-RUN npm run build
+* Ruleهای جدید
+* سازگاری کامل با نسخه 15
 
-FROM base AS runner
-WORKDIR /app
-ENV NODE_ENV production
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-USER nextjs
-EXPOSE 3000
-ENV PORT 3000
-CMD ["node", "server.js"]
-```
+ 4. تنظیم و اصلاح فایل‌های config
 
-## چک‌لیست Migration
+* next.config.js
+* tsconfig.json (در پروژه‌های TypeScript)
+* پاکسازی تنظیمات غیرضروری
 
-1. **Codemod رو اجرا کن:**
-   ```bash
-   npx @next/codemod@canary upgrade latest
-   ```
 
-2. **Async request API ها رو update کن:**
-   - به `headers()`، `cookies()`، `params`، `searchParams` اضافه کن `await`
-   - Component هایی که لازمه رو `async` کن
 
-3. **رفتار caching رو بررسی کن:**
-   - چک کن ببین کدوم fetch request ها نیاز به caching صریح دارن
-   - مطمئن شو API route ها بدون caching درست کار میکنن
-   - رفتار dynamic page ها رو تست کن
 
-4. **Dependency ها رو update کن:**
-   - سازگاری با React 19 RC رو مطمئن شو
-   - ESLint رو update کن اگه از version 9 استفاده میکنی
-   - سازگاری package های third-party رو چک کن
 
-5. **کامل تست کن:**
-   - همه dynamic route ها رو تست کن
-   - Form submission ها و server action ها رو چک کن
-   - فرایند build و deployment رو تست کن
 
-## توصیه های Performance
 
-### Turbopack رو برای Development فعال کن
-```json
-{
-  "scripts": {
-    "dev": "next dev --turbo"
-  }
-}
-```
-
-### استراتژی Caching رو بهینه کن
-```javascript
-// صراحتاً بگو چی باید cache بشه
-const staticData = await fetch('/api/config', {
-  cache: 'force-cache',
-  next: { revalidate: 3600 }
-});
-
-const dynamicData = await fetch('/api/user-specific-data', {
-  cache: 'no-store'
-});
-```
-
-### از Form component جدید برای navigation داخلی استفاده کن
-```javascript
-import Form from 'next/form';
-
-// خوب: Navigation داخلی صفحات
-<Form action="/search">
-  <input name="q" />
-  <button>جست‌وجو</button>
-</Form>
-
-// بد: API call ها (از form معمولی استفاده کن)
-<form action="/api/contact">
-  <input name="email" />
-  <button>ارسال</button>
-</form>
-```
-
-## نتیجه‌گیری
-
-Next.js 15 یه بهبود قابل توجه نسبت به version 14 محسوب میشه، بخصوص تو حل کردن مشکلات caching که خیلی از developer ها رو اذیت میکرد. این که caching حالا opt-in شده به جای opt-out، async request API ها و پشتیبانی از React 19، همگی باعث میشه این upgrade جذاب باشه.
-
-**نکات کلیدی:**
-- Caching حالا opt-in هست به جای opt-out
-- Request API ها async شدن برای static rendering بهتر
-- تجربه development به طور قابل توجهی بهبود یافته
-- Migration بیشترش خودکار شده با codemod ها
-
-مسیر upgrade خوب پشتیبانی میشه، و فواید - بخصوص بهبود رفتار caching - باعث میشه Next.js 15 برای بیشتر application ها ارزش upgrade رو داشته باشه.
-
-همین امروز شروع کن migration رو با codemod خودکار، و از تجربه Next.js قابل پیش‌بینی‌تر و developer-friendly تر لذت ببر!

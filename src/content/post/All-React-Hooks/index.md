@@ -7,7 +7,7 @@ tags: ["React", "Hooks", "JavaScript", "Frontend"]
 ---
 
 
-# برسی کامل React Hooks: همه‌ی Hook ها با مثال
+# برسی کامل React Hook
 
 اگه می‌خوای با React برنامه بسازی، حتماً باید با Hook ها آشنا بشی. اینا واقعاً شیوه‌ی کار کردن با React رو متحول کردن و یه approach تابعی‌تر به مدیریت state و side effect ها دادن بهمون. چه تازه شروع کرده باشی چه بخوای دونسته‌هاتو تعمیق بدی، این راهنما همه چیزی که باید بدونی رو پوشش میده.
 
@@ -681,7 +681,9 @@ function RegistrationForm() {
 }
 ```
 
-### Best Practice ها
+
+## جمع‌بندی
+
 
 1. **با useState شروع کن** برای مدیریت state ساده
 2. **از useEffect برای event handling و data fetching اجتناب کن**
@@ -692,7 +694,6 @@ function RegistrationForm() {
 7. **همیشه dependency array ها رو اضافه کن** تو effect hook ها
 8. **event handler ها رو به effect ها ترجیح بده** برای تعاملات کاربر
 
-## جمع‌بندی
 
 فهمیدن React Hook ها و موارد استفاده‌ی مناسبشون برای ساختن اپلیکیشن‌های React کارآمد و قابل نگه‌داری خیلی مهمه. در حالی که بعضی از Hook ها مثل `useState` و `useRef` همراهان روزانه‌ت میشن، بقیه اهداف خاصی دارن که کمتر بهشون برمی‌خوری. کلید ماجرا اینه که بدونی کی از هر ابزار تو React toolkit استفاده کنی.
 
