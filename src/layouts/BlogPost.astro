@@ -44,7 +44,7 @@ const readingTime: string = remarkPluginFrontmatter.readingTime;
 	<div
 				class=" "
 			>
-			<Comments />
+			<Comments dir={post.data.ltr ? "ltr" : "rtl"} />
 			</div>
 
 	<button
