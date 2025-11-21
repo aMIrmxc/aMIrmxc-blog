@@ -1,0 +1,53 @@
+---
+import Comment from "./Comment.astro";
+import CommentForm from "./CommentForm.astro";
+
+interface Comment {
+  author: string;
+  content: string;
+  date: Date;
+}
+const comments: Comment[] = [];
+---
+
+<section id="comments" class="w-full">
+  <h2 class="text-2xl font-bold mb-4">Comments</h2>
+  <CommentForm />
+  <div id="comments-list" class="space-y-4">
+    {
+      comments.map((comment) => (
+        <Comment
+          author={comment.author}
+          date={comment.date}
+          content={comment.content}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  document.addEventListener("new-comment", (e) => {
+    const { author, content, date } = (e as CustomEvent).detail;
+    const commentsList = document.getElementById("comments-list");
+
+    const newComment = document.createElement("div");
+    newComment.classList.add("flex", "items-start", "space-x-4");
+    newComment.innerHTML = `
+      <div class="flex-shrink-0">
+        <img class="w-10 h-10 rounded-full" src="https://i.pravatar.cc/150?u=${author}" alt="${author}" />
+      </div>
+      <div class="flex-1">
+        <div class="flex items-center justify-between">
+          <span class="font-bold">${author}</span>
+          <span class="text-sm text-gray-500">${new Date(date).toDateString()}</span>
+        </div>
+        <p class="mt-1">${content}</p>
+      </div>
+    `;
+
+    if (commentsList) {
+      commentsList.appendChild(newComment);
+    }
+  });
+</script>

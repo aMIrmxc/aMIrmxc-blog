@@ -1,0 +1,26 @@
+---
+interface Props {
+  author: string;
+  date: Date;
+  content: string;
+}
+
+const { author, date, content } = Astro.props;
+---
+
+<div class="flex items-start space-x-4">
+  <div class="flex-shrink-0">
+    <img
+      class="w-10 h-10 rounded-full"
+      src={`https://i.pravatar.cc/150?u=${author}`}
+      alt={author}
+    />
+  </div>
+  <div class="flex-1">
+    <div class="flex items-center justify-between">
+      <span class="font-bold">{author}</span>
+      <span class="text-sm text-gray-500">{date.toDateString()}</span>
+    </div>
+    <p class="mt-1">{content}</p>
+  </div>
+</div>
