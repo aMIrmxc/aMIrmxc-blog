@@ -1,33 +1,33 @@
 ---
 ---
 
-<form class="mb-6">
-  <div class="mb-4">
-    <label for="name" class="block text-sm font-medium text-gray-700"
+<form  class="mb-16 mt-8">
+  <!-- <div class="mb-4">
+    <label for="name" class="block  text-gray-700"
       >Name</label
     >
     <input
       type="text"
       id="name"
       name="name"
-      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+      class="my-4  block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 "
       required
     />
-  </div>
+  </div> -->
   <div class="mb-4">
-    <label for="comment" class="block text-sm font-medium text-gray-700"
+    <label for="comment" class="block  text-gray-700"
       >Comment</label
     >
     <textarea
       id="comment"
       name="comment"
       rows="4"
-      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+      class="my-4 p-4 block w-full h-64 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 "
       required></textarea>
   </div>
   <button
     type="submit"
-    class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+    class="my-4 inline-flex items-center rounded-md border border-transparent bg-accent px-4 py-2 text-white shadow-sm hover:bg-accent/80 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2"
   >
     Submit
   </button>
@@ -41,7 +41,7 @@
     const name = formData.get("name") as string;
     const comment = formData.get("comment") as string;
 
-    if (name && comment) {
+    if (comment) {
       const event = new CustomEvent("new-comment", {
         bubbles: true,
         detail: { author: name, content: comment, date: new Date() },
