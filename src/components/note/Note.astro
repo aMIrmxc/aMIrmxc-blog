@@ -12,7 +12,7 @@ const { as: Tag = "div", note, isPreview = false } = Astro.props;
 const { Content } = await render(note);
 ---
 
-<article
+<article dir={note.data.ltr ? "ltr" : "rtl" }
 	class:list={[isPreview && "bg-global-text/5 inline-grid rounded-md px-4 py-3"]}
 	data-pagefind-body={isPreview ? false : true}
 >
