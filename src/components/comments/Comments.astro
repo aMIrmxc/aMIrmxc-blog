@@ -3,38 +3,34 @@ import Comment from "./Comment.astro";
 import CommentForm from "./CommentForm.astro";
 
 interface Comment {
-  author: string;
-  content: string;
-  date: Date;
+	author: string;
+	content: string;
+	date: Date;
 }
 const comments: Comment[] = [];
 ---
 
-<section dir="rtl" id="comments" class="w-full  max-w-8xl text-xl font-bold mt-32">
-    <p class="text-2xl font-bold mb-4" > نظر تو چیه؟</p>
+<section dir="rtl" id="comments" class="max-w-8xl mt-32 w-full text-xl font-bold">
+	<p class="mb-4 text-2xl font-bold">نظر تو چیه؟</p>
 
-  <CommentForm />
-  <div id="comments-list" class="space-y-4">
-    {
-      comments.map((comment) => (
-        <Comment
-          author={comment.author}
-          date={comment.date}
-          content={comment.content}
-        />
-      ))
-    }
-  </div>
+	<CommentForm />
+	<div id="comments-list" class="mb-32 space-y-4">
+		{
+			comments.map((comment) => (
+				<Comment author={comment.author} date={comment.date} content={comment.content} />
+			))
+		}
+	</div>
 </section>
 
 <script>
-  document.addEventListener("new-comment", (e) => {
-    const { author, content, date } = (e as CustomEvent).detail;
-    const commentsList = document.getElementById("comments-list");
+	document.addEventListener("new-comment", (e) => {
+		const { author, content, date } = (e as CustomEvent).detail;
+		const commentsList = document.getElementById("comments-list");
 
-    const newComment = document.createElement("div");
-    newComment.classList.add("flex", "items-start", "space-x-4");
-    newComment.innerHTML = `
+		const newComment = document.createElement("div");
+		newComment.classList.add("flex", "items-start", "space-x-4");
+		newComment.innerHTML = `
       <div class="flex-shrink-0">
         <img class="w-10 h-10 rounded-full" src="https://i.pravatar.cc/150?u=${author}" alt="${author}" />
       </div>
@@ -43,12 +39,12 @@ const comments: Comment[] = [];
           <span class="font-bold">${author}</span>
           <span class="text-sm text-gray-500">${new Date(date).toDateString()}</span>
         </div>
-        <p class="mt-1">${content}</p>
+        <p class="mt-4 mb-32">${content}</p>
       </div>
     `;
 
-    if (commentsList) {
-      commentsList.appendChild(newComment);
-    }
-  });
+		if (commentsList) {
+			commentsList.appendChild(newComment);
+		}
+	});
 </script>
