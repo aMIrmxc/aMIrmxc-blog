@@ -1,8 +1,12 @@
 ---
-
+interface Props {
+	post_id: string;
+}
+const { post_id } = Astro.props;
 ---
 
-<form  class="mb-16 mt-8 text-xl font-bold">
+<form class="mb-16 mt-8 text-xl font-bold">
+	<input type="hidden" name="post_id" value={post_id} />
   <!-- <div class="mb-4">
     <label for="name" class="block  text-gray-700"
       >Name</label
@@ -55,12 +59,15 @@
     const formData = new FormData(form);
     const name = formData.get("name") as string;
     const comment = formData.get("comment") as string;
+  const postId = formData.get("post_id") as string;
 
-    if (comment) {
-      const event = new CustomEvent("new-comment", {
-        bubbles: true,
-        detail: { author: name, content: comment, date: new Date() },
-      });
+  console.log("Submitting comment for post_id:", postId); // You can see this in the browser console
+
+  if (comment) {
+   const event = new CustomEvent("new-comment", {
+    bubbles: true,
+    detail: { author: name, content: comment, date: new Date(), postId },
+   });
       form.dispatchEvent(event);
       form.reset();
     }

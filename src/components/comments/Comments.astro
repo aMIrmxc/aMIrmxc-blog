@@ -4,9 +4,10 @@ import CommentForm from "./CommentForm.astro";
 
 interface Props {
 dir: "ltr" | "rtl";
+post_id: string;
 }
 
-const { dir } = Astro.props;
+const { dir, post_id } = Astro.props;
 interface Comment {
 	author: string;
 	content: string;
@@ -18,7 +19,7 @@ const comments: Comment[] = [];
 <section dir={dir}  id="comments" class="max-w-8xl mt-32 w-full text-xl font-bold">
 	<p class="mb-1 text-xl font-bold">{dir === "rtl" ? "نظر تو چیه؟" : "What is your opinion? "}</p>
 
-	<CommentForm />
+	<CommentForm post_id={post_id} />
 	<div id="comments-list" class="mb-32 space-y-4">
 		{
 			comments.map((comment) => (
