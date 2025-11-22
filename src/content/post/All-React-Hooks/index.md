@@ -231,7 +231,7 @@ function DocumentTitle() {
 }
 ```
 
-**بهترین practice ها:**
+**Best practice ها:**
 - برای side effect های event-based استفاده نکن (از event handler ها استفاده کن)
 - برای data fetching اجتناب کن (از React Query، SWR یا الگوهای framework استفاده کن)
 - عالی برای همگام‌سازی با browser API ها
