@@ -10,6 +10,7 @@
 @theme {
 	--color-global-bg: oklch(98.48% 0 0);
 	--color-global-text: oklch(26.99% 0.0096 235.05);
+	--color-global-bg2: rgb(255, 255, 255);
 	--color-link: oklch(55.44% 0.0431 185.69);
 	--color-accent: oklch(55.27% 0.195 19.06);
 	--color-accent-2: oklch(18.15% 0 0);
@@ -30,6 +31,8 @@
 			color-scheme: dark;
 			--color-global-bg: oklch(0.2064 0.0045 248);
 			--color-global-text: oklch(83.54% 0 264);
+			--color-global-bg2: #282A36 ;
+
 			--color-link: oklch(70.44% 0.1133 349);
 			--color-accent: oklch(0.7 0.15 290);
 			--color-accent-2: oklch(94.66% 0 0);

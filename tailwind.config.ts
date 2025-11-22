@@ -7,7 +7,8 @@ export default {
 		extend: {
 			colors: {
 				accent: "var(--color-accent)",
-				"accent-dark": "var(--color-accent-dark)",
+				// "accent-dark": "var(--color-accent-dark)",
+
 			},
 			typography: () => ({
 				DEFAULT: {
