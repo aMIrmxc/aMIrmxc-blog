@@ -7,18 +7,6 @@ const { post_id } = Astro.props;
 
 <form class="mb-16 mt-8 text-xl font-bold">
 	<input type="hidden" name="post_id" value={post_id} />
-  <!-- <div class="mb-4">
-    <label for="name" class="block  text-gray-700"
-      >Name</label
-    >
-    <input
-      type="text"
-      id="name"
-      name="name"
-      class="my-4  block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 "
-      required
-    />
-  </div> -->
   <div class="mb-4">
     <!-- <label for="comment" class="block  text-gray-700 text-sm">Comment</label> -->
     <textarea
@@ -52,24 +40,48 @@ const { post_id } = Astro.props;
   }
 </style>
 
-<script>
-  document.querySelector("form")?.addEventListener("submit", (e) => {
+<script >
+  import { supabase } from "../../utils/supabase";
+
+  document.querySelector("form")?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
-    const name = formData.get("name") as string;
     const comment = formData.get("comment") as string;
-  const postId = formData.get("post_id") as string;
+    const postId = formData.get("post_id") as string;
 
-  console.log("Submitting comment for post_id:", postId); // You can see this in the browser console
+    if (comment) {
+      try {
+        // Since we don't have user auth, we'll use a placeholder.
+        // In a real app, you'd get the user from supabase.auth.getUser()
+        const placeholder_user_id = import.meta.env.PLACEHOLDER_USER_ID;
 
-  if (comment) {
-   const event = new CustomEvent("new-comment", {
-    bubbles: true,
-    detail: { author: name, content: comment, date: new Date(), postId },
-   });
-      form.dispatchEvent(event);
-      form.reset();
+        const { data, error } = await supabase
+          .from("comments")
+          .insert({
+            post_id: postId,
+            comment_text: comment,
+            user_id: placeholder_user_id,
+          })
+          .select()
+          .single();
+
+        if (error) {
+          throw error;
+        }
+
+        if (data) {
+          const event = new CustomEvent("new-comment", {
+            bubbles: true,
+            detail: data,
+          });
+          form.dispatchEvent(event);
+          form.reset();
+        }
+      } catch (error) {
+        console.error("Error submitting comment:", error);
+        alert("Error submitting comment. Check the console for details.");
+      }
     }
   });
 </script>
