@@ -54,7 +54,7 @@ const { post_id } = Astro.props;
       try {
         // Since we don't have user auth, we'll use a placeholder.
         // In a real app, you'd get the user from supabase.auth.getUser()
-        const placeholder_user_id = import.meta.env.PLACEHOLDER_USER_ID;
+        const placeholder_user_id = import.meta.env.PUBLIC_PLACEHOLDER_USER_ID;
 
         const { data, error } = await supabase
           .from("comments")
