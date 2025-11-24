@@ -69,7 +69,7 @@ const { dir, post_id } = Astro.props;
 
     const { data: comments, error } = await supabase
   .from("comments")
-  .select('*')
+  .select('*').order('created_at', { ascending: false })
   .eq('post_id', postId);
 
 
