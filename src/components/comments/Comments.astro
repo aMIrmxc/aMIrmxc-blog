@@ -1,7 +1,5 @@
 ---
-import { supabase } from "../../utils/supabase";
-import Comment from "./Comment.astro";
-import CommentForm from "./CommentForm.astro";
+import CommentsWrapper from "./CommentsWrapper.astro";
 
 interface Props {
   dir: "ltr" | "rtl";
@@ -9,71 +7,6 @@ interface Props {
 }
 
 const { dir, post_id } = Astro.props;
-
-const { data: comments, error } = await supabase
-  .from("comments")
-  .select(
-    `
-    comment_text,
-    created_at,
-    profiles:profiles (
-      username
-    )
-  `
-  )
-  .eq("post_id", post_id);
-
-if (error) {
-  console.error("Error fetching comments:", error);
-}
 ---
 
-<section
-  dir={dir}
-  id="comments"
-  class="max-w-8xl mt-32 w-full text-xl font-bold"
->
-  <p class="mb-1 text-xl font-bold">
-    {dir === "rtl" ? "نظر تو چیه؟" : "What is your opinion? "}
-  </p>
-
-  <CommentForm post_id={post_id} />
-  <div id="comments-list" class="mb-32 space-y-4">
-    {
-      comments &&
-        comments.map((comment) => (
-          <Comment
-            author={comment.profiles?.[0]?.username ?? "Anonymous"}
-            date={new Date(comment.created_at)}
-            content={comment.comment_text}
-          />
-        ))
-    }
-  </div>
-</section>
-
-<script>
-  document.addEventListener("new-comment", (e) => {
-    const { profiles, comment_text, created_at } = (e as CustomEvent).detail;
-    const commentsList = document.getElementById("comments-list");
-
-    const newComment = document.createElement("div");
-    newComment.classList.add("flex", "items-start", "space-x-4", "my-16", "text-xl", "font-bold");
-    newComment.innerHTML = `
-      <div class="flex-shrink-0">
-        <img class="w-10 h-10 rounded-full" src="/user.png" alt="${profiles?.[0]?.username ?? 'Anonymous'}" />
-      </div>
-      <div class="flex-1 min-w-0">
-        <div class="flex items-center justify-between">
-          <span class="font-bold">${profiles?.[0]?.username ?? 'Anonymous'}</span>
-          <span class="text-l text-gray-500">${new Date(created_at).toDateString()}</span>
-        </div>
-        <p class="my-8 comment-content">${comment_text}</p>
-      </div>
-    `;
-
-    if (commentsList) {
-      commentsList.prepend(newComment);
-    }
-  });
-</script>
+<CommentsWrapper dir={dir} post_id={post_id} client:load />
