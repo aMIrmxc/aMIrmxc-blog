@@ -44,7 +44,7 @@ const readingTime: string = remarkPluginFrontmatter.readingTime;
 	<div
 				class=" "
 			>
-			<Comments dir={post.data.ltr ? "ltr" : "rtl"} post_id={Astro.url.pathname.split('/').filter(Boolean).pop() ?? ''} />
+			<Comments dir={post.data.ltr ? "ltr" : "rtl"} post_id={Astro.url.pathname.split('/').filter(Boolean).pop() ?? ''} client:load />
 			</div>
 
 	<button
