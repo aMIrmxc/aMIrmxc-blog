@@ -1,27 +1,37 @@
 ---
+import { getMessages } from "../../utils/i18n";
 interface Props {
-	post_id: string;
+  post_id: string;
+  dir?: "ltr" | "rtl";
 }
-const { post_id } = Astro.props;
+const { post_id, dir } = Astro.props;
+
+const messages = getMessages(dir ?? 'ltr').comments.form;
 ---
 
-<form class="mb-16 mt-8 text-xl font-bold">
-	<input type="hidden" name="post_id" value={post_id} />
+<form
+  class="mb-16 mt-8 text-xl font-bold"
+  dir={dir}
+  data-submitting-text={messages.submitting}
+  data-success-text={messages.success}
+  data-error-text={messages.error}
+>
+  <input type="hidden" name="post_id" value={post_id} />
   <div class="mb-4">
-    <!-- <label for="comment" class="block  text-gray-700 text-sm">Comment</label> -->
     <textarea
-      
       id="comment"
       name="comment"
       rows="4"
       class=" my-4 p-4 block text-2xl font-bold w-full h-64 rounded-md border-gray-300 shadow-sm focus:border-accent focus:ring-accent "
-      required></textarea>
+      required
+      placeholder={messages.comment}
+    ></textarea>
   </div>
   <button
     type="submit"
     class="my-4 inline-flex items-center rounded-md border border-transparent bg-accent px-4 py-2 text-white shadow-sm hover:bg-accent/80 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
   >
-    Submit
+    {messages.submit}
   </button>
 </form>
 
@@ -40,7 +50,7 @@ const { post_id } = Astro.props;
   }
 </style>
 
-<script >
+<script>
   import { supabase } from "../../utils/supabase";
 
   document.querySelector("form")?.addEventListener("submit", async (e) => {
@@ -49,11 +59,15 @@ const { post_id } = Astro.props;
     const formData = new FormData(form);
     const comment = formData.get("comment") as string;
     const postId = formData.get("post_id") as string;
+    const submitButton = form.querySelector("button[type='submit']") as HTMLButtonElement;
+
+    const originalButtonText = submitButton.textContent;
+    submitButton.textContent = form.dataset.submittingText || 'Submitting...';
+    submitButton.disabled = true;
+
 
     if (comment) {
       try {
-        // Since we don't have user auth, we'll use a placeholder.
-        // In a real app, you'd get the user from supabase.auth.getUser()
         const placeholder_user_id = import.meta.env.PUBLIC_PLACEHOLDER_USER_ID;
 
         const { data, error } = await supabase
@@ -77,10 +91,24 @@ const { post_id } = Astro.props;
           });
           form.dispatchEvent(event);
           form.reset();
+          const successEvent = new CustomEvent("show-notification", {
+            bubbles: true,
+            composed: true,
+            detail: { message: form.dataset.successText || 'Comment submitted!' },
+          });
+          document.dispatchEvent(successEvent);
         }
       } catch (error) {
         console.error("Error submitting comment:", error);
-        alert("Error submitting comment. Check the console for details.");
+        const errorEvent = new CustomEvent("show-notification", {
+            bubbles: true,
+            composed: true,
+            detail: { message: form.dataset.errorText || 'Error submitting comment.', isError: true },
+          });
+        document.dispatchEvent(errorEvent);
+      } finally {
+        submitButton.textContent = originalButtonText;
+        submitButton.disabled = false;
       }
     }
   });

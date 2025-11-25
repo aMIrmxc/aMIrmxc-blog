@@ -5,6 +5,7 @@ import Masthead from "@/components/blog/Masthead.astro";
 import TOC from "@/components/blog/TOC.astro";
 import WebMentions from "@/components/blog/webmentions/index.astro";
 import Comments from "@/components/comments/Comments.astro";
+import Notification from "@/components/Notification.astro";
 
 import BaseLayout from "./Base.astro";
 
@@ -28,6 +29,7 @@ const readingTime: string = remarkPluginFrontmatter.readingTime;
 		title,
 	}}
 >
+	 <Notification />
 	<article class="text-l grow break-words" data-pagefind-body dir={post.data.ltr ? "ltr" : "rtl"}>
 		<div id="blog-hero" class="mb-12"><Masthead content={post} readingTime={readingTime} /></div>
 		<div class="flex flex-col gap-10 lg:flex-row lg:items-start">

@@ -1,0 +1,22 @@
+<div id="notification" class="fixed top-5 right-5 bg-green-500 text-white p-4 rounded-lg shadow-lg opacity-0 transition-opacity duration-300">
+  <p id="notification-message"></p>
+</div>
+
+<script>
+  function showNotification(message: string, isError = false) {
+    const notification = document.getElementById('notification');
+    const notificationMessage = document.getElementById('notification-message');
+    if (notification && notificationMessage) {
+      notificationMessage.textContent = message;
+      notification.classList.remove('bg-red-500', 'bg-green-500');
+      notification.classList.add(isError ? 'bg-red-500' : 'bg-green-500');
+      notification.classList.remove('opacity-0');
+      setTimeout(() => {
+        notification.classList.add('opacity-0');
+      }, 3000);
+    }
+  }
+  document.addEventListener('show-notification', (e: any) => {
+    showNotification(e.detail.message, e.detail.isError);
+  });
+</script>

@@ -21,3 +21,12 @@ export function collectionDateSort(
 ) {
 	return b.data.publishDate.getTime() - a.data.publishDate.getTime();
 }
+
+export function formatToPersianDate(date: Date): string {
+  return new Intl.DateTimeFormat("fa-IR-u-nu-latn", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+}

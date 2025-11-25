@@ -2,6 +2,8 @@
 import CommentForm from "./CommentForm.astro";
 import { supabase } from "../../utils/supabase";
 import Comment from "./Comment.astro";
+import CommentStatus from "./CommentStatus.astro";
+import { getMessages } from "../../utils/i18n";
 
 interface Props {
   dir: "ltr" | "rtl";
@@ -24,6 +26,7 @@ const { data: comments, error } = await supabase
   .eq("post_id", post_id)
   .order("created_at", { ascending: false });
 
+const messages = getMessages(dir).comments;
 ---
 <section
   dir={dir}
@@ -31,26 +34,12 @@ const { data: comments, error } = await supabase
   class="max-w-8xl mt-32 w-full text-xl font-bold"
 >
   <p class="mb-1 text-xl font-bold">
-    {dir === "rtl" ? "نظر تو چیه؟" : "What is your opinion? "}
+    {messages.title}
   </p>
 
-  <CommentForm post_id={post_id} />
+  <CommentForm post_id={post_id} dir={dir} />
   <div id="comments-list" class="mb-32 space-y-4">
-    {
-      error && (
-        <div class="text-red-500">
-          Error fetching comments. Visit console for more info.
-        </div>
-      )
-    }
-    {
-      !comments && !error && <div>Loading comments...</div>
-    }
-    {
-      !error && comments && comments.length === 0 && (
-        <div class="text-gray-500">No comments yet. Be the first to comment!</div>
-      )
-    }
+    <CommentStatus {error} {comments} {messages} />
     {
       !error &&
         comments &&
@@ -67,6 +56,7 @@ const { data: comments, error } = await supabase
               author={author}
               date={new Date(comment.created_at)}
               content={comment.comment_text}
+              dir={dir}
             />
           );
         })
@@ -103,9 +93,7 @@ const { data: comments, error } = await supabase
  <div class="flex-1 min-w-0">
  <div class="flex items-center justify-between">
  <span class="font-bold">${author}</span>
- <span class="text-l text-gray-500">${new Date(
-        comment.created_at
-      ).toDateString()}</span>
+ <span class="text-l text-gray-500">Now!}</span>
  </div>
  <p class="my-8 comment-content">${comment.comment_text}</p>
  </div>
