@@ -1,6 +1,6 @@
 # project-description.md
 
-This is an Astro-based personal blog project called "aMIrmxc-blogg Blog" built with modern web technologies. The site is designed as a developer's blog to share ideas, experiments, and practical lessons related to JavaScript ecosystem technologies.
+This is an Astro.js-based personal blog project called "aMIrmxc-blog Blog" built with modern web technologies. The site is designed as a developer's blog to share ideas, experiments, and practical lessons related to JavaScript ecosystem technologies.
 
 Core Technology Stack
 Framework: Astro v5.10.1 - A modern static site builder that uses the "Islands Architecture" for optimal performance
