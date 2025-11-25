@@ -24,11 +24,7 @@ const { data: comments, error } = await supabase
   .eq("post_id", post_id)
   .order("created_at", { ascending: false });
 
-if (error) {
-  console.error("Error fetching comments:", error);
-}
 ---
-
 <section
   dir={dir}
   id="comments"
@@ -41,9 +37,28 @@ if (error) {
   <CommentForm post_id={post_id} />
   <div id="comments-list" class="mb-32 space-y-4">
     {
-      comments &&
+      error && (
+        <div class="text-red-500">
+          Error fetching comments. Visit console for more info.
+        </div>
+      )
+    }
+    {
+      !comments && !error && <div>Loading comments...</div>
+    }
+    {
+      !error && comments && comments.length === 0 && (
+        <div class="text-gray-500">No comments yet. Be the first to comment!</div>
+      )
+    }
+    {
+      !error &&
+        comments &&
         comments.map((comment) => {
-          const profile = comment.profiles?.[0];
+          const profile = comment.profiles as unknown as {
+            first_name: string;
+            last_name: string;
+          };
           const author =
             `${profile?.first_name ?? ""} ${profile?.last_name ?? ""}`.trim() ||
             "Anonymous";
@@ -64,32 +79,37 @@ if (error) {
     const comment = (e as CustomEvent).detail;
     const commentsList = document.getElementById("comments-list");
     if (commentsList) {
-      const profile = comment.profiles?.[0];
+      // Remove the "No comments yet" message if it exists
+      const noCommentsMessage = commentsList.querySelector(".text-gray-500");
+      if (noCommentsMessage) {
+        noCommentsMessage.remove();
+      }
+      const profile = comment.profiles as {
+        first_name: string;
+        last_name: string;
+      };
       const author =
         `${profile?.first_name ?? ""} ${profile?.last_name ?? ""}`.trim() ||
         "Anonymous";
-
-      // This is not a good practice, but for now it's fine
       const newCommentElement = document.createElement("div");
       newCommentElement.innerHTML = `<div class="flex items-start space-x-4 my-16 text-xl font-bold">
-   <div class="flex-shrink-0">
-     <img
-       class="w-10 h-10 rounded-full"
-       src="https://i.pravatar.cc/150?u=${author}"
-       alt=${author}
-     />
-   </div>
-   <div class="flex-1 min-w-0">
-     <div class="flex items-center justify-between">
-       <span class="font-bold">${author}</span>
-       <span class="text-l text-gray-500">${new Date(
-         comment.created_at
-       ).toDateString()}</span>
-     </div>
-     <p class="my-8 comment-content">${comment.comment_text}</p>
-   </div>
+ <div class="flex-shrink-0">
+ <img
+ class="w-10 h-10 rounded-full"
+ src="/user.png"
+ alt=${author}
+ />
+ </div>
+ <div class="flex-1 min-w-0">
+ <div class="flex items-center justify-between">
+ <span class="font-bold">${author}</span>
+ <span class="text-l text-gray-500">${new Date(
+        comment.created_at
+      ).toDateString()}</span>
+ </div>
+ <p class="my-8 comment-content">${comment.comment_text}</p>
+ </div>
  </div>`;
-
       commentsList.prepend(newCommentElement);
     }
   });
