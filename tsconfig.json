@@ -2,6 +2,8 @@
 	"extends": "astro/tsconfigs/strictest",
 	"compilerOptions": {
 		"baseUrl": ".",
+		"jsx": "react-jsx",
+		"jsxImportSource": "preact",
 		"lib": ["es2022", "dom", "dom.iterable"],
 		"paths": {
 			"@/*": ["src/*"]

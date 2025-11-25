@@ -209,7 +209,7 @@ This JavaScript function isn't working correctly. Can you help me fix it?
 - مدل‌ها ممکنه با context های خیلی بزرگ شروع به hallucination یا فراموش کردن دستورالعمل‌ها کنن
 - استفاده token هات رو توی رابط Kilo Code monitor کن
 
-## قسمت پنجم: نکات پیشرفته و بهترین practice ها
+## قسمت پنجم: نکات پیشرفته 
 
 ### ۱. تعویض بین مدل‌ها
 
