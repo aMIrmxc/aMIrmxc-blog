@@ -1,4 +1,6 @@
 ---
+import Auth from "./Auth.astro";
+import SignIn from "./SignIn.astro";
 import Search from "@/components/Search.astro";
 import ThemeToggle from "@/components/ThemeToggle.astro";
 import { menuLinks } from "@/site.config";
@@ -19,7 +21,7 @@ import { siteConfig } from "../../site.config";
 			class="inline-flex items-center grayscale hover:filter-none sm:relative sm:inline-block"
 			href="/"
 		>
-			<span class="pt-2 text-2xl font-bold sm:text-2xl">{siteConfig.title}</span>
+			<span class="pt-1 text-4xl font-bold sm:text-3xl">{siteConfig.title}</span>
 		</a>
 		<nav
 			aria-label="Main menu"
@@ -42,18 +44,20 @@ import { siteConfig } from "../../site.config";
 	</div>
 	<Search />
 	<ThemeToggle />
+	<SignIn />
+	<Auth />
 	<mobile-button>
 		<button
 			aria-expanded="false"
 			aria-haspopup="menu"
-			class="group relative ms-4 h-7 w-7 sm:invisible sm:hidden"
+			class="group relative ml-5 h-7 w-7 sm:invisible sm:hidden"
 			id="toggle-navigation-menu"
 			type="button"
 		>
 			<span class="sr-only">Open main menu</span>
 			<svg
 				aria-hidden="true"
-				class="absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
+				class="mt-1 absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
 				fill="none"
 				focusable="false"
 				id="line-svg"
@@ -85,7 +89,7 @@ import { siteConfig } from "../../site.config";
 
 <script>
 	import { toggleClass } from "@/utils/domElement";
-
+	import "@/utils/auth.ts";
 	class MobileNavBtn extends HTMLElement {
 		#menuOpen: boolean = false;
 

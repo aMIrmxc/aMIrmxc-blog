@@ -1,0 +1,110 @@
+---
+import { Icon } from "astro-icon/components";
+import Register from "./Register.astro";
+---
+
+<div
+	id="auth-modal"
+	class="bg-global-bg/40 text-accent fixed inset-0 z-50 flex hidden items-center justify-center backdrop-blur-sm"
+>
+	<div class="bg-global-bg w-full max-w-md rounded-lg p-8 shadow-lg">
+		<div class="flex justify-end">
+			<button
+				id="close-modal"
+				class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+			>
+				<Icon name="mdi:close" class="h-6 w-6" />
+			</button>
+		</div>
+		<div id="signin-form">
+			<h2 class="mb-4 text-center text-2xl font-bold">Sign In</h2>
+			<form>
+				<div class="mb-4">
+					<label for="email" class="block text-m font-medium text-gray-700 dark:text-gray-300 text-m font-bold">Email</label>
+					<input
+						type="email"
+						id="email"
+						class="mt-1 block w-full rounded-md border border-gray-300  px-3 py-2 shadow-sm focus:border-accent focus:outline-none focus:ring-accent dark:border-gray-600  sm:text-m bg-global-bg2"
+					/>
+				</div>
+				<div class="mb-6">
+					<label for="password" class="block text-m font-medium text-gray-700 dark:text-gray-300 text-m font-bold">Password</label>
+					<input
+						type="password"
+						id="password"
+						class="mt-1 block w-full rounded-md border border-gray-300  px-3 py-2 shadow-sm focus:border-accent focus:outline-none focus:ring-accent dark:border-gray-600  sm:text-m bg-global-bg2"
+					/>
+				</div>
+				<button
+					type="submit"
+					class="w-full flex justify-center rounded-md border border-transparent bg-accent px-4 py-2 text-m font-medium text-white shadow-sm hover:bg-accent/65 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 mb-4 text-center font-bold text-m font-bold"
+				>
+					Sign In
+				</button>
+			</form>
+			<div class="mt-6">
+				<div class="relative">
+					<div class="absolute inset-0 flex items-center">
+						<div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
+					</div>
+					<div class="relative flex justify-center ">
+						<button id="show-register" class="text-accent block  font-medium  text-m font-bold cursor-pointer">Or Register Now!</button>
+					</div>
+					<div class="relative flex justify-center text-m">
+						<span class="mt-8 text-accent/85 bg-global-bg/85 px-2 text-gray-500 backdrop-blur-sm dark:text-gray-400 text-m font-bold">
+							Continue With
+						</span>
+					</div>
+				</div>
+				<div class="mt-6">
+					<a
+						href="#"
+						class="w-full flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-m font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 text-m font-bold hover:bg-accent/65 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2"
+					>
+						<Icon name="mdi:google" class="mr-2 h-5 w-5 focus:border-accent focus:outline-none focus:ring-accent" />
+						Google
+					</a>
+				</div>
+			</div>
+		</div>
+        <Register />
+	</div>
+</div>
+
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const showRegisterBtn = document.getElementById("show-register");
+		const signinForm = document.getElementById("signin-form");
+		const registerForm = document.getElementById("register-form");
+		const authModal = document.getElementById("auth-modal");
+		const closeModal = document.getElementById("close-modal");
+		      const signInBtn = document.querySelector('[aria-label="Sign In"]');
+		      const showLoginBtn = document.getElementById("show-login");
+
+		if (showRegisterBtn && signinForm && registerForm) {
+			showRegisterBtn.addEventListener("click", () => {
+				signinForm.classList.toggle("hidden");
+				registerForm.classList.toggle("hidden");
+			});
+		}
+
+		      if (showLoginBtn && signinForm && registerForm) {
+		          showLoginBtn.addEventListener("click", () => {
+		              signinForm.classList.toggle("hidden");
+		              registerForm.classList.toggle("hidden");
+		          });
+		      }
+
+		if (signInBtn && authModal) {
+			signInBtn.addEventListener("click", () => {
+				authModal.classList.remove("hidden");
+			});
+		}
+
+		if (closeModal && authModal) {
+			closeModal.addEventListener("click", () => {
+				authModal.classList.add("hidden");
+			});
+		}
+	});
+</script>
