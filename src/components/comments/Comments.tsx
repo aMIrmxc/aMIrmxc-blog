@@ -2,6 +2,7 @@ import { useState, useEffect } from "preact/hooks";
 import type { ComponentProps } from "preact";
 import { supabase } from "../../utils/supabase";
 import { getMessages } from "../../utils/i18n";
+import "../../styles/components/comments.css";
 
 // Types
 interface Comment {
@@ -149,18 +150,11 @@ export default function Comments({ post_id, dir }: { post_id: string; dir: "ltr"
             id="comment"
             name="comment"
             rows={4}
-            class="my-4 p-4 block text-2xl font-bold w-full h-64 rounded-md border-accent shadow-sm focus:border-accent focus:ring-accent"
+            class="comment-textarea my-4 p-4 block text-2xl font-bold w-full h-64 rounded-md shadow-sm focus:border-accent focus:ring-accent"
             required
             placeholder={messages.form.comment}
             value={commentText}
             onInput={(e: preact.JSX.TargetedEvent<HTMLTextAreaElement, Event>) => setCommentText(e.currentTarget.value)}
-            style={{
-              borderColor: "var(--color-accent)",
-              backgroundColor: "var(--color-bg)",
-              color: "var(--color-text)",
-              border: "1px solid var(--color-border)",
-              boxShadow: "0 0 0 1px var(--color-accent)",
-            }}
           ></textarea>
         </div>
         <button
@@ -182,7 +176,5 @@ export default function Comments({ post_id, dir }: { post_id: string; dir: "ltr"
         ))}
       </div>
     </section>
-
-    
   );
 }
