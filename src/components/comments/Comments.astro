@@ -1,5 +1,7 @@
 ---
 import CommentForm from "./CommentForm.astro";
+import { supabase } from "../../utils/supabase";
+import Comment from "./Comment.astro";
 
 interface Props {
   dir: "ltr" | "rtl";
@@ -7,6 +9,24 @@ interface Props {
 }
 
 const { dir, post_id } = Astro.props;
+
+const { data: comments, error } = await supabase
+  .from("comments")
+  .select(
+    `
+    comment_text,
+    created_at,
+    profiles (
+      first_name,
+      last_name
+    )`
+  )
+  .eq("post_id", post_id)
+  .order("created_at", { ascending: false });
+
+if (error) {
+  console.error("Error fetching comments:", error);
+}
 ---
 
 <section
@@ -19,103 +39,57 @@ const { dir, post_id } = Astro.props;
   </p>
 
   <CommentForm post_id={post_id} />
-  <div id="comments-list" class="mb-32 space-y-4"></div>
+  <div id="comments-list" class="mb-32 space-y-4">
+    {
+      comments &&
+        comments.map((comment) => {
+          const profile = comment.profiles?.[0];
+          const author =
+            `${profile?.first_name ?? ""} ${profile?.last_name ?? ""}`.trim() ||
+            "Anonymous";
+          return (
+            <Comment
+              author={author}
+              date={new Date(comment.created_at)}
+              content={comment.comment_text}
+            />
+          );
+        })
+    }
+  </div>
 </section>
 
 <script>
-  import { supabase } from "../../utils/supabase";
-
-  const createCommentElement = (comment: {
-    comment_text: string;
-    created_at: string;
-    profiles: { first_name: string; last_name: string }[] | null;
-  }) => {
-    const profile = comment.profiles?.[0];
-    const author =
-      `${profile?.first_name ?? ""} ${profile?.last_name ?? ""}`.trim() ||
-      "Anonymous";
-    const newComment = document.createElement("div");
-    newComment.classList.add(
-      "flex",
-      "items-start",
-      "space-x-4",
-      "my-16",
-      "text-xl",
-      "font-bold"
-    );
-    newComment.innerHTML = `
-      <div class="flex-shrink-0">
-        <img class="w-10 h-10 rounded-full" src="/user.png" />
-      </div>
-      <div class="flex-1 min-w-0">
-        <div class="flex items-center justify-between">
-          <span class="font-bold">${author}</span>
-          <span class="text-l text-gray-500">${new Date(
-            comment.created_at
-          ).toDateString()}</span>
-        </div>
-        <p class="my-8 comment-content">${comment.comment_text}</p>
-      </div>
-    `;
-    return newComment;
-  };
-
-  async function fetchComments() {
-    const commentsList = document.getElementById("comments-list");
-    if (!commentsList) return;
-    
-    // This is a bit of a hack to get the post_id into the client script.
-    // A better way would be to pass it as a prop if this was a framework component.
-    const postId = (document.querySelector('input[name="post_id"]') as HTMLInputElement)?.value;
-    if(!postId) return;
-
-
-
-  const { data: comments, error } = await supabase
-  .from("comments")
-  .select(`
-    comment_text,
-    created_at,
-    profiles (
-      first_name,
-      last_name
-    )`
-  )
-  .eq("post_id", postId).order("created_at", { ascending: false });
-// The result will look like:
-// [
-//   {
-//     comment_text: "Great post!",
-//     created_at: "...",
-//     profiles: {
-//       first_name: "John",
-//       last_name: "Doe"
-//     }
-//   }
-// ]
-
-
-    if (error) {
-      console.error("Error fetching comments:", error);
-      return;
-    }
-
-    if (comments) {
-      commentsList.innerHTML = ""; // Clear existing comments
-      for (const comment of comments) {
-        const commentElement = createCommentElement(comment);
-        commentsList.appendChild(commentElement);
-      }
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", fetchComments);
-
   document.addEventListener("new-comment", (e) => {
     const comment = (e as CustomEvent).detail;
     const commentsList = document.getElementById("comments-list");
     if (commentsList) {
-      const newCommentElement = createCommentElement(comment);
+      const profile = comment.profiles?.[0];
+      const author =
+        `${profile?.first_name ?? ""} ${profile?.last_name ?? ""}`.trim() ||
+        "Anonymous";
+
+      // This is not a good practice, but for now it's fine
+      const newCommentElement = document.createElement("div");
+      newCommentElement.innerHTML = `<div class="flex items-start space-x-4 my-16 text-xl font-bold">
+   <div class="flex-shrink-0">
+     <img
+       class="w-10 h-10 rounded-full"
+       src="https://i.pravatar.cc/150?u=${author}"
+       alt=${author}
+     />
+   </div>
+   <div class="flex-1 min-w-0">
+     <div class="flex items-center justify-between">
+       <span class="font-bold">${author}</span>
+       <span class="text-l text-gray-500">${new Date(
+         comment.created_at
+       ).toDateString()}</span>
+     </div>
+     <p class="my-8 comment-content">${comment.comment_text}</p>
+   </div>
+ </div>`;
+
       commentsList.prepend(newCommentElement);
     }
   });
