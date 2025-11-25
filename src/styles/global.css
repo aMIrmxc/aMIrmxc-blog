@@ -97,3 +97,7 @@
 .scrollbar-hide::-webkit-scrollbar {
 	display: none; /* Chrome, Safari and Opera */
 }
+
+.hover\:border-accent:hover {
+	border-color: var(--color-accent);
+}
