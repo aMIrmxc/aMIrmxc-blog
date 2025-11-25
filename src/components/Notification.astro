@@ -1,4 +1,4 @@
-<div id="notification" class="fixed top-5 right-5 bg-green-500 text-white p-4 rounded-lg shadow-lg opacity-0 transition-opacity duration-300">
+<div id="notification" class="fixed top-5 right-5 bg-accent text-white p-4 rounded-lg shadow-lg opacity-0 transition-opacity duration-500">
   <p id="notification-message"></p>
 </div>
 
@@ -8,8 +8,8 @@
     const notificationMessage = document.getElementById('notification-message');
     if (notification && notificationMessage) {
       notificationMessage.textContent = message;
-      notification.classList.remove('bg-red-500', 'bg-green-500');
-      notification.classList.add(isError ? 'bg-red-500' : 'bg-green-500');
+      notification.classList.remove('bg-red-500', 'bg-accent');
+      notification.classList.add(isError ? 'bg-red-500' : 'bg-accent');
       notification.classList.remove('opacity-0');
       setTimeout(() => {
         notification.classList.add('opacity-0');
