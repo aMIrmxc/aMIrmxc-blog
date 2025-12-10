@@ -67,3 +67,39 @@ import { Icon } from "astro-icon/components";
 		</div>
 	</div>
 </div>
+
+
+<script>
+	import { supabase } from "../../utils/supabase";
+
+	const form = document.querySelector("#signin-form form");
+	if (form) {
+		form.addEventListener("submit", async (e) => {
+			e.preventDefault();
+
+			const emailInput = document.querySelector<HTMLInputElement>("#email");
+			const passwordInput = document.querySelector<HTMLInputElement>("#password");
+
+			if (emailInput && passwordInput) {
+				const email = emailInput.value;
+				const password = passwordInput.value;
+
+				const { data, error: authError } = await supabase.auth.signInWithPassword({
+					email: email,
+					password: password,
+				});
+
+				if (authError) {
+					console.error("Login error:", authError.message);
+					alert("Login failed: " + authError.message);
+					return;
+				}
+
+				if (data.user) {
+					// Redirect or update UI on successful login
+					window.location.href = "/";
+				}
+			}
+		});
+	}
+</script>
