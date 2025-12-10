@@ -1,0 +1,61 @@
+---
+import { Icon } from "astro-icon/components";
+import Register from "./Register.astro";
+import SignIn from "./SignIn.astro";
+---
+
+<div
+	id="auth-modal"
+	class="bg-global-bg/40 text-accent fixed inset-0 z-50 flex hidden items-center justify-center backdrop-blur-sm"
+>
+	<div class="bg-global-bg w-full max-w-md rounded-lg p-8 shadow-lg">
+		<div class="flex justify-end">
+			<button
+				id="close-modal"
+				class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+			>
+				<Icon name="mdi:close" class="h-6 w-6" />
+			</button>
+		</div>
+		<SignIn />
+		<Register />
+	</div>
+</div>
+
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const showRegisterBtn = document.getElementById("show-register");
+		const signinForm = document.getElementById("signin-form");
+		const registerForm = document.getElementById("register-form");
+		const authModal = document.getElementById("auth-modal");
+		const closeModal = document.getElementById("close-modal");
+		const signInBtn = document.querySelector('[aria-label="Sign In"]');
+		const showLoginBtn = document.getElementById("show-login");
+
+		if (showRegisterBtn && signinForm && registerForm) {
+			showRegisterBtn.addEventListener("click", () => {
+				signinForm.classList.toggle("hidden");
+				registerForm.classList.toggle("hidden");
+			});
+		}
+
+		if (showLoginBtn && signinForm && registerForm) {
+			showLoginBtn.addEventListener("click", () => {
+				signinForm.classList.toggle("hidden");
+				registerForm.classList.toggle("hidden");
+			});
+		}
+
+		if (signInBtn && authModal) {
+			signInBtn.addEventListener("click", () => {
+				authModal.classList.remove("hidden");
+			});
+		}
+
+		if (closeModal && authModal) {
+			closeModal.addEventListener("click", () => {
+				authModal.classList.add("hidden");
+			});
+		}
+	});
+</script>
