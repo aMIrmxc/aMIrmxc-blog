@@ -3,19 +3,22 @@ import SearchIcon from "@/components/SearchIcon.astro";
 import ThemeToggleIcon from "@/components/ThemeToggleIcon.astro";
 import { menuLinks } from "@/site.config";
 import { siteConfig } from "../../site.config";
-import SignInIcon from "../auth/SignInIcon.astro";
+
+
+import AuthStatus from "../auth/AuthStatus";
+import AuthIcon from "../auth/AuthIcon.astro";
 import Auth from "../auth/Auth.astro";
 ---
 
 <header class="group relative mb-28 flex items-center" id="main-header">
 	<a href="/" class="hidden sm:block">
-		<img 
+		<img
 			src="/icon.png"
 			alt="Logo"
 			class="transition-all duration-300 hover:scale-110 hover:brightness-145 sm:me-3 sm:mr-5 sm:h-21 sm:w-21"
-		 />
-	 </a>
-	 <div class="flex sm:flex-col">
+		/>
+	</a>
+	<div class="flex sm:flex-col">
 		<a
 			aria-current={Astro.url.pathname === "/" ? "page" : false}
 			class="inline-flex items-center grayscale hover:filter-none sm:relative sm:inline-block"
@@ -44,7 +47,9 @@ import Auth from "../auth/Auth.astro";
 	</div>
 	<SearchIcon />
 	<ThemeToggleIcon />
-	<SignInIcon />
+	<AuthStatus client:load />
+	
+	<AuthIcon />
 	<Auth />
 	<mobile-button>
 		<button
@@ -57,7 +62,7 @@ import Auth from "../auth/Auth.astro";
 			<span class="sr-only">Open main menu</span>
 			<svg
 				aria-hidden="true"
-				class="mt-1 absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
+				class="absolute start-1/2 top-1/2 mt-1 h-full w-full -translate-x-1/2 -translate-y-1/2 transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
 				fill="none"
 				focusable="false"
 				id="line-svg"
@@ -89,7 +94,38 @@ import Auth from "../auth/Auth.astro";
 
 <script>
 	import { toggleClass } from "@/utils/domElement";
-	import "@/utils/auth.ts";
+	const signInButton = document.querySelector('#signin-container button[aria-label="Sign In"]');
+	const authModal = document.getElementById("auth-modal");
+	const closeModalButton = document.getElementById("close-modal");
+
+	if (signInButton && authModal && closeModalButton) {
+		signInButton.addEventListener("click", () => {
+			authModal.classList.remove("hidden");
+		});
+
+		closeModalButton.addEventListener("click", () => {
+			authModal.classList.add("hidden");
+		});
+
+		window.addEventListener("click", (event) => {
+			if (event.target === authModal) {
+				authModal.classList.add("hidden");
+			}
+		});
+	}
+
+	window.addEventListener("auth-status", (event: any) => {
+		const { session } = event.detail;
+		const signInContainer = document.getElementById("signin-container");
+		if (signInContainer) {
+			if (session) {
+				signInContainer.classList.add("hidden");
+			} else {
+				signInContainer.classList.remove("hidden");
+			}
+		}
+	});
+
 	class MobileNavBtn extends HTMLElement {
 		#menuOpen: boolean = false;
 
@@ -107,4 +143,3 @@ import Auth from "../auth/Auth.astro";
 
 	customElements.define("mobile-button", MobileNavBtn);
 </script>
-
