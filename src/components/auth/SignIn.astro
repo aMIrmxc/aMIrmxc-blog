@@ -1,7 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
+import Notification from "../Notification.astro";
 ---
 
+<Notification />
 <div id="signin-form">
 	<h2 class="mb-4 text-center text-2xl font-bold">Sign In</h2>
 	<form>
@@ -68,7 +70,6 @@ import { Icon } from "astro-icon/components";
 	</div>
 </div>
 
-
 <script>
 	import { supabase } from "../../utils/supabase";
 
@@ -91,13 +92,22 @@ import { Icon } from "astro-icon/components";
 
 				if (authError) {
 					console.error("Login error:", authError.message);
-					alert("Login failed: " + authError.message);
+					const event = new CustomEvent("show-notification", {
+						detail: { message: authError.message, isError: true },
+					});
+					document.dispatchEvent(event);
 					return;
 				}
 
 				if (data.user) {
+					const event = new CustomEvent("show-notification", {
+						detail: { message: "Login successful! Redirecting...", isError: false },
+					});
+					document.dispatchEvent(event);
 					// Redirect or update UI on successful login
-					window.location.href = "/";
+					setTimeout(() => {
+						window.location.href = "/";
+					}, 2000);
 				}
 			}
 		});
