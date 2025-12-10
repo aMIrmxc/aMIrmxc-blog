@@ -10,16 +10,13 @@ export default function AuthStatus() {
     return () => unsubscribe();
   }, []);
 
-  const handleSignOut = () => {
-    authStore.signOut();
-  };
+ 
 
   return (
     <div>
       {session ? (
         <div>
           <p>Signed In</p>
-          <button onClick={handleSignOut}>Sign Out</button>
         </div>
       ) : (
         <p>Signed Out</p>

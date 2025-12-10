@@ -72,11 +72,13 @@ import Notification from "../Notification.astro";
 
 <script>
 	import { supabase } from "../../utils/supabase";
+	import authStore from "@/utils/authStore";
 
 	const form = document.querySelector("#signin-form form");
 	if (form) {
 		form.addEventListener("submit", async (e) => {
 			e.preventDefault();
+			authStore.setLoading(true);
 
 			const emailInput = document.querySelector<HTMLInputElement>("#email");
 			const passwordInput = document.querySelector<HTMLInputElement>("#password");
@@ -96,6 +98,7 @@ import Notification from "../Notification.astro";
 						detail: { message: authError.message, isError: true },
 					});
 					document.dispatchEvent(event);
+					authStore.setLoading(false);
 					return;
 				}
 
@@ -110,6 +113,7 @@ import Notification from "../Notification.astro";
 					}, 2000);
 				}
 			}
+			authStore.setLoading(false);
 		});
 	}
 </script>

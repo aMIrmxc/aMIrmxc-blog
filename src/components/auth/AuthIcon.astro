@@ -1,3 +1,7 @@
+---
+import LoadingSpinner from "./LoadingSpinner.astro";
+---
+
 <div id="auth-container" class="ml-7">
 	<button
 		id="auth-icon-button"
@@ -21,44 +25,32 @@
 			>
 		</span>
 	</button>
-	<div id="auth-status-container"></div>
+	<div class="flex items-center justify-center">
+		<LoadingSpinner />
+	</div>
 </div>
 
 <script>
 	import authStore from "@/utils/authStore";
+	import type { Session } from "@supabase/supabase-js";
 
 	const authIconButton = document.getElementById("auth-icon-button");
 	const authModal = document.getElementById("auth-modal");
-	const authStatusContainer = document.getElementById("auth-status-container");
+	const loadingSpinner = document.getElementById("loading-spinner");
 
-	let session = authStore.getSession();
-
-	function renderAuthStatus() {
-		session = authStore.getSession();
-		if (authIconButton && authStatusContainer) {
-			if (session) {
-				authIconButton.classList.add("hidden");
-				authStatusContainer.classList.remove("hidden");
-				authStatusContainer.innerHTML = `<button id="sign-out-button" class="hover:text-accent flex cursor-pointer items-center justify-center rounded-md">Sign Out</button>`;
-				document.getElementById("sign-out-button")?.addEventListener("click", () => {
-					authStore.signOut();
-				});
-			} else {
-				authIconButton.classList.remove("hidden");
-				authStatusContainer.classList.add("hidden");
-				authStatusContainer.innerHTML = "";
-			}
+	function handleLoadingState(_session: Session | null, loading: boolean) {
+		if (loading) {
+			authIconButton?.classList.add("hidden");
+			loadingSpinner?.classList.remove("hidden");
+		} else {
+			authIconButton?.classList.remove("hidden");
+			loadingSpinner?.classList.add("hidden");
 		}
 	}
 
-	authStore.subscribe(renderAuthStatus);
+	authStore.subscribe(handleLoadingState);
 
 	authIconButton?.addEventListener("click", () => {
-		if (!session) {
-			authModal?.classList.remove("hidden");
-		}
+		authModal?.classList.remove("hidden");
 	});
-
-	// Initial render
-	renderAuthStatus();
 </script>

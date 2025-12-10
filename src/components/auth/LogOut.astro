@@ -1,0 +1,29 @@
+---
+import Notification from "../Notification.astro";
+---
+
+<Notification />
+<div id="logout-form" class="hidden">
+	<h2 class="text-accent mb-4 text-center text-2xl font-bold">Log Out</h2>
+	<p class="text-center text-gray-700 dark:text-gray-300">Are you sure you want to log out?</p>
+	<button
+		id="logout-button"
+		class="bg-accent hover:bg-accent/65 focus:ring-accent/50 mt-4 flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-center text-sm font-medium text-white shadow-sm focus:ring-2 focus:ring-offset-2 focus:outline-none"
+	>
+		Log Out
+	</button>
+</div>
+
+<script>
+	import authStore from "@/utils/authStore";
+
+	const logoutButton = document.getElementById("logout-button");
+
+	logoutButton?.addEventListener("click", async () => {
+		authStore.setLoading(true);
+		await authStore.signOut();
+		const authModal = document.getElementById("auth-modal");
+		authModal?.classList.add("hidden");
+		authStore.setLoading(false);
+	});
+</script>

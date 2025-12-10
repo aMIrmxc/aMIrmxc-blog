@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import Register from "./Register.astro";
 import SignIn from "./SignIn.astro";
+import LogOut from "./LogOut.astro";
 ---
 
 <div
@@ -19,13 +20,17 @@ import SignIn from "./SignIn.astro";
 		</div>
 		<SignIn />
 		<Register />
+		<LogOut />
 	</div>
 </div>
 
 <script>
+	import authStore from "@/utils/authStore";
+
 	const showRegisterBtn = document.getElementById("show-register");
 	const signinForm = document.getElementById("signin-form");
 	const registerForm = document.getElementById("register-form");
+	const logoutForm = document.getElementById("logout-form");
 	const authModal = document.getElementById("auth-modal");
 	const closeModal = document.getElementById("close-modal");
 	const showLoginBtn = document.getElementById("show-login");
@@ -35,24 +40,40 @@ import SignIn from "./SignIn.astro";
 		registerForm?.classList.toggle("hidden");
 	}
 
+	function handleAuthModal() {
+		const session = authStore.getSession();
+		if (session) {
+			signinForm?.classList.add("hidden");
+			registerForm?.classList.add("hidden");
+			logoutForm?.classList.remove("hidden");
+		} else {
+			signinForm?.classList.remove("hidden");
+			logoutForm?.classList.add("hidden");
+		}
+	}
+
+	document.getElementById("auth-icon-button")?.addEventListener("click", handleAuthModal);
+
 	showRegisterBtn?.addEventListener("click", toggleForms);
 	showLoginBtn?.addEventListener("click", toggleForms);
 
 	closeModal?.addEventListener("click", () => {
 		authModal?.classList.add("hidden");
 	});
-
-	// Close modal on escape key press
+// Close modal on escape key press
 	document.addEventListener("keydown", (e) => {
 		if (e.key === "Escape" && !authModal?.classList.contains("hidden")) {
 			authModal?.classList.add("hidden");
 		}
 	});
 
-	// Close modal on outside click
+		// Close modal on outside click
 	authModal?.addEventListener("click", (e) => {
 		if (e.target === authModal) {
 			authModal.classList.add("hidden");
 		}
 	});
+
+	authStore.subscribe(handleAuthModal);
+	handleAuthModal();
 </script>

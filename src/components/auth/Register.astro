@@ -108,92 +108,95 @@ import Notification from "../Notification.astro";
 			</a>
 		</div>
 	</div>
-
-	
 </div>
 
 <script>
-		import { supabase } from "../../utils/supabase";
+	import { supabase } from "../../utils/supabase";
+	import authStore from "@/utils/authStore";
 
-		const form = document.getElementById("register-form-element") as HTMLFormElement;
+	const form = document.getElementById("register-form-element") as HTMLFormElement;
 
-		form.addEventListener("submit", async (e) => {
-			e.preventDefault();
+	form.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		authStore.setLoading(true);
 
-			const emailInput = document.getElementById("register-email") as HTMLInputElement;
-			const passwordInput = document.getElementById("register-password") as HTMLInputElement;
-			const confirmPasswordInput = document.getElementById("confirm-password") as HTMLInputElement;
-			const firstNameInput = document.getElementById("register-firstName") as HTMLInputElement;
-			const lastNameInput = document.getElementById("register-lastName") as HTMLInputElement;
+		const emailInput = document.getElementById("register-email") as HTMLInputElement;
+		const passwordInput = document.getElementById("register-password") as HTMLInputElement;
+		const confirmPasswordInput = document.getElementById("confirm-password") as HTMLInputElement;
+		const firstNameInput = document.getElementById("register-firstName") as HTMLInputElement;
+		const lastNameInput = document.getElementById("register-lastName") as HTMLInputElement;
 
-			if (passwordInput.value !== confirmPasswordInput.value) {
-				const event = new CustomEvent("show-notification", {
-					detail: { message: "Passwords do not match.", isError: true },
-				});
-				document.dispatchEvent(event);
-				return;
-			}
+		if (passwordInput.value !== confirmPasswordInput.value) {
+			const event = new CustomEvent("show-notification", {
+				detail: { message: "Passwords do not match.", isError: true },
+			});
+			document.dispatchEvent(event);
+			authStore.setLoading(false);
+			return;
+		}
 
-			const email = emailInput.value;
-			const password = passwordInput.value;
-			const firstName = firstNameInput.value;
-			const lastName = lastNameInput.value;
+		const email = emailInput.value;
+		const password = passwordInput.value;
+		const firstName = firstNameInput.value;
+		const lastName = lastNameInput.value;
 
-			if (!email || !password || !firstName || !lastName) {
-				const event = new CustomEvent("show-notification", {
-					detail: { message: "Please fill out all fields.", isError: true },
-				});
-				document.dispatchEvent(event);
-				return;
-			}
+		if (!email || !password || !firstName || !lastName) {
+			const event = new CustomEvent("show-notification", {
+				detail: { message: "Please fill out all fields.", isError: true },
+			});
+			document.dispatchEvent(event);
+			authStore.setLoading(false);
+			return;
+		}
 
-			const formData = {
-				email,
-				password,
-				firstName,
-				lastName,
-			};
+		const formData = {
+			email,
+			password,
+			firstName,
+			lastName,
+		};
 
-			await handleRegister(formData);
-			form.reset();
+		await handleRegister(formData);
+		form.reset();
+		authStore.setLoading(false);
+	});
+
+	interface RegisterFormData {
+		email: string;
+		password: string;
+		firstName: string;
+		lastName: string;
+	}
+
+	async function handleRegister(formData: RegisterFormData) {
+		const { email, password, firstName, lastName } = formData;
+
+		const { data, error } = await supabase.auth.signUp({
+			email: email,
+			password: password,
+			options: {
+				data: {
+					first_name: firstName,
+					last_name: lastName,
+				},
+			},
 		});
 
-		interface RegisterFormData {
-			email: string;
-			password: string;
-			firstName: string;
-			lastName: string;
-		}
-
-		async function handleRegister(formData: RegisterFormData) {
-			const { email, password, firstName, lastName } = formData;
-
-			const { data, error } = await supabase.auth.signUp({
-				email: email,
-				password: password,
-				options: {
-					data: {
-						first_name: firstName,
-						last_name: lastName,
-					},
+		if (error) {
+			console.error("Error signing up:", error.message);
+			const event = new CustomEvent("show-notification", {
+				detail: { message: "Registration failed: " + error.message, isError: true },
+			});
+			document.dispatchEvent(event);
+		} else {
+			console.log("User registered:", data);
+			const event = new CustomEvent("show-notification", {
+				detail: {
+					message: "Success! Check your email for the confirmation link.",
+					isError: false,
 				},
 			});
-
-			if (error) {
-				console.error("Error signing up:", error.message);
-				const event = new CustomEvent("show-notification", {
-					detail: { message: "Registration failed: " + error.message, isError: true },
-				});
-				document.dispatchEvent(event);
-			} else {
-				console.log("User registered:", data);
-				const event = new CustomEvent("show-notification", {
-					detail: {
-						message: "Success! Check your email for the confirmation link.",
-						isError: false,
-					},
-				});
-				document.dispatchEvent(event);
-			}
+			document.dispatchEvent(event);
 		}
-	</script>
+	}
+</script>
