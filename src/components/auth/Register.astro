@@ -4,63 +4,177 @@ import { Icon } from "astro-icon/components";
 
 <div id="register-form" class="hidden">
 	<h2 class="mb-4 text-center text-2xl font-bold">Register</h2>
-	<form>
+	<form id="register-form-element">
+		<div class="grid grid-cols-2 gap-4">
+			<div class="mb-4">
+				<label
+					for="register-firstName"
+					class="text-accent text-m block font-medium text-gray-700 dark:text-gray-300"
+					>First Name</label
+				>
+				<input
+					type="text"
+					id="register-firstName"
+					class="focus:border-accent focus:ring-accent sm:text-m bg-global-bg2 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none dark:border-gray-600"
+				/>
+			</div>
+			<div class="mb-4">
+				<label
+					for="register-lastName"
+					class="text-accent text-m block font-medium text-gray-700 dark:text-gray-300"
+					>Last Name</label
+				>
+				<input
+					type="text"
+					id="register-lastName"
+					class="focus:border-accent focus:ring-accent sm:text-m bg-global-bg2 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none dark:border-gray-600"
+				/>
+			</div>
+		</div>
 		<div class="mb-4">
-			<label for="register-email" class="text-accent block text-m font-medium text-gray-700 dark:text-gray-300">Email</label>
+			<label
+				for="register-email"
+				class="text-accent text-m block font-medium text-gray-700 dark:text-gray-300">Email</label
+			>
 			<input
 				type="email"
 				id="register-email"
-				class="mt-1 block w-full rounded-md border border-gray-300  px-3 py-2 shadow-sm focus:border-accent focus:outline-none focus:ring-accent dark:border-gray-600  sm:text-m bg-global-bg2"
+				class="focus:border-accent focus:ring-accent sm:text-m bg-global-bg2 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none dark:border-gray-600"
 			/>
 		</div>
 		<div class="mb-4">
-			<label for="register-password" class="text-accent block text-m font-medium text-gray-700 dark:text-gray-300">Password</label>
+			<label
+				for="register-password"
+				class="text-accent text-m block font-medium text-gray-700 dark:text-gray-300"
+				>Password</label
+			>
 			<input
 				type="password"
 				id="register-password"
-				class="mt-1 block w-full rounded-md border border-gray-300  px-3 py-2 shadow-sm focus:border-accent focus:outline-none focus:ring-accent dark:border-gray-600  sm:text-m bg-global-bg2"
+				class="focus:border-accent focus:ring-accent sm:text-m bg-global-bg2 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none dark:border-gray-600"
 			/>
 		</div>
 		<div class="mb-6">
-			<label for="confirm-password" class="text-accent block text-m font-medium text-gray-700 dark:text-gray-300">Confirm Password</label>
+			<label
+				for="confirm-password"
+				class="text-accent text-m block font-medium text-gray-700 dark:text-gray-300"
+				>Confirm Password</label
+			>
 			<input
 				type="password"
 				id="confirm-password"
-				class="mt-1 block w-full rounded-md border border-gray-300  px-3 py-2 shadow-sm focus:border-accent focus:outline-none focus:ring-accent dark:border-gray-600  sm:text-m bg-global-bg2"
+				class="focus:border-accent focus:ring-accent sm:text-m bg-global-bg2 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none dark:border-gray-600"
 			/>
 		</div>
 		<button
 			type="submit"
-			class="w-full flex justify-center rounded-md border border-transparent bg-accent px-4 py-2 text-m font-medium text-white shadow-sm hover:bg-accent/65 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 mb-4 text-center font-bold"
+			class="bg-accent text-m hover:bg-accent/65 focus:ring-accent/50 mb-4 flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-center font-bold font-medium text-white shadow-sm focus:ring-2 focus:ring-offset-2 focus:outline-none"
 		>
 			Register
 		</button>
 	</form>
-    <div class="mt-6">
-      <div class="relative">
-        <div class="absolute inset-0 flex items-center">
-          <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
-    </div>
-    <div class="relative flex justify-center text-m">
-          <button id="show-login" class="text-accent block text-m font-medium  text-m font-bold cursor-pointer"
-              >Or Login Now!</button>
-            </div>
-    <div class="relative flex justify-center text-m">
-
-     <span
-						class="mt-8 text-accent/85 bg-global-bg/85 px-2 text-gray-500 backdrop-blur-sm dark:text-gray-400 text-m font-bold"
-					>
-						 Continue With
-					</span>
-				</div>
+	<div class="mt-6">
+		<div class="relative">
+			<div class="absolute inset-0 flex items-center">
+				<div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
 			</div>
-			<div class="mt-6">
-				<a
-					href="#"
-					class="w-full flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-m font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 text-m font-bold hover:bg-accent/65 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2"
+			<div class="text-m relative flex justify-center">
+				<button
+					id="show-login"
+					class="text-accent text-m text-m block cursor-pointer font-bold font-medium"
+					>Or Login Now!</button
 				>
-					<Icon name="mdi:google" class="mr-2 h-5 w-5 focus:border-accent focus:outline-none focus:ring-accent " />
-					Google
-				</a>
 			</div>
+			<div class="text-m relative flex justify-center">
+				<span
+					class="text-accent/85 bg-global-bg/85 text-m mt-8 px-2 font-bold text-gray-500 backdrop-blur-sm dark:text-gray-400"
+				>
+					Continue With
+				</span>
+			</div>
+		</div>
+		<div class="mt-6">
+			<a
+				href="#"
+				class="text-m text-m hover:bg-accent/65 focus:ring-accent/50 flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 font-bold font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+			>
+				<Icon
+					name="mdi:google"
+					class="focus:border-accent focus:ring-accent mr-2 h-5 w-5 focus:outline-none"
+				/>
+				Google
+			</a>
+		</div>
+	</div>
+
+	<script>
+		import { supabase } from "../../utils/supabase";
+
+		const form = document.getElementById("register-form-element") as HTMLFormElement;
+
+		form.addEventListener("submit", async (e) => {
+			e.preventDefault();
+
+			const emailInput = document.getElementById("register-email") as HTMLInputElement;
+			const passwordInput = document.getElementById("register-password") as HTMLInputElement;
+			const confirmPasswordInput = document.getElementById("confirm-password") as HTMLInputElement;
+			const firstNameInput = document.getElementById("register-firstName") as HTMLInputElement;
+			const lastNameInput = document.getElementById("register-lastName") as HTMLInputElement;
+
+			if (passwordInput.value !== confirmPasswordInput.value) {
+				alert("Passwords do not match.");
+				return;
+			}
+
+			const email = emailInput.value;
+			const password = passwordInput.value;
+			const firstName = firstNameInput.value;
+			const lastName = lastNameInput.value;
+
+			if (!email || !password || !firstName || !lastName) {
+				alert("Please fill out all fields.");
+				return;
+			}
+
+			const formData = {
+				email,
+				password,
+				firstName,
+				lastName,
+			};
+
+			await handleRegister(formData);
+			form.reset();
+		});
+
+		interface RegisterFormData {
+			email: string;
+			password: string;
+			firstName: string;
+			lastName: string;
+		}
+
+		async function handleRegister(formData: RegisterFormData) {
+			const { email, password, firstName, lastName } = formData;
+
+			const { data, error } = await supabase.auth.signUp({
+				email: email,
+				password: password,
+				options: {
+					data: {
+						first_name: firstName,
+						last_name: lastName,
+					},
+				},
+			});
+
+			if (error) {
+				console.error("Error signing up:", error.message);
+				alert("Registration failed: " + error.message);
+			} else {
+				console.log("User registered:", data);
+				alert("Success! Check your email for the confirmation link.");
+			}
+		}
+	</script>
 </div>
