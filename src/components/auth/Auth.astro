@@ -23,39 +23,36 @@ import SignIn from "./SignIn.astro";
 </div>
 
 <script>
-	document.addEventListener("DOMContentLoaded", () => {
-		const showRegisterBtn = document.getElementById("show-register");
-		const signinForm = document.getElementById("signin-form");
-		const registerForm = document.getElementById("register-form");
-		const authModal = document.getElementById("auth-modal");
-		const closeModal = document.getElementById("close-modal");
-		const signInBtn = document.querySelector('[aria-label="Sign In"]');
-		const showLoginBtn = document.getElementById("show-login");
+	const showRegisterBtn = document.getElementById("show-register");
+	const signinForm = document.getElementById("signin-form");
+	const registerForm = document.getElementById("register-form");
+	const authModal = document.getElementById("auth-modal");
+	const closeModal = document.getElementById("close-modal");
+	const showLoginBtn = document.getElementById("show-login");
 
-		if (showRegisterBtn && signinForm && registerForm) {
-			showRegisterBtn.addEventListener("click", () => {
-				signinForm.classList.toggle("hidden");
-				registerForm.classList.toggle("hidden");
-			});
+	function toggleForms() {
+		signinForm?.classList.toggle("hidden");
+		registerForm?.classList.toggle("hidden");
+	}
+
+	showRegisterBtn?.addEventListener("click", toggleForms);
+	showLoginBtn?.addEventListener("click", toggleForms);
+
+	closeModal?.addEventListener("click", () => {
+		authModal?.classList.add("hidden");
+	});
+
+	// Close modal on escape key press
+	document.addEventListener("keydown", (e) => {
+		if (e.key === "Escape" && !authModal?.classList.contains("hidden")) {
+			authModal?.classList.add("hidden");
 		}
+	});
 
-		if (showLoginBtn && signinForm && registerForm) {
-			showLoginBtn.addEventListener("click", () => {
-				signinForm.classList.toggle("hidden");
-				registerForm.classList.toggle("hidden");
-			});
-		}
-
-		if (signInBtn && authModal) {
-			signInBtn.addEventListener("click", () => {
-				authModal.classList.remove("hidden");
-			});
-		}
-
-		if (closeModal && authModal) {
-			closeModal.addEventListener("click", () => {
-				authModal.classList.add("hidden");
-			});
+	// Close modal on outside click
+	authModal?.addEventListener("click", (e) => {
+		if (e.target === authModal) {
+			authModal.classList.add("hidden");
 		}
 	});
 </script>

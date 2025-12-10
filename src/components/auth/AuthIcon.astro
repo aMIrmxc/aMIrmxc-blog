@@ -1,24 +1,64 @@
+<div id="auth-container" class="ml-7">
+	<button
+		id="auth-icon-button"
+		aria-label="Sign In"
+		class="hover:text-accent flex cursor-pointer items-center justify-center rounded-md"
+	>
+		<span class="inline-block size-4">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.5"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="lucide lucide-circle-user-round-icon lucide-circle-user-round size-full scale-180 transform"
+				><path d="M18 20a6 6 0 0 0-12 0"></path><circle cx="12" cy="10" r="4"></circle><circle
+					cx="12"
+					cy="12"
+					r="10"></circle></svg
+			>
+		</span>
+	</button>
+	<div id="auth-status-container"></div>
+</div>
 
-<button
-	aria-label="Sign In"
-	class="hover:text-accent flex ml-7 cursor-pointer items-center justify-center rounded-md"
->
-	
-	<span class="inline-block size-4">
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="1.5"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			class="lucide lucide-circle-user-round-icon lucide-circle-user-round size-full transform scale-180"
-			><path d="M18 20a6 6 0 0 0-12 0" /><circle cx="12" cy="10" r="4" /><circle
-				cx="12"
-				cy="12"
-				r="10"
-			/></svg
-		>
-	</span>
-</button>
+<script>
+	import authStore from "@/utils/authStore";
+
+	const authIconButton = document.getElementById("auth-icon-button");
+	const authModal = document.getElementById("auth-modal");
+	const authStatusContainer = document.getElementById("auth-status-container");
+
+	let session = authStore.getSession();
+
+	function renderAuthStatus() {
+		session = authStore.getSession();
+		if (authIconButton && authStatusContainer) {
+			if (session) {
+				authIconButton.classList.add("hidden");
+				authStatusContainer.classList.remove("hidden");
+				authStatusContainer.innerHTML = `<button id="sign-out-button" class="hover:text-accent flex cursor-pointer items-center justify-center rounded-md">Sign Out</button>`;
+				document.getElementById("sign-out-button")?.addEventListener("click", () => {
+					authStore.signOut();
+				});
+			} else {
+				authIconButton.classList.remove("hidden");
+				authStatusContainer.classList.add("hidden");
+				authStatusContainer.innerHTML = "";
+			}
+		}
+	}
+
+	authStore.subscribe(renderAuthStatus);
+
+	authIconButton?.addEventListener("click", () => {
+		if (!session) {
+			authModal?.classList.remove("hidden");
+		}
+	});
+
+	// Initial render
+	renderAuthStatus();
+</script>
