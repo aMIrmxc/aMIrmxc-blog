@@ -1,9 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
-import Notification from "../Notification.astro";
 ---
 
-<Notification />
 <div id="signin-form">
 	<h2 class="mb-4 text-center text-2xl font-bold">Sign In</h2>
 	<form>
@@ -94,19 +92,13 @@ import Notification from "../Notification.astro";
 
 				if (authError) {
 					console.error("Login error:", authError.message);
-					const event = new CustomEvent("show-notification", {
-						detail: { message: authError.message, isError: true },
-					});
-					document.dispatchEvent(event);
+					authStore.showNotification(authError.message, true);
 					authStore.setLoading(false);
 					return;
 				}
 
 				if (data.user) {
-					const event = new CustomEvent("show-notification", {
-						detail: { message: "Login successful! Redirecting...", isError: false },
-					});
-					document.dispatchEvent(event);
+					authStore.showNotification("Login successful! Redirecting...");
 					// Redirect or update UI on successful login
 					setTimeout(() => {
 						window.location.href = "/";

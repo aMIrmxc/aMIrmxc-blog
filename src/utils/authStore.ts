@@ -51,7 +51,14 @@ const authStore = {
     authStore.setLoading(true);
     await supabase.auth.signOut();
     authStore.setLoading(false);
-  }
+  },
+
+  showNotification(message: string, isError = false) {
+    const event = new CustomEvent("show-notification", {
+      detail: { message, isError },
+    });
+    document.dispatchEvent(event);
+  },
 };
 
 authStore.initialize();

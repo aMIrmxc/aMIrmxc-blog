@@ -1,8 +1,7 @@
 ---
-import Notification from "../Notification.astro";
+
 ---
 
-<Notification />
 <div id="logout-form" class="hidden">
 	<h2 class="text-accent mb-4 text-center text-2xl font-bold">Log Out</h2>
 	<p class="text-center text-gray-700 dark:text-gray-300">Are you sure you want to log out?</p>
@@ -22,8 +21,7 @@ import Notification from "../Notification.astro";
 	logoutButton?.addEventListener("click", async () => {
 		authStore.setLoading(true);
 		await authStore.signOut();
-		const authModal = document.getElementById("auth-modal");
-		authModal?.classList.add("hidden");
+		authStore.showNotification("You have been logged out.");
 		authStore.setLoading(false);
 	});
 </script>

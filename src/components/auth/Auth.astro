@@ -40,7 +40,24 @@ import LogOut from "./LogOut.astro";
 		registerForm?.classList.toggle("hidden");
 	}
 
-	function handleAuthModal() {
+	function handleAuthStateChange() {
+		const session = authStore.getSession();
+		if (session) {
+			signinForm?.classList.add("hidden");
+			registerForm?.classList.add("hidden");
+			logoutForm?.classList.remove("hidden");
+			// Close modal only on state change to signed in
+			if (authModal?.classList.contains("hidden") === false) {
+				authModal?.classList.add("hidden");
+			}
+		} else {
+			signinForm?.classList.remove("hidden");
+			registerForm?.classList.add("hidden");
+			logoutForm?.classList.add("hidden");
+		}
+	}
+
+	function openModal() {
 		const session = authStore.getSession();
 		if (session) {
 			signinForm?.classList.add("hidden");
@@ -48,11 +65,13 @@ import LogOut from "./LogOut.astro";
 			logoutForm?.classList.remove("hidden");
 		} else {
 			signinForm?.classList.remove("hidden");
+			registerForm?.classList.add("hidden");
 			logoutForm?.classList.add("hidden");
 		}
+		authModal?.classList.remove("hidden");
 	}
 
-	document.getElementById("auth-icon-button")?.addEventListener("click", handleAuthModal);
+	document.getElementById("auth-icon-button")?.addEventListener("click", openModal);
 
 	showRegisterBtn?.addEventListener("click", toggleForms);
 	showLoginBtn?.addEventListener("click", toggleForms);
@@ -60,20 +79,20 @@ import LogOut from "./LogOut.astro";
 	closeModal?.addEventListener("click", () => {
 		authModal?.classList.add("hidden");
 	});
-// Close modal on escape key press
+	// Close modal on escape key press
 	document.addEventListener("keydown", (e) => {
 		if (e.key === "Escape" && !authModal?.classList.contains("hidden")) {
 			authModal?.classList.add("hidden");
 		}
 	});
 
-		// Close modal on outside click
+	// Close modal on outside click
 	authModal?.addEventListener("click", (e) => {
 		if (e.target === authModal) {
 			authModal.classList.add("hidden");
 		}
 	});
 
-	authStore.subscribe(handleAuthModal);
-	handleAuthModal();
+	authStore.subscribe(handleAuthStateChange);
+	handleAuthStateChange();
 </script>
