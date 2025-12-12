@@ -1,6 +1,7 @@
 import { useState, useEffect } from "preact/hooks";
 import type { ComponentProps } from "preact";
 import { supabase } from "../../utils/supabase";
+import authStore from "@/utils/authStore";
 import { getMessages } from "../../utils/i18n";
 import "../../styles/components/comments.css";
 
@@ -98,13 +99,24 @@ export default function Comments({ post_id, dir }: { post_id: string; dir: "ltr"
 
     if (commentText.trim()) {
       try {
-        const placeholder_user_id = import.meta.env.PUBLIC_PLACEHOLDER_USER_ID;
+        const session = authStore.getSession();
+        if (!session?.user) {
+          const errorEvent = new CustomEvent("show-notification", {
+            bubbles: true,
+            composed: true,
+            detail: { message: "Please sign in to comment.", isError: true },
+          });
+          document.dispatchEvent(errorEvent);
+          setIsSubmitting(false);
+          return;
+        }
+
         const { data, error: insertError } = await supabase
           .from("comments")
           .insert({
             post_id: post_id,
             comment_text: commentText,
-            user_id: placeholder_user_id,
+            user_id: session.user.id,
           })
           .select("*, profiles (first_name, last_name)")
           .single();
