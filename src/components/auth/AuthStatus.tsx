@@ -10,17 +10,17 @@ export default function AuthStatus() {
     return () => unsubscribe();
   }, []);
 
- 
 
-  return (
-    <div>
-      {session ? (
-        <div>
-          <p>Signed In</p>
-        </div>
-      ) : (
-        <p>Signed Out</p>
-      )}
-    </div>
-  );
+
+//   return (
+//     <div>
+//       {session ? (
+//         <div>
+//           <p>Signed In</p>
+//         </div>
+//       ) : (
+//         <p>Signed Out</p>
+//       )}
+//     </div>
+//   );
 }
