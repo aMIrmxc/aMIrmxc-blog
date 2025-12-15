@@ -56,6 +56,7 @@ import { Icon } from "astro-icon/components";
 		<div class="mt-6">
 			<a
 				href="#"
+				id="google-signin-btn"
 				class="text-m hover:bg-accent/65 focus:ring-accent/50 flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 font-bold font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
 			>
 				<Icon
@@ -73,6 +74,28 @@ import { Icon } from "astro-icon/components";
 	import authStore from "@/utils/authStore";
 
 	const form = document.querySelector("#signin-form form");
+	const googleButton = document.getElementById("google-signin-btn");
+
+	const signInWithGoogle = async () => {
+		const { data, error } = await supabase.auth.signInWithOAuth({
+			provider: "google",
+			options: {
+				redirectTo: "https://amirmxc.ir",
+			},
+		});
+
+		if (error) {
+			console.error(error);
+		}
+	};
+
+	if (googleButton) {
+		googleButton.addEventListener("click", (e) => {
+			e.preventDefault();
+			signInWithGoogle();
+		});
+	}
+
 	if (form) {
 		form.addEventListener("submit", async (e) => {
 			e.preventDefault();
