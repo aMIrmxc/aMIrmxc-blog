@@ -1,0 +1,55 @@
+---
+---
+
+<div id="notification" class="fixed top-5 right-5 bg-opacity-80 backdrop-blur-md border text-white p-4 rounded-lg shadow-lg opacity-0 transition-all duration-500 flex items-center">
+  <div id="notification-icon" class="mr-3"></div>
+  <p id="notification-message" class="flex-grow"></p>
+  <button id="notification-close" class="ml-4">&times;</button>
+</div>
+
+<script>
+  function showNotification(message: string, isError = false) {
+
+      console.log('Notification message', 'color: #007acc;', message);
+
+    const notification = document.getElementById('notification') as HTMLDivElement;
+    const notificationMessage = document.getElementById('notification-message') as HTMLParagraphElement;
+    const notificationIcon = document.getElementById('notification-icon') as HTMLDivElement;
+    const closeButton = document.getElementById('notification-close') as HTMLButtonElement;
+
+    if (notification && notificationMessage && notificationIcon) {
+      notificationMessage.textContent = message;
+
+      // Reset classes
+      notification.classList.remove('border-accent/80', 'border-red-500', 'bg-accent/80-500', 'bg-red-500');
+      notificationIcon.innerHTML = ''; 
+
+      if (isError) {
+        notification.classList.add('bg-red-500', 'border-red-700');
+        notificationIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+      } else {
+        notification.classList.add('bg-accent/80', 'border-accent/80');
+        notificationIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+      }
+
+      notification.classList.remove('opacity-0');
+      notification.classList.add('opacity-100');
+
+      const hideNotification = () => {
+        notification.classList.remove('opacity-100');
+        notification.classList.add('opacity-0');
+      };
+
+      const timer = setTimeout(hideNotification, 9000);
+
+      closeButton.onclick = () => {
+        clearTimeout(timer);
+        hideNotification();
+      };
+    }
+  }
+
+  document.addEventListener('show-notification', (e: any) => {
+    showNotification(e.detail.message, e.detail.isError);
+  });
+</script>

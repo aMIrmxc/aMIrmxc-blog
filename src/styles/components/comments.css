@@ -1,0 +1,12 @@
+.comment-textarea {
+  border-color: var(--color-accent);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 0 0 1px var(--color-accent);
+}
+
+.comment-textarea:focus {
+  box-shadow: 0 0 0 2px var(--color-accent);
+  outline: none;
+}

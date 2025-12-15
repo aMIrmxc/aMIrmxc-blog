@@ -1,0 +1,134 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div id="signin-form">
+	<h2 class="mb-4 text-center text-2xl font-bold">Sign In</h2>
+	<form>
+		<div class="mb-4">
+			<label for="email" class="text-m block font-bold font-medium text-gray-700 dark:text-gray-300"
+				>Email</label
+			>
+			<input
+				type="email"
+				id="email"
+				class="focus:border-accent focus:ring-accent sm:text-m bg-global-bg2 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none dark:border-gray-600"
+			/>
+		</div>
+		<div class="mb-6">
+			<label
+				for="password"
+				class="text-m block font-bold font-medium text-gray-700 dark:text-gray-300">Password</label
+			>
+			<input
+				type="password"
+				id="password"
+				class="focus:border-accent focus:ring-accent sm:text-m bg-global-bg2 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none dark:border-gray-600"
+			/>
+		</div>
+		<button
+			type="submit"
+			class="bg-accent text-m hover:bg-accent/65 focus:ring-accent/50 mb-4 flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-center font-bold font-medium text-white shadow-sm focus:ring-2 focus:ring-offset-2 focus:outline-none"
+		>
+			Sign In
+		</button>
+	</form>
+	<div class="mt-6">
+		<div class="relative">
+			<div class="absolute inset-0 flex items-center">
+				<div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
+			</div>
+			<div class="relative flex justify-center">
+				<button
+					id="show-register"
+					class="text-accent text-m block cursor-pointer font-bold font-medium"
+					>Or Register Now!</button
+				>
+			</div>
+			<div class="text-m relative flex justify-center">
+				<span
+					class="text-accent/85 bg-global-bg/85 mt-8 px-2 font-bold text-gray-500 backdrop-blur-sm dark:text-gray-400"
+				>
+					Continue With
+				</span>
+			</div>
+		</div>
+		<div class="mt-6">
+			<a
+				href="#"
+				id="google-signin-btn"
+				class="text-m hover:bg-accent/65 focus:ring-accent/50 flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 font-bold font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+			>
+				<Icon
+					name="mdi:google"
+					class="focus:border-accent focus:ring-accent mr-2 h-5 w-5 focus:outline-none"
+				/>
+				Google
+			</a>
+		</div>
+	</div>
+</div>
+
+<script>
+	import { supabase } from "../../utils/supabase";
+	import authStore from "@/utils/authStore";
+
+	const form = document.querySelector("#signin-form form");
+	const googleButton = document.getElementById("google-signin-btn");
+
+	const signInWithGoogle = async () => {
+		const { data, error } = await supabase.auth.signInWithOAuth({
+			provider: "google",
+			options: {
+				redirectTo: "https://amirmxc.ir",
+			},
+		});
+
+		if (error) {
+			console.error(error);
+		}
+	};
+
+	if (googleButton) {
+		googleButton.addEventListener("click", (e) => {
+			e.preventDefault();
+			signInWithGoogle();
+		});
+	}
+
+	if (form) {
+		form.addEventListener("submit", async (e) => {
+			e.preventDefault();
+			authStore.setLoading(true);
+
+			const emailInput = document.querySelector<HTMLInputElement>("#email");
+			const passwordInput = document.querySelector<HTMLInputElement>("#password");
+
+			if (emailInput && passwordInput) {
+				const email = emailInput.value;
+				const password = passwordInput.value;
+
+				const { data, error: authError } = await supabase.auth.signInWithPassword({
+					email: email,
+					password: password,
+				});
+
+				if (authError) {
+					console.error("Login error:", authError.message);
+					authStore.showNotification(authError.message, true);
+					authStore.setLoading(false);
+					return;
+				}
+
+				if (data.user) {
+					authStore.showNotification("Login successful! Redirecting...");
+					// Redirect or update UI on successful login
+					setTimeout(() => {
+						window.location.href = "/";
+					}, 2000);
+				}
+			}
+			authStore.setLoading(false);
+		});
+	}
+</script>

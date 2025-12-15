@@ -1,0 +1,98 @@
+---
+import { Icon } from "astro-icon/components";
+import Register from "./Register.astro";
+import SignIn from "./SignIn.astro";
+import LogOut from "./LogOut.astro";
+---
+
+<div
+	id="auth-modal"
+	class="bg-global-bg/40 text-accent fixed inset-0 z-50 flex hidden items-center justify-center backdrop-blur-sm"
+>
+	<div class="bg-global-bg w-full max-w-md rounded-lg p-8 shadow-lg">
+		<div class="flex justify-end">
+			<button
+				id="close-modal"
+				class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+			>
+				<Icon name="mdi:close" class="h-6 w-6" />
+			</button>
+		</div>
+		<SignIn />
+		<Register />
+		<LogOut />
+	</div>
+</div>
+
+<script>
+	import authStore from "@/utils/authStore";
+
+	const showRegisterBtn = document.getElementById("show-register");
+	const signinForm = document.getElementById("signin-form");
+	const registerForm = document.getElementById("register-form");
+	const logoutForm = document.getElementById("logout-form");
+	const authModal = document.getElementById("auth-modal");
+	const closeModal = document.getElementById("close-modal");
+	const showLoginBtn = document.getElementById("show-login");
+
+	function toggleForms() {
+		signinForm?.classList.toggle("hidden");
+		registerForm?.classList.toggle("hidden");
+	}
+
+	function handleAuthStateChange() {
+		const session = authStore.getSession();
+		if (session) {
+			signinForm?.classList.add("hidden");
+			registerForm?.classList.add("hidden");
+			logoutForm?.classList.remove("hidden");
+			// Close modal only on state change to signed in
+			if (authModal?.classList.contains("hidden") === false) {
+				authModal?.classList.add("hidden");
+			}
+		} else {
+			signinForm?.classList.remove("hidden");
+			registerForm?.classList.add("hidden");
+			logoutForm?.classList.add("hidden");
+		}
+	}
+
+	function openModal() {
+		const session = authStore.getSession();
+		if (session) {
+			signinForm?.classList.add("hidden");
+			registerForm?.classList.add("hidden");
+			logoutForm?.classList.remove("hidden");
+		} else {
+			signinForm?.classList.remove("hidden");
+			registerForm?.classList.add("hidden");
+			logoutForm?.classList.add("hidden");
+		}
+		authModal?.classList.remove("hidden");
+	}
+
+	document.getElementById("auth-icon-button")?.addEventListener("click", openModal);
+
+	showRegisterBtn?.addEventListener("click", toggleForms);
+	showLoginBtn?.addEventListener("click", toggleForms);
+
+	closeModal?.addEventListener("click", () => {
+		authModal?.classList.add("hidden");
+	});
+	// Close modal on escape key press
+	document.addEventListener("keydown", (e) => {
+		if (e.key === "Escape" && !authModal?.classList.contains("hidden")) {
+			authModal?.classList.add("hidden");
+		}
+	});
+
+	// Close modal on outside click
+	authModal?.addEventListener("click", (e) => {
+		if (e.target === authModal) {
+			authModal.classList.add("hidden");
+		}
+	});
+
+	authStore.subscribe(handleAuthStateChange);
+	handleAuthStateChange();
+</script>

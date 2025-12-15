@@ -6,6 +6,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwind from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
 import expressiveCode from "astro-expressive-code";
+import preact from "@astrojs/preact";
 import icon from "astro-icon";
 import robotsTxt from "astro-robots-txt";
 import webmanifest from "astro-webmanifest";
@@ -52,20 +53,20 @@ export default defineConfig({
 			short_name: "aMIrmxc-blog ⚙", // optional
 			description: siteConfig.description,
 			lang: siteConfig.lang,
-			icon: "public/icon.svg", // the source for generating favicon & icons
+			icon: "/icon.png", // the source for generating favicon & icons
 			icons: [
 				{
-					src: "icons/apple-touch-icon.png", // used in src/components/BaseHead.astro L:26
+					src: "/apple-touch-icon.png", // used in src/components/BaseHead.astro L:26
 					sizes: "180x180",
 					type: "image/png",
 				},
 				{
-					src: "icons/icon-192.png",
+					src: "/icon-192.png",
 					sizes: "192x192",
 					type: "image/png",
 				},
 				{
-					src: "icons/icon-512.png",
+					src: "/icon-512.png",
 					sizes: "512x512",
 					type: "image/png",
 				},
@@ -80,6 +81,7 @@ export default defineConfig({
 				insertManifestLink: false,
 			},
 		}),
+		preact(),
 	],
 	markdown: {
 		rehypePlugins: [
@@ -107,7 +109,7 @@ export default defineConfig({
 		optimizeDeps: {
 			exclude: ["@resvg/resvg-js"],
 		},
-		plugins: [tailwind(), rawFonts([".ttf", ".woff"])],
+		plugins: [tailwind()],
 	},
 	env: {
 		schema: {
@@ -118,18 +120,3 @@ export default defineConfig({
 	},
 });
 
-function rawFonts(ext: string[]) {
-	return {
-		name: "vite-plugin-raw-fonts",
-		// @ts-expect-error:next-line
-		transform(_, id) {
-			if (ext.some((e) => id.endsWith(e))) {
-				const buffer = fs.readFileSync(id);
-				return {
-					code: `export default ${JSON.stringify(buffer)}`,
-					map: null,
-				};
-			}
-		},
-	};
-}

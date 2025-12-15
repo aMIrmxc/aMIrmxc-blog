@@ -4,6 +4,7 @@ import SkipLink from "@/components/SkipLink.astro";
 import ThemeProvider from "@/components/ThemeProvider.astro";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
+import Notification from "@/components/Notification.astro";
 import { siteConfig } from "@/site.config";
 import type { SiteMeta } from "@/types";
 
@@ -16,13 +17,14 @@ const {
 } = Astro.props;
 ---
 
-<html class="scroll-smooth bg-global-bg" lang={siteConfig.lang}>
+<html class="bg-global-bg scroll-smooth" lang={siteConfig.lang}>
 	<head>
 		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
 	</head>
 	<body
-		class="bg-global-bg text-global-text mx-auto flex min-h-screen  max-w-6xl flex-col px-4 pt-16 font-mono text-m font-normal antialiased sm:px-8"
+		class="bg-global-bg text-global-text text-m mx-auto flex min-h-screen max-w-6xl flex-col px-4 pt-16 font-mono font-normal antialiased sm:px-8"
 	>
+		<Notification />
 		<ThemeProvider />
 		<SkipLink />
 		<Header />

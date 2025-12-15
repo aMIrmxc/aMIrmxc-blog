@@ -1,0 +1,222 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div id="register-form" class="hidden">
+	<h2 class="mb-4 text-center text-2xl font-bold">Register</h2>
+	<form id="register-form-element">
+		<div class="grid grid-cols-2 gap-4">
+			<div class="mb-4">
+				<label
+					for="register-firstName"
+					class="text-accent text-m block font-medium text-gray-700 dark:text-gray-300"
+					>First Name</label
+				>
+				<input
+					type="text"
+					id="register-firstName"
+					class="focus:border-accent focus:ring-accent sm:text-m bg-global-bg2 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none dark:border-gray-600"
+				/>
+			</div>
+			<div class="mb-4">
+				<label
+					for="register-lastName"
+					class="text-accent text-m block font-medium text-gray-700 dark:text-gray-300"
+					>Last Name</label
+				>
+				<input
+					type="text"
+					id="register-lastName"
+					class="focus:border-accent focus:ring-accent sm:text-m bg-global-bg2 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none dark:border-gray-600"
+				/>
+			</div>
+		</div>
+		<div class="mb-4">
+			<label
+				for="register-email"
+				class="text-accent text-m block font-medium text-gray-700 dark:text-gray-300">Email</label
+			>
+			<input
+				type="email"
+				id="register-email"
+				class="focus:border-accent focus:ring-accent sm:text-m bg-global-bg2 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none dark:border-gray-600"
+			/>
+		</div>
+		<div class="mb-4">
+			<label
+				for="register-password"
+				class="text-accent text-m block font-medium text-gray-700 dark:text-gray-300"
+				>Password</label
+			>
+			<input
+				type="password"
+				id="register-password"
+				class="focus:border-accent focus:ring-accent sm:text-m bg-global-bg2 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none dark:border-gray-600"
+			/>
+		</div>
+		<div class="mb-6">
+			<label
+				for="confirm-password"
+				class="text-accent text-m block font-medium text-gray-700 dark:text-gray-300"
+				>Confirm Password</label
+			>
+			<input
+				type="password"
+				id="confirm-password"
+				class="focus:border-accent focus:ring-accent sm:text-m bg-global-bg2 mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none dark:border-gray-600"
+			/>
+		</div>
+		<button
+			type="submit"
+			class="bg-accent text-m hover:bg-accent/65 focus:ring-accent/50 mb-4 flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-center font-bold font-medium text-white shadow-sm focus:ring-2 focus:ring-offset-2 focus:outline-none"
+		>
+			Register
+		</button>
+	</form>
+	<div class="mt-6">
+		<div class="relative">
+			<div class="absolute inset-0 flex items-center">
+				<div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
+			</div>
+			<div class="text-m relative flex justify-center">
+				<button
+					id="show-login"
+					class="text-accent text-m text-m block cursor-pointer font-bold font-medium"
+					>Or Login Now!</button
+				>
+			</div>
+			<div class="text-m relative flex justify-center">
+				<span
+					class="text-accent/85 bg-global-bg/85 text-m mt-8 px-2 font-bold text-gray-500 backdrop-blur-sm dark:text-gray-400"
+				>
+					Continue With
+				</span>
+			</div>
+		</div>
+		<div class="mt-6">
+			<a
+				href="#"
+				id="google-register-btn"
+				class="text-m text-m hover:bg-accent/65 focus:ring-accent/50 flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 font-bold font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+			>
+				<Icon
+					name="mdi:google"
+					class="focus:border-accent focus:ring-accent mr-2 h-5 w-5 focus:outline-none"
+				/>
+				Google
+			</a>
+		</div>
+	</div>
+</div>
+
+<script>
+	import { supabase } from "../../utils/supabase";
+	import authStore from "@/utils/authStore";
+
+	const form = document.getElementById("register-form-element") as HTMLFormElement;
+	const googleButton = document.getElementById("google-register-btn");
+
+	const signInWithGoogle = async () => {
+		const { data, error } = await supabase.auth.signInWithOAuth({
+			provider: "google",
+			options: {
+				redirectTo: "https://amirmxc.ir",
+			},
+		});
+
+		if (error) {
+			console.error(error);
+		}
+	};
+
+	if (googleButton) {
+		googleButton.addEventListener("click", (e) => {
+			e.preventDefault();
+			signInWithGoogle();
+		});
+	}
+
+	form.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		authStore.setLoading(true);
+
+		const emailInput = document.getElementById("register-email") as HTMLInputElement;
+		const passwordInput = document.getElementById("register-password") as HTMLInputElement;
+		const confirmPasswordInput = document.getElementById("confirm-password") as HTMLInputElement;
+		const firstNameInput = document.getElementById("register-firstName") as HTMLInputElement;
+		const lastNameInput = document.getElementById("register-lastName") as HTMLInputElement;
+
+		if (passwordInput.value !== confirmPasswordInput.value) {
+			const event = new CustomEvent("show-notification", {
+				detail: { message: "Passwords do not match.", isError: true },
+			});
+			document.dispatchEvent(event);
+			authStore.setLoading(false);
+			return;
+		}
+
+		const email = emailInput.value;
+		const password = passwordInput.value;
+		const firstName = firstNameInput.value;
+		const lastName = lastNameInput.value;
+
+		if (!email || !password || !firstName || !lastName) {
+			const event = new CustomEvent("show-notification", {
+				detail: { message: "Please fill out all fields.", isError: true },
+			});
+			document.dispatchEvent(event);
+			authStore.setLoading(false);
+			return;
+		}
+
+		const formData = {
+			email,
+			password,
+			firstName,
+			lastName,
+		};
+
+		await handleRegister(formData);
+		form.reset();
+		authStore.setLoading(false);
+	});
+
+	interface RegisterFormData {
+		email: string;
+		password: string;
+		firstName: string;
+		lastName: string;
+	}
+
+	async function handleRegister(formData: RegisterFormData) {
+		const { email, password, firstName, lastName } = formData;
+
+		const { data, error } = await supabase.auth.signUp({
+			email: email,
+			password: password,
+			options: {
+				data: {
+					first_name: firstName,
+					last_name: lastName,
+				},
+			},
+		});
+
+		if (error) {
+			console.error("Error signing up:", error.message);
+			const event = new CustomEvent("show-notification", {
+				detail: { message: "Registration failed: " + error.message, isError: true },
+			});
+			document.dispatchEvent(event);
+		} else {
+			console.log("User registered:", data);
+			const event = new CustomEvent("show-notification", {
+				detail: {
+					message: "Success! Check your email for the confirmation link.",
+					isError: false,
+				},
+			});
+			document.dispatchEvent(event);
+		}
+	}
+</script>
