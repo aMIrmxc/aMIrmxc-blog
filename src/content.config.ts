@@ -5,7 +5,7 @@ function removeDupsAndLowerCase(array: string[]) {
 	return [...new Set(array.map((str) => str.toLowerCase()))];
 }
 
-const titleSchema = z.string().max(60);
+const titleSchema = z.string().max(100);
 
 const baseSchema = z.object({
 	title: titleSchema,
