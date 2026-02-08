@@ -1,9 +1,12 @@
 ---
 title: " یادگیری Vue.js در کنار نمونه کد های React.js "
 description: با خواندن این پست ۱۳ قدمِ مقایسه‌ایِ کاملاً عملی را طی می‌کنید؛ از ساختار کامپوننت و state گرفته تا Context vs. Provide/Inject و Redux vs. Pinia."
+post_id: "vue-vs-react"
 publishDate: "09 Oct 2024"
 tags: ["Vue", "Learn", "React"]
 ---
+
+
 
 
 # یادگیری Vue.js برای توسعه دهندگان React 
@@ -114,8 +117,6 @@ const name = ref('Ali');
 </style>
 ```
 
----
-
 ## ۲. مدیریت State (Reactive State)
 
 در React از `useState` استفاده می‌کنید. در Vue دو راه اصلی داریم: `ref` (برای داده‌های ساده مثل عدد و رشته) و `reactive` (برای آبجکت‌ها).
@@ -147,8 +148,6 @@ const increment = () => {
   <button @click="increment">Count is: {{ count }}</button>
 </template>
 ```
-
----
 
 ## ۳. شرط‌ها و حلقه‌ها (Conditionals & Loops)
 
@@ -190,8 +189,6 @@ React از قدرت جاوااسکریپت (`map`, `&&`, `ternary`) استفاد
 </ul>
 ```
 
----
-
 ## ۴. پراپ‌ها (Props)
 
 در React پراپ‌ها آرگومان‌های تابع هستند. در Vue باید آن‌ها را با `defineProps` تعریف کنید.
@@ -218,8 +215,6 @@ const props = defineProps({
   <h1>{{ title }}: {{ count }}</h1>
 </template>
 ```
-
----
 
 ## ۵. افکت‌ها و چرخه حیات (Side Effects / Lifecycle)
 
@@ -267,8 +262,6 @@ watch(count, (newVal, oldVal) => {
 </script>
 ```
 
----
-
 ## ۶. ویژگی Computed (معادل useMemo)
 
 یکی از قدرتمندترین ویژگی‌های Vue است. اگر مقداری بر اساس State دیگر محاسبه می‌شود، از `computed` استفاده کنید.
@@ -290,8 +283,6 @@ const doubleCount = computed(() => count.value * 2);
 </script>
 ```
 
----
-
 ## ۷. فرم‌ها (Two-way Binding)
 
 اینجا جایی است که Vue می‌درخشد. در React شما باید `value` و `onChange` را جداگانه بنویسید. در Vue از `v-model` استفاده می‌کنیم که جادو می‌کند.
@@ -308,8 +299,6 @@ const doubleCount = computed(() => count.value * 2);
 ```html
 <input v-model="text" />
 ```
-
----
 
 
 ## ۸. Children vs Slots
@@ -356,7 +345,6 @@ function Card({ children }) {
 
 
 
----
 ## ۹. اشتراک داده در عمق (Context API vs Provide/Inject)
 
 در React برای جلوگیری از "Prop Drilling" (پاس دادن پراپ‌ها از پدربزرگ به نوه)، از **Context API** استفاده می‌کنید (`createContext`, `Provider`, `useContext`).
@@ -403,7 +391,6 @@ const theme = inject('themeKey', 'light');
 ```
 *نکته:* اگر `theme` در کامپوننت والد `ref` باشد و تغییر کند، در فرزند هم آپدیت می‌شود (Reactivity حفظ می‌شود).
 
----
 
 ## ۱۰. استفاده مجدد از منطق (Custom Hooks vs Composables)
 
@@ -469,7 +456,6 @@ const { x, y } = useMouse();
 </template>
 ```
 
----
 
 ## ۱۱. دسترسی به DOM (useRef vs Template Refs)
 
@@ -508,7 +494,6 @@ onMounted(() => {
 </template>
 ```
 
----
 
 ## ۱۲. مدیریت استیت سراسری (Redux/Zustand vs Pinia)
 
@@ -559,7 +544,6 @@ const store = useCounterStore();
 
 
 
----
 ## ۱۳.پروژه ساده: To-Do List
 
  بیایید آموخته‌های بخش قبل را در قالب یک پروژه کوچک **"لیست کارها" (To-Do List)** پیاده‌سازی کنیم .
