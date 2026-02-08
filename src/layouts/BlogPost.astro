@@ -29,7 +29,7 @@ const readingTime: string = remarkPluginFrontmatter.readingTime;
 		title,
 	}}
 >
-	 <Notification />
+	<Notification />
 	<article class="text-l grow break-words" data-pagefind-body dir={post.data.ltr ? "ltr" : "rtl"}>
 		<div id="blog-hero" class="mb-12"><Masthead content={post} readingTime={readingTime} /></div>
 		<div class="flex flex-col gap-10 lg:flex-row lg:items-start">
@@ -43,11 +43,9 @@ const readingTime: string = remarkPluginFrontmatter.readingTime;
 		</div>
 	</article>
 
-	<div
-				class=" "
-			>
-			<Comments dir={post.data.ltr ? "ltr" : "rtl"} post_id={Astro.url.pathname.split('/').filter(Boolean).pop() ?? ''} client:visible />
-			</div>
+	<div class="">
+		<Comments dir={post.data.ltr ? "ltr" : "rtl"} post_id={post.data.post_id} client:visible />
+	</div>
 
 	<button
 		class="hover:border-accent fixed end-4 bottom-8 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 text-3xl opacity-0 transition-all transition-discrete duration-300 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-8 sm:h-12 sm:w-12 dark:bg-zinc-700"
