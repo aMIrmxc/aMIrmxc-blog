@@ -1,10 +1,18 @@
 ---
 title: "React، Vue، Angular – مقایسه‌ی هم‌زمان سه غول Frontend"
 description: "در این پست به‌صورت جانبی و هم‌زمان React، Vue و Angular را بررسی می‌کنیم؛ اشتراکات معماری کامپوننتی، رندرینگ واکنشی و مدیریت وضعیت را کنار هم برسی می کنیم. "
+post_id: "react-vue-angular"
 publishDate: "10 Nov 2024"
 tags: ["Vue", "React" , "Angular", "Learn"]
 ---
+
+
+
+
+
 # مقایسه همزمان  React ، Vue و Angular
+
+![alt text](img.png)
 
 در دنیای توسعه وب مدرن React، Vue و Angular سه ستون اصلی ساخت رابط‌های کاربری پویا و تعاملی هستند. هر کدام از این فریم‌ورک‌ها و کتابخانه‌ها با فلسفه‌ای متفاوت به دنیا آمدند، اما همگی برای حل یک مشکل بنیادین طراحی شده‌اند: مدیریت کارآمد وضعیت (State) در اپلیکیشن‌های وب.
 
@@ -36,8 +44,6 @@ tags: ["Vue", "React" , "Angular", "Learn"]
 6.  **فرم‌ها و بایندینگ دوطرفه (Two-Way Binding)**
 7.  **چرخه حیات و فراخوانی API (Lifecycle/Effects)**
 8.  **استایل‌دهی (Styling)**
-
----
 
 ## ۱. ساختار کامپوننت (Component Structure)
 
@@ -91,8 +97,6 @@ export class AppComponent {
 }
 ```
 
----
-
 ## ۲. نمایش داده و متغیرها (Data Interpolation)
 
 چگونه یک متغیر جاوااسکریپت را در صفحه نمایش دهیم؟
@@ -130,8 +134,6 @@ export class AppComponent {
 // در تمپلیت: <h1>سلام {{ name }}</h1>
 ```
 
----
-
 ## ۳. مدیریت وضعیت (State) - مهم‌ترین بخش
 
 وقتی داده تغییر می‌کند، UI باید آپدیت شود. به این داده‌ی قابل تغییر **State** می‌گویند.
@@ -149,7 +151,7 @@ import { useState } from 'react';
 function Counter() {
   const [count, setCount] = useState(0); // تعریف استیت
 
-  const increment = () => setCount(count + 1); 
+  const increment = () => setCount(count + 1);
 
   return <button onClick={increment}>تعداد: {count}</button>;
 }
@@ -162,7 +164,7 @@ import { ref } from 'vue';
 
 const count = ref(0); // تعریف استیت
 
-const increment = () => count.value++; 
+const increment = () => count.value++;
 </script>
 
 <template>
@@ -176,7 +178,7 @@ export class CounterComponent {
   count = 0; // تعریف استیت ساده
 
   increment() {
-    this.count++; 
+    this.count++;
   }
 }
 // در HTML:
@@ -194,7 +196,7 @@ export class CounterComponent {
 فرض: یک `UserCard` که `name` می‌گیرد.
 
  **React (Props)**
- 
+
 **Child**
 ```jsx
 export function UserCard({ name }) {
@@ -207,7 +209,7 @@ export function UserCard({ name }) {
 ```
 
  **Vue (Props)**
- 
+
 **Child**
 ```vue
 <script setup>
@@ -277,7 +279,7 @@ const emit = defineEmits(['add'])
 ```
 
  **Angular (`@Output` + EventEmitter)**
- 
+
 **Child**
 ```ts
 import { Component, EventEmitter, Output } from '@angular/core';
@@ -294,8 +296,6 @@ export class AddButtonComponent {
 ```html
 <app-add-button (add)="count = count + 1"></app-add-button>
 ```
-
----
 
 ## ۴. مدیریت رویدادها (Event Handling)
 
@@ -321,8 +321,6 @@ export class AddButtonComponent {
 ```html
 <button (click)="handleClick()">Click Me</button>
 ```
-
----
 
 ## ۵. حلقه‌ها و شرط‌ها (Loops & Conditionals)
 
@@ -384,8 +382,6 @@ export class AddButtonComponent {
 *(نکته: در انگولار ۱۷+ سینتکس `@if (isAdmin) { ... }` اضافه شده که شبیه جاوااسکریپت است).*
 
 
----
-
 ## ۶. فرم‌ها و بایندینگ دوطرفه (Two-Way Data Binding)
 
 وقتی کاربر چیزی در `input` تایپ می‌کند، ما می‌خواهیم متغیر ما همزمان آپدیت شود و برعکس.
@@ -403,9 +399,9 @@ function Form() {
 
   return (
     <div>
-      <input 
-        value={text} 
-        onChange={(e) => setText(e.target.value)} 
+      <input
+        value={text}
+        onChange={(e) => setText(e.target.value)}
       />
       <p>شما نوشتید: {text}</p>
     </div>
@@ -436,8 +432,6 @@ export class FormComponent {
 // <input [(ngModel)]="text" />
 // <p>شما نوشتید: {{ text }}</p>
 ```
-
----
 
 ## ۷. چرخه حیات (Lifecycle) - مثلاً لود شدن صفحه
 
@@ -484,8 +478,6 @@ export class AppComponent implements OnInit {
   }
 }
 ```
-
----
 
 ## ۸. استایل‌دهی (CSS Styles)
 
@@ -537,7 +529,6 @@ export class AppComponent implements OnInit {
 
 
 
----
 ##  سخن پایانی
 
 همانطور که دیدیم  هر سه (React / Vue / Angular) برای ساختن اپلیکیشن‌ تحت مرورگر ساخته شده‌اند. «ایده‌ی مشترک» این است: UI را به **کامپوننت‌های کوچک** می‌شکنیم، **داده** را نگه می‌داریم، با **رویدادها** به صورت یکپارچه تغییرش می‌دهیم، و UI با تغییر داده **به‌روزرسانی** می‌شود. تفاوت اصلی در (syntax) و ابزارهای پیش‌فرض است.
