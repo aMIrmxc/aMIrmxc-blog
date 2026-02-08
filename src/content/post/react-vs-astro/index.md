@@ -1,6 +1,7 @@
 ---
 title: "یادگیری Astro برای React Developer ها"
 description: "راهنمای جامع مهاجرت از React به Astro با مثال‌های کاربردی و مقایسه کد‌به‌کد"
+post_id: "react-vs-astro"
 publishDate: "17 Aug 2025"
 tags: ["astro", "react" ] 
 pinned: true
@@ -8,6 +9,8 @@ pinned: true
 
 
 # یادگیری Astro برای React Developer ها
+
+![alt text](img.png)
 
 در دنیای توسعه وب امروز، فریم‌ورک‌های زیادی وجود دارن که هر کدوم برای هدف خاصی ساخته شدن. از **React** و **Vue** گرفته تا **Next.js** و **SvelteKit**. اما در این میان، یک فریم‌ورک جدید و قدرتمند به نام **Astro** خیلی سریع توجه برنامه‌نویس‌ها رو به خودش جلب کرده.
 
