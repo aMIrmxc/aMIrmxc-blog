@@ -1,6 +1,7 @@
 ---
 title: "معرفی همه  React Hook ها "
 description: "مرجع جامع  برای آشنایی با تمام Hook های React، کاربرد و مثال عملی هرکدام"
+post_id: "all-react-hooks"
 publishDate: "02 Mar 2024"
 updatedDate: "03 Jan 2025"
 tags: ["React", "Hooks", "JavaScript", "Frontend"]
@@ -8,6 +9,8 @@ tags: ["React", "Hooks", "JavaScript", "Frontend"]
 
 
 # برسی همه هوک های ریکت
+
+![alt text](img.png)
 
 اگه می‌خوای با React برنامه بسازی، حتماً باید با Hook ها آشنا بشی. اینا واقعاً شیوه‌ی کار کردن با React رو متحول کردن و یه راهکار تابعی‌تر به مدیریت state و side effect ها دادن بهمون. چه تازه شروع کرده باشی چه بخوای دونسته‌هاتو تعمیق بدی، این بلاگ پست همه چیزی که    باید بدونی رو پوشش میده.
 
