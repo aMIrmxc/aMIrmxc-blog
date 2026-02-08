@@ -1,6 +1,7 @@
 ---
 title: "معرفی بهترین کتابخانه‌های React"
 description: "معرفی و آموزش کاربردی برترین کتابخانه‌های React برای مسیریابی، مدیریت state، دریافت داده، فرم‌ها، UI و انیمیشن؛ همراه با کد و نکات انتخاب"
+post_id: "popular-react-libraries"
 publishDate: "14 Aug 2024"
 updatedDate: "03 Jan 2025"
 tags: ["React", "ReactLibraries", "ReactRouter", "Zustand", "TanStackQuery", "ReactHookForm", "TypeScript"]
@@ -8,6 +9,8 @@ tags: ["React", "ReactLibraries", "ReactRouter", "Zustand", "TanStackQuery", "Re
 
 
 # معرفی بهترین کتابخانه‌هایی که می توانیم کنار React استفاده کنیم
+
+![alt text](img.png)
 
 سلام به همه توسعه‌دهندگان عزیز! امروز می‌خوایم باهم راجع به یکی از مهمترین موضوعات در توسعه با React صحبت کنیم. خیلی از شما که وارد دنیای React شدید، احتمالاً این سوال براتون پیش اومده که "خب React رو یاد گرفتم، ولی برای ساختن یه پروژه کامل چه کتابخانه‌های دیگه‌ای هم لازم دارم؟"
 
