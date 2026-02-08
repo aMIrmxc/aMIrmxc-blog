@@ -1,6 +1,7 @@
 ---
 title: "برسی Next.js 15  "
 description: "هر آنچه برای ارتقاء به Next.js 15 نیاز دارید؛ از Codemod خودکار تا breaking changeهای caching و async APIها"
+post_id: "introduce-new-nextjs15"
 publishDate: "04 Apr 2024"
 updatedDate: "13 Mar 2025"
 tags: ["Nextjs", "Migration", "React"]
@@ -9,6 +10,8 @@ tags: ["Nextjs", "Migration", "React"]
 
 
 # Next.js 15 — راهنمای جامع و کامل برای آموزش
+
+![alt text](img.png)
 
 Next.js 15 منتشر شده و مانند هر نسخه اصلی دیگر، شامل **قابلیت‌های مهم جدید** و **breaking change‌ های تأثیرگذار** است. این نسخه روی عملکرد، DX (Developer Experience)، و مدل رندرینگ تغییرات بنیادی ایجاد کرده که دانستن آن‌ها برای هر توسعه‌دهنده ضروری است.
 
