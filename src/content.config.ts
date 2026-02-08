@@ -9,6 +9,7 @@ const titleSchema = z.string().max(100);
 
 const baseSchema = z.object({
 	title: titleSchema,
+	post_id: z.string().optional(),
 });
 
 const post = defineCollection({
