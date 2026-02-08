@@ -1,12 +1,15 @@
 ---
 title: "مفاهیم اساسی React js "
 description: "این پست تمام مفاهیم اساسی React را از componentها و JSX گرفته تا Context، Portals و Error Boundaries با مثال‌های عملی و توضیحات ساده پوشش می‌دهد"
+post_id: "react-concepts"
 publishDate: "15 Apr 2024"
 updatedDate: "03 Jan 2025"
 tags: ["React", "JavaScript", "Frontend"]
 ---
 
 #  مفاهیم اساسی React js : هر چیزی که باید بدانید
+
+![alt text](img.png)
 
 نو ین پست جامع قراره همه مفاهیم اساسی React رو با مثال‌های عملی و توضیحات ساده رو با هم شرح بدیم. بریم که شروع کنیم.
 
