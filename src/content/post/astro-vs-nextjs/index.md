@@ -1,6 +1,7 @@
 ---
 title: "Astro درمقابل Next.js "
 description: "مقایسه جامع Astro و Next.js از نظر performance، معماری، انعطاف‌پذیری و انتخاب مناسب برای پروژه‌های مختلف"
+post_id: "astro-vs-nextjs"
 publishDate: "17 Apr 2025"
 tags: ["astro", "nextjs", "performance", "react", "ssr", "ssg"]
 ---
@@ -8,6 +9,8 @@ tags: ["astro", "nextjs", "performance", "react", "ssr", "ssg"]
 
 
 # Astro vs Next.js: کدوم را برای پروژمان انتخاب کنیم؟
+
+![alt text](img.png)
 
 وقتی میخوای یه وب‌سایت یا وب اپ بسازی، انتخاب framework درست میتونه تو موفقیت پروژت تاثیر زیادی داشته باشه. دوتا از محبوب‌ترین گزینه‌هایی که همیشه تو بحث‌ها میان Astro و Next.js هستن. هر دوتاشون نقاط قوت خودشونو دارن، ولی درک تفاوت‌هاشون برای تصمیم‌گیری درست خیلی مهمه.
 
