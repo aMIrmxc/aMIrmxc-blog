@@ -1,6 +1,7 @@
 ---
 title: "مرور سریع دستورات Git"
 description: "راهنمای جامع و فشرده برای مرور سریع دستورات Git از مقدماتی تا پیشرفته"
+post_id: "git-recap"
 publishDate: "14 Jan 2024"
 updatedDate: "27 Feb 2025"
 tags: ["git", "cheatsheet"]
@@ -9,6 +10,8 @@ tags: ["git", "cheatsheet"]
 
 
 # مرور شب امتحانی دستورات Git
+
+![alt text](img.png)
 
 
 به پست جامع و کاربردی دستورات Git خوش آمدید!
