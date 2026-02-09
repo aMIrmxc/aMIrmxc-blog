@@ -11,7 +11,7 @@ import { collectionDateSort } from "@/utils/date";
 const pinnedPosts = await getPinnedPosts();
 
 // Regular posts (excluding pinned ones)
-const MAX_POSTS = 30;
+const MAX_POSTS = 100;
 const allPosts = await getAllPosts();
 const nonPinnedPosts = allPosts.filter(post => !post.data.pinned);
 const allPostsByDate = nonPinnedPosts
@@ -40,10 +40,10 @@ const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
 		pinnedPosts.length > 0 && (
 			<section class="mt-16">
 				<h2 class="title text-accent mb-6 text-xl">Pinned Posts</h2>
-				<ul class="space-y-6" role="list">
+				<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
 					{
 						pinnedPosts.map((p) => (
-							<li class="grid gap-2 sm:grid-cols-[auto_1fr]">
+							<li class="flex flex-col">
 								<PostPreview post={p} />
 							</li>
 						))
@@ -54,11 +54,12 @@ const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
 	}
 	
 	<section class="mt-16">
+		<!-- <img src="src/content/post/git-recap/img.png"/> -->
 		<h2 class="title text-accent mb-6 text-xl"><a href="/posts/">Posts</a></h2>
-		<ul class="space-y-6" role="list">
+		<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
 			{
 				allPostsByDate.map((p) => (
-					<li class="grid gap-2 sm:grid-cols-[auto_1fr]">
+					<li class="flex flex-col">
 						<PostPreview post={p} />
 					</li>
 				))
