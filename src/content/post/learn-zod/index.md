@@ -1,6 +1,7 @@
 ---
 title: "برسی Zod : راهنمای جامع TypeScript Schema Validation"
 description: "یاد بگیرید چطور با Zod validation قدرتمند و type-safe برای TypeScript بسازید؛ با مثال‌های عملی"
+post_id: "learn-zod"
 publishDate: "14 Sep 2024"
 updatedDate: "03 Mar 2025"
 tags: ["typescript", "zod", "validation"]
@@ -10,6 +11,8 @@ tags: ["typescript", "zod", "validation"]
 
 
 # Zod: TypeScript Schema Validation
+
+![alt text](img.png)
 
 Zod داره به سرعت تبدیل به اول انتخاب توسعه‌دهنده‌های TypeScript میشه، و دلیلش هم مشخصه. این TypeScript-first schema validation library قدرت runtime validation رو با compile-time type safety ترکیب میکنه و یه ابزار فوق‌العاده ارزشمند برای web development مدرن محسوب میشه.
 

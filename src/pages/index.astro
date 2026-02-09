@@ -11,9 +11,9 @@ import { collectionDateSort } from "@/utils/date";
 const pinnedPosts = await getPinnedPosts();
 
 // Regular posts (excluding pinned ones)
-const MAX_POSTS = 30;
+const MAX_POSTS = 100;
 const allPosts = await getAllPosts();
-const nonPinnedPosts = allPosts.filter(post => !post.data.pinned);
+const nonPinnedPosts = allPosts.filter((post) => !post.data.pinned);
 const allPostsByDate = nonPinnedPosts
 	.sort(collectionDateSort)
 	.slice(0, MAX_POSTS) as CollectionEntry<"post">[];
@@ -34,39 +34,36 @@ const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
 		</p>
 		<SocialList />
 	</section>
-	
+
 	<!-- Pinned Posts Section -->
 	{
 		pinnedPosts.length > 0 && (
 			<section class="mt-16">
 				<h2 class="title text-accent mb-6 text-xl">Pinned Posts</h2>
-				<ul class="space-y-6" role="list">
-					{
-						pinnedPosts.map((p) => (
-							<li class="grid gap-2 sm:grid-cols-[auto_1fr]">
-								<PostPreview post={p} />
-							</li>
-						))
-					}
+				<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
+					{pinnedPosts.map((p) => (
+							<PostPreview post={p} />
+					))}
 				</ul>
 			</section>
 		)
 	}
-	
+
 	<section class="mt-16">
+		<!-- <img src="src/content/post/git-recap/img.png"/> -->
 		<h2 class="title text-accent mb-6 text-xl"><a href="/posts/">Posts</a></h2>
-		<ul class="space-y-6" role="list">
-			{
-				allPostsByDate.map((p) => (
-					<li class="grid gap-2 sm:grid-cols-[auto_1fr]">
+		<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
+
+		{
+			allPostsByDate.map((p) => (
 						<PostPreview post={p} />
-					</li>
-				))
-			}
+			))
+		}
 		</ul>
-		<h2 class="title text-accent mb-6 text-xl  p-5">
-			<a class=" min-w-30 font-semibold text-gray-600 dark:text-gray-400" href="/posts/"
-				>See All Posts →</a>
+		<h2 class="title text-accent mb-6 p-5 text-xl">
+			<a class="min-w-30 font-semibold text-gray-600 dark:text-gray-400" href="/posts/"
+				>See All Posts →</a
+			>
 		</h2>
 	</section>
 	{
@@ -75,7 +72,7 @@ const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
 				<h2 class="title text-accent mb-6 text-xl">
 					<a href="/notes/">Notes</a>
 				</h2>
-				<ul class="space-y-6" role="list">
+				<ul class="flex flex-col items-center space-y-6" role="list">
 					{latestNotes.map((note) => (
 						<li>
 							<Note note={note} as="h3" isPreview />

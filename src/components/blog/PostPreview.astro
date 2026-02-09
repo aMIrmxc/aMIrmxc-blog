@@ -11,14 +11,22 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 const { as: Tag = "div", post, withDesc = false } = Astro.props;
 ---
 
-<FormattedDate
-	class="min-w-30 font-semibold text-gray-600 dark:text-gray-400"
-	date={post.data.publishDate}
-/>
-<Tag>
-	{post.data.draft && <span class="text-red-500">(Draft) </span>}
-	<a dir="rtl" class="mxc-link font-bold text-l" data-astro-prefetch href={`/posts/${post.id}/`}>
-		{post.data.title}
-	</a>
-</Tag>
-{withDesc && <q class="line-clamp-3 italic">{post.data.description}</q>}
+	<li class="flex flex-col">
+					
+
+					<a href={`/posts/${post.id}/`} class="block aspect-video overflow-hidden rounded-lg mb-2">
+						
+						<img src=`/src/content/post/${post.id}/img.png` class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"/>
+					</a>
+					<FormattedDate
+						class="min-w-30 font-semibold text-gray-600 dark:text-gray-400"
+						date={post.data.publishDate}
+					/>
+					<Tag>
+						{post.data.draft && <span class="text-red-500">(Draft) </span>}
+						<a dir="rtl" class="mxc-link font-bold text-l" data-astro-prefetch href={`/posts/${post.id}/`}>
+							{post.data.title}
+						</a>
+					</Tag>
+					{withDesc && <q class="line-clamp-3 italic">{post.data.description}</q>}
+	</li>

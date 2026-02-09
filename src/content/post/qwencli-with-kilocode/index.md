@@ -1,6 +1,7 @@
 ---
 title: "AI Coding رایگان با Kilo Code و Qwen CLI"
 description: "نحوه راه‌اندازی محیط AI coding کاملاً رایگان با ۲۰۰۰ درخواست روزانه، کانتکست ویندوز یک میلیون توکن و پشتیبانی از VS Code"
+post_id: "qwencli-with-kilocode"
 publishDate: "17 Sep 2025"
 tags: ["AI coding", "Qwen", "Kilo Code", "VS Code"]
 pinned: true
@@ -8,6 +9,9 @@ pinned: true
 
 
 # معرفی یکی از بهترین گزینه های AI Agent Coding های رایگان ( Kilo Code + Qwen CLI)
+
+![alt text](img.png)
+
 
 *روزانه 2000 request رایگان برای AI coding با این ترکیب قدرتمند*
 

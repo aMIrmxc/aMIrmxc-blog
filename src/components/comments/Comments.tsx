@@ -65,7 +65,7 @@ function CommentComponent({
 }
 
 // Main Comments component
-export default function Comments({ post_id, dir }: { post_id: string; dir: "ltr" | "rtl" }) {
+export default function Comments({ post_id, dir }: { post_id: string | any ; dir: "ltr" | "rtl" }) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [error, setError] = useState<any>(null);
   const [loading, setLoading] = useState(true);

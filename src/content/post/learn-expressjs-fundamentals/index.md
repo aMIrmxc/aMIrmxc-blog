@@ -1,6 +1,7 @@
 ---
 title: "آموزش پایه ای  Express.js "
 description: "راهنمای کامل Express.js شامل routing، middleware، view engine ها و تکنیک‌های پیشرفته برای ساخت backend های قدرتمند"
+post_id: "learn-expressjs-fundamentals"
 publishDate: "17 Sep 2024"
 updatedDate: "03 Apr 2025"
 tags: ["expressjs", "nodejs", "backend", "javascript"]
@@ -9,6 +10,8 @@ tags: ["expressjs", "nodejs", "backend", "javascript"]
 
 
 # آموزش پایه ای Express.js
+
+![alt text](img.png)
 
 اگه داری با JavaScript بک اند می‌سازی، احتمالاً  از Express.js استفاده می کنی. تو این راهنمای کامل، همه چیزی که باید در مورد Express بدونی رو دوره می کنیم، و حتی چند تا فیچر پیشرفته‌ای که کم تو آموزش‌های دیگه دیده میشه.
 
@@ -637,7 +640,7 @@ module.exports = router;
 ```
 
 
-## نتیجه‌گیری
+## سحن پایانی
 
 Express.js یه framework قوی و انعطاف‌پذیره که ساخت web server ها با Node.js رو ساده و لذت‌بخش می‌کنه. مفاهیم کلیدی که تو این آموزش پوشش دادیم شامل:
 
@@ -648,6 +651,5 @@ Express.js یه framework قوی و انعطاف‌پذیره که ساخت web 
 - کار با route های پویا و parameter ها
 - استفاده از view engine ها برای server-side rendering
 
-با این مبانی، برای ساخت web application ها و API ها آماده‌ای. همونطور که به برسی ادامه می‌دی، موضوعاتی مثل authentication، یکپارچگی database، testing، و deployment رو بررسی کن تا application های آماده production بسازی.
 
-یادت باشه که Express.js از طریق اکوسیستم middleware اش خیلی قابل گسترشه. npm registry هزاران package middleware داره که می‌تونن قابلیت‌هایی مثل authentication، logging، rate limiting، و خیلی چیزهای دیگه رو به application تو اضافه کنن.
+یادت باشه که Express.js از طریق اکوسیستم middleware اش خیلی قابل گسترشه. npm registry هزاران package middleware داره که می‌تونن قابلیت‌هایی مثل authentication، logging، rate limiting، و خیلی چیزهای دیگه رو به application اضافه کنن.

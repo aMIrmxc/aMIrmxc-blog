@@ -1,6 +1,7 @@
 ---
 title: "چرا Astro فوق‌العاده سریعه ؟"
 description: "بررسی کامل architecture، مزایای performance و اینکه چرا Astro طرز فکرمون رو نسبت به web development عوض کرده"
+post_id: "introduce-to-astro"
 publishDate: "14 Aug 2025"
 tags: ["astro", "performance"]
 ---
@@ -8,6 +9,8 @@ tags: ["astro", "performance"]
 
 
 # چرا Astro فوق‌العاده سریعه: نگاهی عمیق به این فریم‌ورک مدرن
+
+![alt text](img.png)
 
 *بررسی کامل architecture، مزایای performance و اینکه چرا Astro طرز فکرمون رو نسبت به web development عوض کرده*
 
