@@ -9,6 +9,27 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 };
 
 const { as: Tag = "div", post, withDesc = false } = Astro.props;
+
+// Get cover image URL using Content Collection API
+const coverImageSrc = post.data.coverImage?.src;
+let imageUrl = "";
+
+// If coverImage is defined in frontmatter, use its src
+if (coverImageSrc) {
+	// If it's already a string URL (from glob loader), use it directly
+	if (typeof coverImageSrc === "string") {
+		imageUrl = coverImageSrc;
+	} else {
+		// If it's an ImageMetadata object, get the src
+		imageUrl = coverImageSrc.src || "";
+	}
+} else {
+	// Fallback: check for img.png in the post's directory
+	// With glob loader, post.id contains the relative path like "popular-react-libraries/index"
+	// We need to construct the public URL for images
+	const postDir = post.id.replace(/\/index$/, "");
+	imageUrl = `/images/post/${postDir}/img.png`;
+}
 ---
 
 	<li class="flex flex-col">
@@ -16,7 +37,13 @@ const { as: Tag = "div", post, withDesc = false } = Astro.props;
 
 					<a href={`/posts/${post.id}/`} class="block aspect-video overflow-hidden rounded-lg mb-2">
 						
-						<img src={`/src/content/post/${post.id}/img.png`} class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"/>
+						{imageUrl ? (
+							<img src={imageUrl} class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" alt={post.data.coverImage?.alt || post.data.title} />
+						) : (
+							<div class="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+								<span class="text-gray-400">No image</span>
+							</div>
+						)}
 					</a>
 					<FormattedDate
 						class="min-w-30 font-semibold text-gray-600 dark:text-gray-400"
