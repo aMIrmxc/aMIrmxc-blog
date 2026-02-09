@@ -16,7 +16,7 @@ const { as: Tag = "div", post, withDesc = false } = Astro.props;
 
 					<a href={`/posts/${post.id}/`} class="block aspect-video overflow-hidden rounded-lg mb-2">
 						
-						<img src=`/src/content/post/${post.id}/img.png` class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"/>
+						<img src={`/src/content/post/${post.id}/img.png`} class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"/>
 					</a>
 					<FormattedDate
 						class="min-w-30 font-semibold text-gray-600 dark:text-gray-400"
