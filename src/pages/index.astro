@@ -9,14 +9,16 @@ import { collectionDateSort } from "@/utils/date";
 
 // Get all posts
 const allPosts = await getAllPosts();
+const faPosts = allPosts.filter((post) => post.data.eng === false);
+
 
 // Pinned posts (only non-English posts)
-const pinnedPosts = allPosts.filter((post) => post.data.pinned === true && post.data.eng !== true);
+const pinnedPosts = faPosts.filter((post) => post.data.pinned === true && post.data.eng !== true);
 
 // Regular posts (excluding pinned and English posts)
 const MAX_POSTS = 100;
-const nonPinnedNonEngPosts = allPosts.filter((post) => !post.data.pinned && post.data.eng !== true);
-const allPostsByDate = nonPinnedNonEngPosts
+const nonPinnedNonEngPosts = faPosts.filter((post) => !post.data.pinned && post.data.eng !== true);
+const faPostsByDate = nonPinnedNonEngPosts
 	.sort(collectionDateSort)
 	.slice(0, MAX_POSTS) as CollectionEntry<"post">[];
 
@@ -55,7 +57,7 @@ const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
 		<!-- <img src="src/content/post/git-recap/img.png"/> -->
 		<h2 class="title text-accent mb-6 text-xl"><a href="/posts/">Posts</a></h2>
 		<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
-			{allPostsByDate.map((p) => <PostPreview post={p} />)}
+			{faPostsByDate.map((p) => <PostPreview post={p} />)}
 		</ul>
 		<h2 class="title text-accent mb-6 p-5 text-xl">
 			<a class="min-w-30 font-semibold text-gray-600 dark:text-gray-400" href="/posts/"
