@@ -3,18 +3,20 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import SocialList from "@/components/SocialList.astro";
 import PostPreview from "@/components/blog/PostPreview.astro";
 import Note from "@/components/note/Note.astro";
-import { getAllPosts, getPinnedPosts } from "@/data/post";
+import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
 
-// Pinned posts
-const pinnedPosts = await getPinnedPosts();
-
-// Regular posts (excluding pinned ones)
-const MAX_POSTS = 100;
+// Get all posts
 const allPosts = await getAllPosts();
-const nonPinnedPosts = allPosts.filter((post) => !post.data.pinned);
-const allPostsByDate = nonPinnedPosts
+
+// Pinned posts (only non-English posts)
+const pinnedPosts = allPosts.filter((post) => post.data.pinned === true && post.data.eng !== true);
+
+// Regular posts (excluding pinned and English posts)
+const MAX_POSTS = 100;
+const nonPinnedNonEngPosts = allPosts.filter((post) => !post.data.pinned && post.data.eng !== true);
+const allPostsByDate = nonPinnedNonEngPosts
 	.sort(collectionDateSort)
 	.slice(0, MAX_POSTS) as CollectionEntry<"post">[];
 
@@ -42,7 +44,7 @@ const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
 				<h2 class="title text-accent mb-6 text-xl">Pinned Posts</h2>
 				<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
 					{pinnedPosts.map((p) => (
-							<PostPreview post={p} />
+						<PostPreview post={p} />
 					))}
 				</ul>
 			</section>
@@ -53,12 +55,7 @@ const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
 		<!-- <img src="src/content/post/git-recap/img.png"/> -->
 		<h2 class="title text-accent mb-6 text-xl"><a href="/posts/">Posts</a></h2>
 		<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
-
-		{
-			allPostsByDate.map((p) => (
-						<PostPreview post={p} />
-			))
-		}
+			{allPostsByDate.map((p) => <PostPreview post={p} />)}
 		</ul>
 		<h2 class="title text-accent mb-6 p-5 text-xl">
 			<a class="min-w-30 font-semibold text-gray-600 dark:text-gray-400" href="/posts/"
