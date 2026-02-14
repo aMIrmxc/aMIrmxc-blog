@@ -5,66 +5,65 @@ import type { HTMLTag, Polymorphic } from "astro/types";
 import { Image } from "astro:assets";
 
 type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
-	post: CollectionEntry<"post">;
-	withDesc?: boolean;
+ post: CollectionEntry<"post">;
+ withDesc?: boolean;
 };
 
 const { as: Tag = "div", post, withDesc = false } = Astro.props;
 
-// Get cover image URL using Content Collection API
+// ۱. لود کردن تمام تصاویر محتوا به صورت داینامیک
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/content/post/**/*.{jpeg,jpg,png,gif,webp}');
+
 const coverImageSrc = post.data.coverImage?.src;
-let imageUrl = "";
+let finalImage: any = null;
 
-// If coverImage is defined in frontmatter, use its src
 if (coverImageSrc) {
-	// If it's already a string URL (from glob loader), use it directly
-	if (typeof coverImageSrc === "string") {
-		imageUrl = coverImageSrc;
-	} else {
-		// If it's an ImageMetadata object, get the src
-		imageUrl = coverImageSrc.src || "";
-	}
+  finalImage = coverImageSrc;
 } else {
-	// Fallback: check for img.png in the post's directory
-	// With glob loader, post.id contains the relative path like "popular-react-libraries/index"
-	// We need to construct the public URL for images
-	const postDir = post.id.replace(/\/index$/, "");
+  // ۲. ساخت مسیر دقیق و جستجو در لیست تصاویر
+  const postDir = post.id.replace(/\/index$/, "");
 
-	//old approach:
+  //old approach:
 	// imageUrl = `/images/post/${postDir}/img.png`;
 
 	//new approach:
-	imageUrl = `/src/content/post/${postDir}/img.png`;
+	
+  const imagePath = `/src/content/post/${postDir}/img.png`;
+  
+  if (images[imagePath]) {
+    finalImage = images[imagePath](); // فراخوانی تابع برای دریافت Metadata
+  }
 }
+
 ---
 
 <li class="flex flex-col">
-	<a href={`/posts/${post.id}/`} class="mb-2 block aspect-video overflow-hidden rounded-lg">
-		{
-			imageUrl ? (
-				<Image
-					src={imageUrl}
-					class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-					width={640}
-  					height={360}
-					alt={post.data.coverImage?.alt || post.data.title}
-				/>
-			) : (
-				<div class="flex h-full w-full items-center justify-center bg-gray-200 dark:bg-gray-700">
-					<span class="text-gray-400">No image</span>
-				</div>
-			)
-		}
-	</a>
-	<FormattedDate
-		class="min-w-30 font-semibold text-gray-600 dark:text-gray-400"
-		date={post.data.publishDate}
-	/>
-	<Tag>
-		{post.data.draft && <span class="text-red-500">(Draft) </span>}
-		<a dir="rtl" class="mxc-link text-l font-bold" data-astro-prefetch href={`/posts/${post.id}/`}>
-			{post.data.title}
-		</a>
-	</Tag>
-	{withDesc && <q class="line-clamp-3 italic">{post.data.description}</q>}
+ <a href={`/posts/${post.id}/`} class="mb-2 block aspect-video overflow-hidden rounded-lg">
+  {
+   finalImage ? (
+    <Image
+     src={finalImage}
+     class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+     width={640}
+     height={360}
+     alt={post.data.coverImage?.alt || post.data.title}
+    />
+   ) : (
+    <div class="flex h-full w-full items-center justify-center bg-gray-200 dark:bg-gray-700">
+     <span class="text-gray-400">No image</span>
+    </div>
+   )
+  }
+ </a>
+ <FormattedDate
+  class="min-w-30 font-semibold text-gray-600 dark:text-gray-400"
+  date={post.data.publishDate}
+ />
+ <Tag>
+  {post.data.draft && <span class="text-red-500">(Draft) </span>}
+  <a dir="rtl" class="mxc-link text-l font-bold" data-astro-prefetch href={`/posts/${post.id}/`}>
+   {post.data.title}
+  </a>
+ </Tag>
+ {withDesc && <q class="line-clamp-3 italic">{post.data.description}</q>}
 </li>
