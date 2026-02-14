@@ -1,4 +1,3 @@
-import fs from "node:fs";
 // Rehype plugins
 import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
@@ -50,7 +49,7 @@ export default defineConfig({
 		webmanifest({
 			// See: https://github.com/alextim/astro-lib/blob/main/packages/astro-webmanifest/README.md
 			name: siteConfig.title,
-			short_name: "aMIrmxc-blog ⚙", // optional
+			// short_name: "aMIrmxc-blog ⚙", // optional
 			description: siteConfig.description,
 			lang: siteConfig.lang,
 			icon: "/icon.png", // the source for generating favicon & icons
