@@ -54,7 +54,6 @@ const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
 	}
 
 	<section class="mt-16">
-		<!-- <img src="src/content/post/git-recap/img.png"/> -->
 		<h2 class="title text-accent mb-6 text-xl"><a href="/posts/">Posts</a></h2>
 		<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
 			{faPostsByDate.map((p) => <PostPreview post={p} />)}
