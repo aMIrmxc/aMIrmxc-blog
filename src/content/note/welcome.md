@@ -2,7 +2,7 @@
 title: Hello, Welcome
 description: An introduction to the amirmxc's Astro Blog.
 publishDate: "2024-10-14T11:23:00Z"
-ltr: true
+eng: true
 ---
 
 This is amirmxc's blog.
