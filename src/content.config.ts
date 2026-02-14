@@ -24,7 +24,7 @@ const post = defineCollection({
 					})
 					.optional(),
 				draft: z.boolean().default(false),
-				ltr: z.boolean().default(false),
+				eng: z.boolean().default(false),
 				pinned: z.boolean().default(false),
 				ogImage: z.string().optional(),
 				tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
@@ -47,7 +47,7 @@ const note = defineCollection({
 			.string()
 			.datetime({ offset: true }) // Ensures ISO 8601 format with offsets allowed (e.g. "2024-01-01T00:00:00Z" and "2024-01-01T00:00:00+02:00")
 			.transform((val) => new Date(val)),
-			ltr: z.boolean().default(false),
+			eng: z.boolean().default(false),
 			
 	}),
 });
