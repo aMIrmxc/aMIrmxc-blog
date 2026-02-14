@@ -5,7 +5,6 @@ import TranslateIcon from "@/components/TranslateIcon.astro";
 import { menuLinks } from "@/site.config";
 import { siteConfig } from "../../site.config";
 
-
 import AuthStatus from "../auth/AuthStatus";
 import AuthIcon from "../auth/AuthIcon.astro";
 import Auth from "../auth/Auth.astro";
@@ -48,9 +47,9 @@ import Auth from "../auth/Auth.astro";
 	</div>
 	<SearchIcon />
 	<ThemeToggleIcon />
-	<TranslateIcon />
+	<!-- Only show the language switcher on root path and `/posts/*` pages -->
+	{Astro.url.pathname === "/" || Astro.url.pathname === "/eng/" || Astro.url.pathname === "/eng" || Astro.url.pathname.includes("/posts") ? <TranslateIcon /> : null}
 	<AuthStatus client:load />
-	
 	<AuthIcon />
 	<Auth />
 	<mobile-button>
@@ -144,4 +143,6 @@ import Auth from "../auth/Auth.astro";
 	}
 
 	customElements.define("mobile-button", MobileNavBtn);
+
+	console.log(Astro.url.pathname);
 </script>
