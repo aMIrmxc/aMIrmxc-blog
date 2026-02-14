@@ -1,0 +1,81 @@
+---
+import { getCollection } from "astro:content";
+import SocialList from "@/components/SocialList.astro";
+import PostPreview from "@/components/blog/PostPreview.astro";
+import Note from "@/components/note/Note.astro";
+import { getAllPosts } from "@/data/post";
+import PageLayout from "@/layouts/Base.astro";
+import { collectionDateSort } from "@/utils/date";
+
+// English posts (eng: true)
+const allPosts = await getAllPosts();
+const engPosts = allPosts.filter((post) => post.data.eng === true);
+
+// Separate pinned English posts from regular English posts
+const pinnedEngPosts = engPosts.filter((post) => post.data.pinned === true);
+const regularEngPosts = engPosts.filter((post) => post.data.pinned !== true);
+const pinnedEngPostsByDate = pinnedEngPosts.sort(collectionDateSort);
+const regularEngPostsByDate = regularEngPosts.sort(collectionDateSort);
+
+// All English posts sorted with pinned first
+const MAX_NOTES = 5;
+const allNotes = await getCollection("note");
+const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
+---
+
+<PageLayout meta={{ title: "Home" }}>
+	<section>
+		<h1 class="title mb-6">Hello There!</h1>
+		<p class="mb-4">
+			I’m Amir, a software developer focused on the JavaScript ecosystem. Here I share ideas,
+			experiments, and practical lessons I’ve found genuinely useful in real projects. Interested in
+			contributing or collaborating? Reach out and let’s build together.
+		</p>
+		<SocialList />
+	</section>
+
+	<!-- Pinned English Posts Section -->
+	{
+		pinnedEngPostsByDate.length > 0 && (
+			<section class="mt-16">
+				<h2 class="title text-accent mb-6 text-xl">Pinned Posts</h2>
+				<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
+					{pinnedEngPostsByDate.map((p) => (
+						<PostPreview post={p} />
+					))}
+				</ul>
+			</section>
+		)
+	}
+
+	<!-- English Posts Section -->
+	{
+		regularEngPostsByDate.length > 0 && (
+			<section class="mt-16">
+				<h2 class="title text-accent mb-6 text-xl">Posts</h2>
+				<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
+					{regularEngPostsByDate.map((p) => (
+						<PostPreview post={p} />
+					))}
+				</ul>
+			</section>
+		)
+	}
+
+	{
+		latestNotes.length > 0 && (
+			<section class="mt-16">
+				<h2 class="title text-accent mb-6 text-xl">
+					<a href="/notes/">Notes</a>
+				</h2>
+				<ul class="flex flex-col items-center space-y-6" role="list">
+					{latestNotes.map((note) => (
+						<li>
+							<Note note={note} as="h3" isPreview />
+						</li>
+					))}
+				</ul>
+			</section>
+		)
+	}
+</PageLayout>
