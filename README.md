@@ -24,7 +24,7 @@ Special thanks to Chris Williams for creating and maintaining the original theme
 
 ## Core Technology Stack
 
-Framework: Astro v5.10.1 - A modern static site builder that uses the "Islands Architecture" for optimal performance
+Framework: Astro v5 - A modern static site builder that uses the "Islands Architecture" for optimal performance
 Language: TypeScript for type safety throughout the project
 Styling: Tailwind CSS for utility-first styling approach
 Content Format: Markdown and MDX for blog posts and notes
