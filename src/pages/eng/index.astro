@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { getCollection } from "astro:content";
 import SocialList from "@/components/SocialList.astro";
 import PostPreview from "@/components/blog/PostPreview.astro";
 import Note from "@/components/note/Note.astro";
@@ -7,22 +7,17 @@ import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
 
-// Get all posts
+// English posts (eng: true)
 const allPosts = await getAllPosts();
-const faPosts = allPosts.filter((post) => post.data.eng === false);
+const engPosts = allPosts.filter((post) => post.data.eng === true);
 
+// Separate pinned English posts from regular English posts
+const pinnedEngPosts = engPosts.filter((post) => post.data.pinned === true);
+const regularEngPosts = engPosts.filter((post) => post.data.pinned !== true);
+const pinnedEngPostsByDate = pinnedEngPosts.sort(collectionDateSort);
+const regularEngPostsByDate = regularEngPosts.sort(collectionDateSort);
 
-// Pinned posts (only non-English posts)
-const pinnedPosts = faPosts.filter((post) => post.data.pinned === true && post.data.eng !== true);
-
-// Regular posts (excluding pinned and English posts)
-const MAX_POSTS = 100;
-const nonPinnedNonEngPosts = faPosts.filter((post) => !post.data.pinned && post.data.eng !== true);
-const faPostsByDate = nonPinnedNonEngPosts
-	.sort(collectionDateSort)
-	.slice(0, MAX_POSTS) as CollectionEntry<"post">[];
-
-// Notes
+// All English posts sorted with pinned first
 const MAX_NOTES = 5;
 const allNotes = await getCollection("note");
 const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
@@ -39,13 +34,13 @@ const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
 		<SocialList />
 	</section>
 
-	<!-- Pinned Posts Section -->
+	<!-- Pinned English Posts Section -->
 	{
-		pinnedPosts.length > 0 && (
+		pinnedEngPostsByDate.length > 0 && (
 			<section class="mt-16">
 				<h2 class="title text-accent mb-6 text-xl">Pinned Posts</h2>
 				<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
-					{pinnedPosts.map((p) => (
+					{pinnedEngPostsByDate.map((p) => (
 						<PostPreview post={p} />
 					))}
 				</ul>
@@ -53,17 +48,20 @@ const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
 		)
 	}
 
-	<section class="mt-16">
-		<h2 class="title text-accent mb-6 text-xl"><a href="/posts/">Posts</a></h2>
-		<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
-			{faPostsByDate.map((p) => <PostPreview post={p} />)}
-		</ul>
-		<h2 class="title text-accent mb-6 p-5 text-xl">
-			<a class="min-w-30 font-semibold text-gray-600 dark:text-gray-400" href="/posts/"
-				>See All Posts →</a
-			>
-		</h2>
-	</section>
+	<!-- English Posts Section -->
+	{
+		regularEngPostsByDate.length > 0 && (
+			<section class="mt-16">
+				<h2 class="title text-accent mb-6 text-xl">Posts</h2>
+				<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
+					{regularEngPostsByDate.map((p) => (
+						<PostPreview post={p} />
+					))}
+				</ul>
+			</section>
+		)
+	}
+
 	{
 		latestNotes.length > 0 && (
 			<section class="mt-16">
