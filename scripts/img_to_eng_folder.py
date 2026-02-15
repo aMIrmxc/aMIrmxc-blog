@@ -57,28 +57,29 @@
 
 # v3 : also create blank index.md if not exists
 # distribute_img.py
+import os
 import shutil
 from pathlib import Path
 
-ROOT_DIR = Path("./src/content/post")
+ROOT_DIR = Path("./src/content/post")   # only this tree is scanned
 IMG_FILE = "img.png"
 TARGET_SUBDIR = "eng"
 INDEX_FILE = "index.md"
 
+# only first-level sub-folders
 for entry in ROOT_DIR.iterdir():
     if not entry.is_dir():
         continue
 
-    # handle img.png
     img_path = entry / IMG_FILE
     eng_path = entry / TARGET_SUBDIR
     dest_img = eng_path / IMG_FILE
+
     eng_path.mkdir(exist_ok=True)
+
     if img_path.is_file() and not dest_img.exists():
         shutil.copy2(img_path, dest_img)
 
-    # create index.md only inside the sub-folder
     index_path = entry / INDEX_FILE
     if not index_path.exists():
-        index_path.touch()
-
+        index_path.touch()   # create empty file
