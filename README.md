@@ -12,9 +12,8 @@
 This project is based on [astro-theme-cactus](https://github.com/chrismwilliams/astro-theme-cactus) by Chris Williams. I have customized and extended it to fit my personal blogging needs, including:
 
 - Added multi-language support (English and Persian/Farsi)
-- Integrated Supabase for authentication (sign up, sign in, sign out)
-- Added comment system with GitHub authentication
-- Enhanced with custom remark plugins for admonitions and GitHub cards
+- Integrated Supabase for authentication with Google and  Email authentication (sign up, sign in, sign out)
+- Added comment system with supabase backend and 
 - Modified styling with Tailwind CSS
 - Added more components and layouts for a richer blogging experience
 
@@ -61,7 +60,12 @@ This project uses Supabase for authentication (Google OAuth). Here's a complete 
 
 ### 1. Environment Setup
 
-Create a `.env` file in the project root with your Supabase credentials:
+Create a `.env` file in the project root with your Supabase credentials.
+
+```env
+PUBLIC_SUPABASE_URL=your-supabase-project-url
+PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
 
 
 ### 2. Supabase Dashboard Configuration
@@ -155,9 +159,8 @@ CREATE TRIGGER on_auth_user_created
 
 #### D. Configure Redirect URLs
 
-Go to **Authentication > URL Configuration** and add your redirect URLs:
+Go to  google OAuth Dashboard > **Authentication > URL Configuration** and add your redirect URLs:
 
-- Local: `http://localhost:4321`
 - Production: `https://your-domain.com`
 
 ### 3. Frontend Implementation
