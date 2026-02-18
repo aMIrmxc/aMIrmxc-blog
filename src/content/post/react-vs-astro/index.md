@@ -250,7 +250,7 @@ import MyButton from "../components/MyButton.jsx";
 
 
 
-# Layouts در Astro
+## Layouts در Astro
 
 Layout مثل یک قالب کلیه که برای چندین صفحه استفاده می‌شه (header, footer, navigation).
 
