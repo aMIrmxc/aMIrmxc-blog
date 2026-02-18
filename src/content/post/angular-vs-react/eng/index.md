@@ -7,7 +7,7 @@ tags: ["React", "Angular", "Frontend"]
 eng: true
 ---
 
-# Learning Angular for React Developers - Complete Translation
+# Learning Angular for React Developers 
 
 ![alt text](img.png)
 
