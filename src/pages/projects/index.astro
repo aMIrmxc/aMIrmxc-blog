@@ -1,0 +1,43 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import ProjectPreview from "@/components/project/ProjectPreview.astro";
+import PageLayout from "@/layouts/Base.astro";
+import { collectionDateSort } from "@/utils/date";
+
+// Get all projects
+const allProjects = await getCollection("project");
+const projects = allProjects
+	.filter((project) => {
+		return import.meta.env.PROD ? !project.data.draft : true;
+	})
+	.sort(collectionDateSort);
+
+const meta = {
+	description: "A collection of my projects and experiments",
+	title: "Projects",
+};
+---
+
+<PageLayout meta={meta}>
+	<section>
+		<h1 class="title mb-6">Projects</h1>
+		<p class="mb-4">
+			Here are some of the projects I've worked on. Each project showcases different technologies
+			and skills. Feel free to check out the code on GitHub or try the live demos.
+		</p>
+	</section>
+
+	<section class="mt-16">
+		{
+			projects.length > 0 ? (
+				<ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
+					{projects.map((project) => (
+						<ProjectPreview project={project} withDesc />
+					))}
+				</ul>
+			) : (
+				<p class="text-gray-600 dark:text-gray-400">No projects yet. Check back soon!</p>
+			)
+		}
+	</section>
+</PageLayout>
