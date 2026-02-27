@@ -2,7 +2,7 @@
 title: "بررسی Prisma؛ محبوب‌ترین ORM در اکوسیستم Node.js"
 description: "آشنایی با Prisma و نحوه‌ی اتصال، مدل‌سازی و کوئری‌زنی امن در پایگاه‌های داده‌ی SQL‌ با استفاده از TypeScript"
 post_id: "prisma-introduction"
-publishDate: "14 Feb 2026"
+publishDate: "14 Jan 2026"
 tags: ["Prisma", "ORM", "Node", "TypeScript", "PostgreSQL", "MySQL", "SQL"]
 ---
 
