@@ -16,15 +16,15 @@ githubUrl: "https://github.com/aMIrmxc/kara-code"
 demoUrl: "kara-code.ir"
 ---
 
-Kara Code is a web and backendand mobile development services.
+Kara Code is a web and app development services and.
 
-The main focus of our website is to provide Web Development Services for our customers. We have a service section where customers can order Application Development Services and we will develop them what they ordered.
+The main focus of our website is to provide Web Development Services for customers. It has a service section where customers can order Application Development Services and we will develop them what they ordered.
 
-We have a contact section where customers can contact us and ask for what we provide and what they need.
+It has a contact section where customers can contact and ask for what we provide and what they need.
 
 A team of expert programmers is waiting to receive programming orders from customers, including website design, backend development, and mobile and desktop application development.
 
-This web service platform is based on Iran market and clients are Iranian that speak Farsi.
+This web service platform is based on Iran market and clients are Iranian.
 
 
 ## Technologies Used
