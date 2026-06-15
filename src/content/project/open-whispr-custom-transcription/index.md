@@ -9,7 +9,10 @@ techStack:
 githubUrl: "https://github.com/aMIrmxc/open-whispr-fork"
 ---
 
-## Overview
+# contribution to open-whispr project
+
+![img](img.png)
+
 
 This open-source contribution introduces a new feature to the [open-whispr](https://github.com/OpenWhispr/openwhispr) project that allows users to specify a custom transcription model for cloud-based audio transcriptions. This enhancement provides greater flexibility by enabling users to leverage different or fine-tuned Whisper models.
 

@@ -1,5 +1,5 @@
 ---
-title: "Kara Code"
+title: "kara-code Next.js web app"
 description: "Kara Code is a web and backend and mobile and desktop development services. The main focus of our website is to provide Web Development Services for our customers."
 publishDate: 2025-8-1
 techStack:
@@ -15,6 +15,11 @@ techStack:
 githubUrl: "https://github.com/aMIrmxc/kara-code"
 demoUrl: "kara-code.ir"
 ---
+
+# kara-code Next.js web app
+
+![img](img.png)
+
 
 Kara Code is a web and app development services and.
 
