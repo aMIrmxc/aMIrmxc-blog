@@ -29,8 +29,6 @@ In this article, instead of starting from scratch, **we'll use your React knowle
 
 The goal isn't to say which is better, but to **transfer your mental model** from React to Angular. So grab your tea and let's start this journey together!
 
----
-
 ## 1. First Glance (Framework vs Library)
 
 **Key Philosophical Difference:**
@@ -79,8 +77,6 @@ ng serve --open
 
 The `--open` flag automatically opens your browser to `http://localhost:4200`
 
----
-
 ## 2. Component Structure
 
 **Core Difference in Architecture:**
@@ -121,8 +117,6 @@ export class AppComponent {
 - `selector` is how you use this component in HTML: `<app-root></app-root>`
 - `standalone: true` is the modern way (Angular 14+) that doesn't require NgModules
 - You can write templates inline or in separate HTML files
-
----
 
 ## 3. State Management
 
@@ -175,8 +169,6 @@ export class CounterComponent {
    - React: Immutable - must use `setState` function
    - Angular: Mutable - can directly change class properties (change detection handles it)
 
----
-
 ## 4. Props / Input
 
 In React, you receive props as function arguments. In Angular, you use the `@Input()` decorator to mark properties that can be passed from parent components.
@@ -216,8 +208,6 @@ export class UserCardComponent {
 - Without brackets `name="Ali"` would pass the literal string "Ali"
 - With brackets `[name]="'Ali'"` evaluates the expression and passes the value
 - The `@Input()` decorator makes the property accessible from parent components
-
----
 
 ## 5. Loops and Conditionals
 
@@ -268,8 +258,6 @@ In React, you use `map` and JavaScript operators (`&&` or `? :`). In modern Angu
 - Older Angular versions used `*ngIf` and `*ngFor` directives instead
 - The new syntax is cleaner and more performant
 
----
-
 ## 6. Lifecycle
 
 You know `useEffect`. In Angular, there are specific methods in the class that serve similar purposes.
@@ -303,8 +291,6 @@ export class ExampleComponent implements OnInit, OnDestroy {
   - `ngAfterViewInit()` - after component's view is fully initialized
   - `ngDoCheck()` - custom change detection
 
----
-
 ## 7. Form Management (Two-Way Binding)
 
 In React, to connect an input to state, you need to write both `value` and `onChange`. Angular has a "magical" directive called `[(ngModel)]` that creates two-way binding.
@@ -327,8 +313,6 @@ In React, to connect an input to state, you need to write both `value` and `onCh
 - The `[(ngModel)]` syntax is called "banana in a box" 🍌📦
 - You must import `FormsModule` to use `ngModel`
 - This is conceptually similar to React's controlled components but with less boilerplate
-
----
 
 ## 8. State Management Approaches in Angular
 
@@ -405,8 +389,6 @@ If you used Redux in React, NgRx is exactly equivalent. This library is built on
 | useEffect             | Signals Effect or RxJS Hooks        |
 
 This section requires detailed explanation, so it will be fully covered in the next part of this series. If you want it published sooner, please let me know in the comments!
-
----
 
 ## 9. Complete Code Example (Simple Todo List)
 
@@ -590,8 +572,6 @@ export class TodoComponent {
 4. **Two-Way Binding:** React needs `value` + `onChange`, Angular has `[(ngModel)]`
 
 5. **Styling:** Both support inline styles, but syntax differs (`style={{}}` vs `[style.property]`)
-
----
 
 ## 10. Conclusion
 

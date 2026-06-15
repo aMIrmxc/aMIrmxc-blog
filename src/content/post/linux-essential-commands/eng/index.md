@@ -7,17 +7,13 @@ tags: ["linux", "cli", "cheatsheet", "sysadmin"]
 eng: true
 ---
 
-
 # Essential Linux Commands – From Beginner to Pro
 
 ![alt text](img.png)
 
-
 Linux 🐧 is one of the world's most powerful and popular operating systems, used across servers, personal computers, mobile devices, and embedded systems. One of its defining features is the **Terminal** (command-line interface), which gives users complete control over the system by typing commands. This guide covers the most important Linux commands every user should know.
 
 Learning Linux commands isn't just essential for sysadmins and developers — it gives you a deep understanding of how the OS actually works. Unlike a graphical interface, the command line enables task automation, remote management, and access to advanced capabilities that are difficult or impossible to achieve through a GUI.
-
-
 
 ## 1. Sudo Access (Super User Do)
 
@@ -43,8 +39,6 @@ sudo -i
 
 After entering your current user's password, the prompt changes from `$` to `#`, indicating root access. **Be very careful in this mode** — a wrong command can delete data or break the system. Only sensitive administrative commands require `sudo` or a root session; regular commands do not.
 
----
-
 ## 2. `clear` – Clear the Terminal Screen
 
 After extended terminal use, the screen fills with output and becomes cluttered. The `clear` command gives you a clean workspace:
@@ -57,8 +51,6 @@ clear
 
 > 💡 **Shortcut:** `Ctrl+L` does the same thing, faster.
 
----
-
 ## 3. `pwd` – Print Working Directory
 
 `pwd` shows the full absolute path of the directory you're currently in. This is especially useful when navigating deeply nested folder structures.
@@ -69,8 +61,6 @@ pwd
 ```
 
 Knowing your current location is critical because many Linux commands operate *relative* to your working directory. Misidentifying your location is a common source of errors for beginners.
-
----
 
 ## 4. `cd` – Change Directory
 
@@ -85,8 +75,6 @@ Knowing your current location is critical because many Linux commands operate *r
 | `cd -` | Go back to the previous directory |
 
 The `cd -` command is particularly handy — it toggles between your current and last visited directory, like an "undo" for navigation.
-
----
 
 ## 5. `ls` – List Directory Contents
 
@@ -112,8 +100,6 @@ The `-l` flag provides a detailed view with the following columns:
 | 6th | Last modified date/time |
 | 7th | File/directory name |
 
----
-
 ## 6. `mkdir` – Make Directory
 
 `mkdir` creates new directories.
@@ -128,8 +114,6 @@ mkdir -p parent/child        # Create nested directories (creates parent if it d
 
 The `-p` flag ("parents") is very useful — without it, trying to create `parent/child` when `parent` doesn't exist would throw an error.
 
----
-
 ## 7. `rmdir` – Remove Directory
 
 `rmdir` removes **empty** directories only.
@@ -141,8 +125,6 @@ rmdir --ignore-fail-on-non-empty       # Suppress error if directory isn't empty
 ```
 
 > ⚠️ **Note:** To delete a directory that contains files, use `rm -r dirName`. Use this with extreme caution — deleted files are not recoverable through the Recycle Bin.
-
----
 
 ## 8. `man` – Manual Pages
 
@@ -172,8 +154,6 @@ man ls       # Shows the full manual for the ls command
 
 `man` is arguably the most important command to learn — it makes you self-sufficient and removes the need to constantly search the web.
 
----
-
 ## 9. `cp` – Copy Files
 
 `cp` copies files and directories from one location to another.
@@ -191,8 +171,6 @@ cp file.txt /path/to/directory/        # Copy file to another directory
 | `-i` | Prompt before overwriting existing files |
 | `-p` | Preserve file permissions and timestamps |
 | `-v` | Verbose — show what's being copied |
-
----
 
 ## 10. `grep` – Search Inside Files
 
@@ -215,8 +193,6 @@ grep error /var/log/syslog     # Find all lines containing "error" in the system
 
 `grep` is frequently combined with other commands using pipes (`|`). For example: `ls -l | grep ".txt"` lists only `.txt` files.
 
----
-
 ## 11. `cat` – View and Combine Files
 
 `cat` (short for **concatenate**) is a versatile command used for displaying, creating, copying, and merging files.
@@ -231,8 +207,6 @@ cat file1 file2 > merged.txt     # Merge multiple files into one
 ```
 
 > 💡 The `>` operator **overwrites** a file, while `>>` **appends** to it. This distinction is important to avoid accidental data loss.
-
----
 
 ## 12. `chmod` – Change File Permissions
 
@@ -276,8 +250,6 @@ Each digit is the **sum** of the permission values. For example, `755` means:
 | 5 | `r-x` | Read + Execute |
 | 6 | `rw-` | Read + Write |
 | 7 | `rwx` | Full permissions |
-
----
 
 ## Final Words
 

@@ -124,9 +124,7 @@ File: `src/pages/index.astro`
 #### ✅ Astro:
 
 ```astro
----
 const name = "Ali";
----
 
 <html>
 	<head>
@@ -171,9 +169,7 @@ export default function App() {
 #### ✅ Astro Component (`src/components/Greeting.astro`)
 
 ```astro
----
 const { name } = Astro.props;
----
 
 <h2>Hello {name} 🌟</h2>
 ```
@@ -181,9 +177,7 @@ const { name } = Astro.props;
 **Using it in a page:**
 
 ```astro
----
 import Greeting from "../components/Greeting.astro";
----
 
 <html>
 	<body>
@@ -236,9 +230,7 @@ export default defineConfig({
 #### Usage:
 
 ```astro
----
 import MyButton from "../components/MyButton.jsx";
----
 
 <html>
 	<body>
@@ -257,9 +249,7 @@ A Layout is like a master template used across multiple pages (header, footer, n
 #### ✅ Astro Layout (`src/layouts/BaseLayout.astro`)
 
 ```astro
----
 const { title } = Astro.props;
----
 
 <html lang="en">
 	<head>
@@ -279,9 +269,7 @@ const { title } = Astro.props;
 #### Using the Layout (`src/pages/about.astro`)
 
 ```astro
----
 import BaseLayout from "../layouts/BaseLayout.astro";
----
 
 <BaseLayout title="About Page">
 	<h1>About Us 📖</h1>
@@ -334,9 +322,7 @@ src/pages/
 ### ✅ Dynamic Route (`src/pages/blog/[slug].astro`)
 
 ```astro
----
 const { slug } = Astro.params;
----
 
 <html>
 	<body>
@@ -390,9 +376,7 @@ export default function Counter() {
 `src/pages/index.astro`
 
 ```astro
----
 import Counter from "../components/Counter.jsx";
----
 
 <html>
 	<body>
@@ -438,10 +422,8 @@ Astro can fetch data directly during **server-side build** or at request time.
 ### ✅ Example: Fetching from API (`src/pages/users.astro`)
 
 ```astro
----
 const res = await fetch("https://jsonplaceholder.typicode.com/users");
 const users = await res.json();
----
 
 <html>
 	<body>
@@ -550,9 +532,7 @@ export default defineConfig({
 ### ✅ SSR Page (`src/pages/time.astro`)
 
 ```astro
----
 const now = new Date().toLocaleTimeString();
----
 
 <html>
 	<body>
@@ -584,10 +564,8 @@ One of Astro's strongest features is seamless Markdown integration.
 ### ✅ `src/pages/blog/first-post.md`
 
 ```md
----
 title: "First Blog Post"
 date: "2025-09-16"
----
 
 ## Astro + Markdown
 
@@ -597,9 +575,7 @@ This is my first post using Astro and Markdown!
 ### ✅ `src/pages/blog/index.astro`
 
 ```astro
----
 import Post from "./first-post.md";
----
 
 <html>
 	<body>
@@ -633,10 +609,8 @@ Astro treats Markdown as first-class components. You can import .md files direct
 #### ✅ Astro (`src/pages/conditional.astro`)
 
 ```astro
----
 const loggedIn = true;
 const user = "Ali";
----
 
 <html>
 	<body>
@@ -667,13 +641,11 @@ The syntax is nearly identical, but in Astro this runs at build time (or server-
 #### ✅ Astro (`src/pages/products.astro`)
 
 ```astro
----
 const products = [
 	{ id: 1, name: "Laptop 💻", price: 1200 },
 	{ id: 2, name: "Phone 📱", price: 800 },
 	{ id: 3, name: "Headphones 🎧", price: 150 },
 ];
----
 
 <html>
 	<body>
@@ -722,9 +694,7 @@ Astro allows both **scoped CSS** (component-level) and global styles.
 ### ✅ `src/components/Card.astro`
 
 ```astro
----
 const { title, text } = Astro.props;
----
 
 <div class="card">
 	<h2>{title}</h2>
@@ -789,9 +759,7 @@ Astro's `<style>` tags are automatically scoped to the component (similar to Vue
 ### Using in a page
 
 ```astro
----
 import Layout from "../components/Layout.astro";
----
 
 <Layout>
 	<h1>Welcome to Slot Example 🌟</h1>
@@ -840,9 +808,7 @@ Slots are more powerful than React's children - you can have named slots for mor
 #### ✅ Astro (`src/pages/counter.astro`)
 
 ```astro
----
 import Counter from "../components/Counter.jsx";
----
 
 <html>
 	<body>
@@ -871,9 +837,7 @@ export default function Counter() {
 #### ✅ Astro
 
 ```astro
----
 import data from "../data/users.json";
----
 
 <html>
 	<body>
@@ -933,10 +897,8 @@ src/
 ### ✅ `src/pages/blog/first-post.md`
 
 ```md
----
 title: "First Post"
 date: "2025-09-16"
----
 
 # Hello World 🌍
 
@@ -946,11 +908,9 @@ This is my first post in Astro.
 ### ✅ `src/pages/blog/index.astro`
 
 ```astro
----
 import First from "./first-post.md";
 import Second from "./second-post.md";
 import BlogLayout from "../../layouts/BlogLayout.astro";
----
 
 <BlogLayout>
 	<h1>All Posts</h1>
@@ -1028,9 +988,7 @@ export default function Todo() {
 ### ✅ `src/pages/todo.astro`
 
 ```astro
----
 import Todo from "../components/Todo.jsx";
----
 
 <html>
 	<body>
@@ -1114,9 +1072,7 @@ src/
 ### ✅ `src/pages/index.astro`
 
 ```astro
----
 import Layout from "../layouts/PortfolioLayout.astro";
----
 
 <Layout>
 	<h1>👋 Hi, I'm Ali</h1>
@@ -1127,10 +1083,8 @@ import Layout from "../layouts/PortfolioLayout.astro";
 ### ✅ `src/pages/projects.astro`
 
 ```astro
----
 import Layout from "../layouts/PortfolioLayout.astro";
 const projects = ["Astro Blog", "ToDo App", "Portfolio"];
----
 
 <Layout>
 	<h1>💼 Projects</h1>

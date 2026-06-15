@@ -35,8 +35,6 @@ We'll explore these concepts step-by-step (with direct comparisons between React
 
 Let's go! 🚀
 
----
-
 ## 1. Component Structure
 
 In React, logic and template (JSX) are combined in a JavaScript function. In Vue, we typically use `.vue` files with three separate sections:
@@ -88,8 +86,6 @@ export default function App() {
 </style>
 ```
 
----
-
 ## 2. Reactive State Management
 
 In React you use `useState`. In Vue there are two main approaches: `ref` (for simple data like numbers and strings) and `reactive` (for objects).
@@ -125,8 +121,6 @@ const increment = () => {
 	<button @click="increment">Count is: {{ count }}</button>
 </template>
 ```
-
----
 
 ## 3. Conditionals & Loops
 
@@ -179,8 +173,6 @@ Vue's directive-based approach keeps templates cleaner and more declarative, whi
 </ul>
 ```
 
----
-
 ## 4. Props
 
 In React, props are function arguments. In Vue, you must define them with `defineProps`.
@@ -215,8 +207,6 @@ function Child({ title, count }) {
 	<h1>{{ title }}: {{ count }}</h1>
 </template>
 ```
-
----
 
 ## 5. Side Effects & Lifecycle
 
@@ -270,8 +260,6 @@ useEffect(() => {
 </script>
 ```
 
----
-
 ## 6. Computed Properties (equivalent to useMemo)
 
 One of Vue's most powerful features. If a value is calculated based on other state, use `computed`.
@@ -297,8 +285,6 @@ const doubleCount = useMemo(() => {
 </script>
 ```
 
----
-
 ## 7. Forms (Two-way Binding)
 
 This is where Vue shines. In React you must separately write `value` and `onChange`. In Vue we use `v-model` which works like magic.
@@ -316,8 +302,6 @@ Vue's `v-model` is syntactic sugar for binding both the value and the input even
 ```html
 <input v-model="text" />
 ```
-
----
 
 ## 8. Children vs Slots
 
@@ -366,8 +350,6 @@ Vue's slot system is more powerful than React's children prop. Vue supports name
 	<h1>Title</h1>
 </Card>
 ```
-
----
 
 ## 9. Deep Data Sharing (Context API vs Provide/Inject)
 
@@ -419,8 +401,6 @@ No need to create a separate file for Context.
 ```
 
 **Note:** If `theme` is a `ref` in the parent component and changes, it will update in the child too (Reactivity is preserved).
-
----
 
 ## 10. Logic Reusability (Custom Hooks vs Composables)
 
@@ -494,8 +474,6 @@ export function useMouse() {
 <template> Mouse position: {{ x }}, {{ y }} </template>
 ```
 
----
-
 ## 11. DOM Access (useRef vs Template Refs)
 
 In React, for direct access to an HTML element (e.g., to focus an input), you use `useRef`.
@@ -535,8 +513,6 @@ Vue's template refs are more straightforward - just match the variable name to t
 	<input ref="inputElem" />
 </template>
 ```
-
----
 
 ## 12. Global State Management (Redux/Zustand vs Pinia)
 
@@ -587,8 +563,6 @@ export const useCounterStore = defineStore("counter", () => {
 	</button>
 </template>
 ```
-
----
 
 ## 13. Simple Project: To-Do List
 

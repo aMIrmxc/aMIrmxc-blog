@@ -8,12 +8,9 @@ tags: ["git", "cheatsheet"]
 eng: true
 ---
 
-
 # Git Commands Quick Review
 
-
 ![alt text](img.png)
-
 
 **Welcome to this comprehensive and practical Git commands guide!**
 
@@ -31,8 +28,6 @@ Here, we cover all essential Git commands and concepts with simple language and 
 - **Branching Strategies**: Introduction to GitHub Flow and Git Flow and choosing the best approach for your project
 - **Merge vs Rebase**: Differences, advantages, disadvantages, and when to use each
 - **Solving Common Problems**: Practical solutions for conflicts, incorrect commits, files forgotten in gitignore, and recovering deleted commits
-
----
 
 ## Getting Started with Git
 
@@ -74,8 +69,6 @@ cd project-name
 ```
 
 **Explanation**: Cloning automatically sets up the remote connection and downloads the entire project history, not just the latest files.
-
----
 
 ## Routine Git Commands
 
@@ -147,8 +140,6 @@ git push origin dev
 
 **Explanation**: This uploads your local commits to the remote repository, making them available to team members and backing them up.
 
----
-
 ## What is Origin?
 
 `origin` is an alias for your remote repository address. Instead of typing the full address every time:
@@ -178,8 +169,6 @@ origin  https://github.com/myuser/myproject.git (push)
 ```
 
 **Explanation**: The `(fetch)` and `(push)` indicate separate URLs for downloading and uploading, though they're usually the same.
-
----
 
 ## Important Notes Before Committing
 
@@ -212,8 +201,6 @@ git commit -m "Fix login bug on home page"
 ```
 
 **Explanation**: Good commit messages help you and your team understand what changed and why, especially when reviewing history months later.
-
----
 
 ## Working with Branches
 
@@ -279,8 +266,6 @@ git push origin --delete feature/login-page
 
 **Explanation**: The `-d` flag only deletes if the branch has been merged. Use `-D` to force deletion of unmerged branches (be careful!).
 
----
-
 ## Reset and Going Backwards
 
 ### Types of git reset
@@ -334,8 +319,6 @@ git checkout a1b2c3d  # HEAD detached
 
 **Explanation**: In detached HEAD, you're not on any branch. Any commits you make won't be attached to a branch and could become unreachable. Create a branch if you want to keep work done in detached state.
 
----
-
 ## Tagging
 
 Tags are used to mark important versions:
@@ -366,8 +349,6 @@ git push origin --delete v1.0.0
 **Note**: Tags are immutable! They always point to the same commit.
 
 **Explanation**: Tags are like bookmarks for important points in history (releases, milestones). Annotated tags (with `-a`) store who created them and when, making them better for releases than lightweight tags.
-
----
 
 ## Branching Strategies
 
@@ -421,8 +402,6 @@ develop ──────────────►
 
 **Explanation**: Simpler workflows work better for small teams that deploy frequently. Complex workflows help coordinate large teams with formal release cycles.
 
----
-
 ## Merge vs Rebase
 
 ### Merge
@@ -453,8 +432,6 @@ git rebase main
 
 **Explanation**: Rebase rewrites history by replaying your commits on top of another branch. This creates a cleaner timeline but changes commit hashes, which causes problems if others have those commits.
 
----
-
 ## git push -f (Force Push)
 
 Sometimes you need to force push changes:
@@ -477,8 +454,6 @@ git push --force-with-lease origin main
 This command won't push if someone else has made changes.
 
 **Explanation**: `--force-with-lease` checks if the remote has changed since you last fetched. It prevents you from accidentally overwriting someone else's work.
-
----
 
 ## Useful Tips and Tricks
 
@@ -541,8 +516,6 @@ git co main  # instead of git checkout main
 
 **Explanation**: Aliases save typing for frequently used commands. You can create complex aliases for multi-step operations.
 
----
-
 ## Common Problems and Solutions
 
 ### 1. Forgetting .gitignore
@@ -600,8 +573,6 @@ git checkout -b recovered-branch
 
 **Explanation**: `reflog` records every movement of HEAD, even deleted commits. It's your safety net for recovering "lost" work, but entries expire after ~90 days by default.
 
----
-
 ## Best Practices:
 
 ### 1. Branch Naming
@@ -647,7 +618,5 @@ fix
 - Don't leave branches open for more than a few days
 
 **Explanation**: Long-lived branches drift from main and create merge conflicts. Short branches stay fresh and integrate easily.
-
----
 
 This guide covers essential Git workflows from beginner to intermediate level. The key is practicing these commands regularly until they become second nature.

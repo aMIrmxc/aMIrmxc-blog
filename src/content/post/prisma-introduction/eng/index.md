@@ -7,16 +7,11 @@ tags: ["Prisma", "ORM", "Node", "TypeScript", "PostgreSQL", "MySQL", "SQL"]
 eng: true
 ---
 
-
-
 # Prisma: The Most Popular ORM in the Node.js Ecosystem
 
 ![alt text](img.png)
 
-
 Welcome! Before diving into the world of ORMs, you should have a basic familiarity with SQL and a backend framework like Express.js. In previous posts, we covered Express.js — and now we're exploring Prisma ORM, which is widely used with it. Learning Prisma will also give you a solid grasp of ORM concepts in general, applicable across any programming language.
-
-
 
 ## What is an ORM?
 
@@ -69,8 +64,6 @@ console.log(user.name);
 
 Much cleaner — it reads almost like working with a JavaScript array.
 
----
-
 ## Popular ORMs Across Languages
 
 Every major backend language has its own ORM ecosystem:
@@ -84,8 +77,6 @@ Every major backend language has its own ORM ecosystem:
 | **Go** 🐹 | GORM |
 
 Each language needs its own ORM because each has a different data structure: Java/C# use *classes*, JavaScript uses *objects/JSON*, Go uses *structs*. An ORM must speak the native language of its environment.
-
----
 
 ## Prisma in 6 Steps
 
@@ -111,8 +102,6 @@ This creates two important files:
 > **Why use `npx` instead of a global install?** If you have multiple projects using different Prisma versions, a globally installed version may conflict. `npx` always uses the version installed in the current project, keeping things consistent.
 
 > **Tip for beginners:** For learning purposes, you can use **SQLite** as your database — it requires no server setup. Just set `provider = "sqlite"` in `schema.prisma`.
-
----
 
 ### Step 2: Data Modeling
 
@@ -142,8 +131,6 @@ model User {
 - `?` — makes a field optional (it can be `null`).
 - `@default(...)` — sets a default value automatically.
 
----
-
 ### Step 3: Migrations
 
 A migration is how you sync your `schema.prisma` definition with the actual database. Think of it as a versioned changelog for your database structure.
@@ -167,8 +154,6 @@ This single command does three things:
 | `migrate status` | Anywhere | Shows which migrations are pending | ❌ No |
 
 **Important:** Never run `migrate dev` on a production server — it can reset your database and wipe real data. Use `migrate deploy` in production, which only applies pre-built migration files safely.
-
----
 
 ### Step 4: CRUD Operations
 
@@ -216,8 +201,6 @@ const deletedUser = await prisma.user.delete({
   where: { email: "ali@example.com" },
 });
 ```
-
----
 
 ### Step 5: Relations Between Tables
 
@@ -293,8 +276,6 @@ const user = await prisma.user.findUnique({
 });
 ```
 
----
-
 ### Step 6: Integrating with Express.js
 
 Here's a minimal but complete Express app using Prisma:
@@ -333,8 +314,6 @@ app.post("/signup", async (req, res) => {
 
 app.listen(3000, () => console.log("Server running on port 3000"));
 ```
-
----
 
 ## Summary
 
