@@ -13,7 +13,7 @@ techStack:
   - Lucide React
   - Cloudflare Pages
 githubUrl: "https://github.com/aMIrmxc/kara-code"
-demoUrl: "kara-code.ir"
+demoUrl: "https://kara-code.ir"
 ---
 
 # kara-code Next.js web app
