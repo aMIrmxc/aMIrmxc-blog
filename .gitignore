@@ -29,3 +29,11 @@ pnpm-debug.log*
 
 # my docs 
 docs 
+
+.linkedin-post.md
+.linkedin-postd.md
+
+.gitignore
+
+
+.files.md

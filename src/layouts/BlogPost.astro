@@ -14,7 +14,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { ogImage, title, description, updatedDate, publishDate } = post.data;
+const { ogImage, title, description, updatedDate, publishDate, author, authorUrl } = post.data;
 const socialImage = ogImage ?? `/social-card.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const { headings, remarkPluginFrontmatter } = await render(post);
@@ -30,8 +30,29 @@ const readingTime: string = remarkPluginFrontmatter.readingTime;
 	}}
 >
 	<Notification />
-	<article class="text-l grow break-words" data-pagefind-body dir={post.data.eng ? "ltr" : "rtl"}>
-		<div id="blog-hero" class="mb-12"><Masthead content={post} readingTime={readingTime} /></div>
+	<article class="text-xl grow break-words" data-pagefind-body dir={post.data.eng ? "ltr" : "rtl"}>
+		<div id="blog-hero" class="mb-12">
+			<Masthead  content={post} readingTime={readingTime} />
+			<div class="text-2xl" >
+				{author && (
+					<p class="mt-2  text-gray-500 dark:text-gray-400">
+					{post.data.eng ? "By" : "نوشته‌ی"}
+					{authorUrl ? (
+						<a
+							href={authorUrl}
+							class="text-accent ms-1 hover:underline"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{author}
+						</a>
+					) : (
+						<span class="ms-1">{author}</span>
+					)}
+					</p>
+				)}
+			</div>
+		</div>
 		<div class="flex flex-col gap-10 lg:flex-row lg:items-start">
 			{!!headings.length && <TOC headings={headings} />}
 			<div

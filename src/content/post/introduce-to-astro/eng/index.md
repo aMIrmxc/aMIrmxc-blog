@@ -7,11 +7,9 @@ tags: ["astro", "performance"]
 eng: true
 ---
 
-
 # Why Astro is Extremely Fast: A Deep Dive into This Modern Framework
 
 ![alt text](img.png)
-
 
 *A comprehensive review of its architecture, performance advantages, and why Astro has changed our thinking about web development*
 
@@ -37,11 +35,9 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 ### Astro's Approach
 ```astro
----
 // This runs on the server
 import Button from '../components/Button.jsx';
 const serverData = await fetch('/api/data');
----
 
 <html>
   <body>
@@ -75,13 +71,11 @@ The file-based routing means you don't need to configure routes manually - just 
 Here's what a proper Astro page looks like:
 
 ```astro
----
 // Component Script (runs on server)
 import { Button } from '../components/Button.jsx';
 
 // This code runs on the server during build
 const greeting = "Hello, Astro!";
----
 
 <!-- Component Template (HTML) -->
 <html>
@@ -125,10 +119,8 @@ Astro's real power becomes apparent when you look at the network tab. Let's see 
 ### Example: Building a Simple Interactive Component
 
 ```astro
----
 // Server-side logic
 const names = ['Ali', 'Fatima', 'Hassan', 'Zahra'];
----
 
 <html>
   <body>
@@ -177,11 +169,9 @@ One of Astro's most attractive features is that it's framework agnostic. You can
 All of these in one project! Like this:
 
 ```astro
----
 import ReactButton from './ReactButton.jsx';
 import VueCounter from './VueCounter.vue';
 import SvelteWidget from './SvelteWidget.svelte';
----
 
 <html>
   <body>
@@ -213,7 +203,6 @@ Astro shines particularly well for content-heavy sites. With built-in Markdown s
 ### Markdown Integration
 
 ```astro
----
 // src/pages/blog/[slug].astro
 export async function getStaticPaths() {
   const posts = await Astro.glob('../content/*.md');
@@ -224,7 +213,6 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
----
 
 <html>
   <head>

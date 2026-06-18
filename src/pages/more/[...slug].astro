@@ -1,0 +1,27 @@
+---
+import { render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { getAllMore } from "@/data/more";
+import PostLayout from "@/layouts/BlogPost.astro";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+
+export const getStaticPaths = (async () => {
+	const moreEntries = await getAllMore();
+	return moreEntries.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// تبدیل نوع برای جلوگیری از خطای تایپ اسکریپت در کامپوننت لی‌اوت
+const typedPost = post as unknown as CollectionEntry<"post">;
+---
+
+<PostLayout post={typedPost}>
+	<Content />
+</PostLayout>

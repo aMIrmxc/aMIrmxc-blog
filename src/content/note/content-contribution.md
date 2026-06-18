@@ -4,9 +4,9 @@ description: content contribution on website.
 publishDate: "2025-10-14T01:20:00Z"
 ---
 
-If you want to publish a post here under your own name, fork the project from  https://github.com/aMIrmxc/aMIrmxc-blog 
-and add your article in the path:  
 
-src/content/post/your-post-url/your-post-title.md
-  
-Then submit a pull request to the project.
+Publish Your Post on the Blog!
+
+If you have something worth sharing — a tutorial, a deep dive, a cheat sheet, or a concept explained clearly — you're welcome to publish it here **under your own name**.
+
+[read more about how to contribute](/more/contribute-on-blog)

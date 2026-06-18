@@ -1,0 +1,103 @@
+---
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "@/components/FormattedDate.astro";
+import type { HTMLTag, Polymorphic } from "astro/types";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+	project: CollectionEntry<"project">;
+	withDesc?: boolean;
+};
+
+const { as: Tag = "div", project, withDesc = false } = Astro.props;
+
+// Load all images from project content dynamically
+const images = import.meta.glob<{ default: ImageMetadata }>(
+	"/src/content/project/**/*.{jpeg,jpg,png,gif,webp}",
+);
+
+const coverImageSrc = project.data.coverImage?.src;
+let finalImage: any = null;
+
+if (coverImageSrc) {
+	finalImage = coverImageSrc;
+} else {
+	const projectDir = project.id.replace(/\/index$/, "");
+	const imagePath = `/src/content/project/${projectDir}/img.png`;
+
+	if (images[imagePath]) {
+		finalImage = images[imagePath]();
+	}
+}
+---
+
+<li class="flex flex-col">
+	<a href={`/projects/${project.id}/`} class="mb-2 block aspect-video overflow-hidden rounded-lg">
+		{
+			finalImage ? (
+				<Image
+					src={finalImage}
+					class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+					width={640}
+					height={360}
+					alt={project.data.coverImage?.alt || project.data.title}
+				/>
+			) : (
+				<div class="flex h-full w-full items-center justify-center bg-gray-200 dark:bg-gray-700">
+					<span class="text-gray-400">No image</span>
+				</div>
+			)
+		}
+	</a>
+	<FormattedDate
+		class="min-w-30 font-semibold text-gray-600 dark:text-gray-400"
+		date={project.data.publishDate}
+	/>
+	<Tag>
+		{project.data.draft && <span class="text-red-500">(Draft) </span>}
+		<a class="mxc-link text-l font-bold" data-astro-prefetch href={`/projects/${project.id}/`}>
+			{project.data.title}
+		</a>
+	</Tag>
+	{withDesc && <p class="line-clamp-3 italic">{project.data.description}</p>}
+	{
+		project.data.techStack && project.data.techStack.length > 0 && (
+			<ul class="mt-2 flex flex-wrap gap-2">
+				{project.data.techStack.map((tech) => (
+					<li class="rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+						{tech}
+					</li>
+				))}
+			</ul>
+		)
+	}
+	<div class="mt-2 flex gap-4">
+		{
+			project.data.githubUrl && (
+				<a
+					href={project.data.githubUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
+				>
+					<Icon name="mdi:github" class="h-5 w-5" />
+					GitHub
+				</a>
+			)
+		}
+		{
+			project.data.demoUrl && (
+				<a
+					href={project.data.demoUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
+				>
+					<Icon name="mdi:open-in-new" class="h-5 w-5" />
+					Demo
+				</a>
+			)
+		}
+	</div>
+</li>

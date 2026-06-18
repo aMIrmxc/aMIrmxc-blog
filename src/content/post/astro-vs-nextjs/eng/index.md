@@ -22,10 +22,8 @@ This comprehensive guide examines the core differences between Astro and Next.js
 Astro uses a **multi-page application (MPA)** approach, similar to traditional websites built with WordPress or Wix. When users navigate between pages, each link click sends a new HTTP request to the server.
 
 ```astro
----
 // src/pages/index.astro
 const title = "Welcome to Astro";
----
 
 <html>
 	<head>
@@ -91,10 +89,8 @@ One of the most significant differences between these frameworks is their approa
 **Explanation of Island Architecture:** Instead of making the entire page interactive (which requires loading all the JavaScript), Astro only makes specific components ("islands") interactive. For example, on a blog post page, the article content is static HTML, but a search component or comment section can be an interactive "island."
 
 ```astro
----
 // Astro example - Minimal JavaScript
 const posts = await fetch("/api/posts").then((r) => r.json());
----
 
 <div>
 	{
@@ -155,12 +151,10 @@ One of Astro's standout features is its ability to work with multiple frontend f
 - **Alpine.js**
 
 ```astro
----
 // You can combine different frameworks in one Astro project
 import ReactComponent from "../components/ReactComponent.jsx";
 import VueComponent from "../components/VueComponent.vue";
 import SvelteComponent from "../components/SvelteComponent.svelte";
----
 
 <div>
 	<ReactComponent client:load />
@@ -248,7 +242,6 @@ ISR is particularly powerful - you get the speed of static sites but with fresh 
 Astro focuses on static site generation but supports server-side rendering through adapters:
 
 ```astro
----
 // src/pages/blog/[slug].astro
 export async function getStaticPaths() {
 	const posts = await fetchAllPosts();
@@ -259,7 +252,6 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
----
 
 <html>
 	<head>
@@ -331,9 +323,7 @@ Astro launched in 2021, so it's much younger. While the community is passionate 
    - Component library integration
 
 ```astro
----
 const features = await fetchFeatures();
----
 
 <!-- Perfect for marketing landing pages -->
 <html>
@@ -460,10 +450,8 @@ export default function BlogPost({ post }) {
 ```
 
 ```astro
----
 // src/components/BlogPost.astro
 const { post } = Astro.props;
----
 
 <!-- After: Astro component -->
 <article>
