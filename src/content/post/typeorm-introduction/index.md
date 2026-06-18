@@ -243,7 +243,6 @@ export class User {
 *   `npm run migration:generate -- ./src/migration/NewChange`
 *   `npm run migration:run`
 
----
 
 ### خلاصه کاربردی دستورات TypeORM CLI:
 

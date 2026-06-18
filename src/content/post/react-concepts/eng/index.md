@@ -10,10 +10,7 @@ eng: true
 
 # Essential React.js Concepts: Everything You Need to Know
 
-
 ![alt text](img.png)
-
-
 
 This comprehensive post covers all fundamental React concepts with practical examples and simple explanations. Let's dive in.
 
@@ -52,8 +49,6 @@ function App() {
   );
 }
 ```
-
----
 
 ## JSX — When JavaScript Wears HTML Clothes
 
@@ -109,8 +104,6 @@ function UserCard({ user }) {
   );
 }
 ```
-
----
 
 ## Props — Passing Data Between Components
 
@@ -210,8 +203,6 @@ const todos = [
 ];
 ```
 
----
-
 ## What is the Virtual DOM?
 
 It's like React maintains a **mental map of the page** and checks any changes in that map first, not in the browser's actual DOM.
@@ -247,8 +238,6 @@ function Counter() {
   );
 }
 ```
-
----
 
 ## Event Handling in React
 
@@ -297,8 +286,6 @@ function ContactForm() {
 }
 ```
 
----
-
 ## State in React
 
 State represents **data that changes over time**. Even if just one small value changes, React **re-renders** the entire component (which updates the UI).
@@ -346,8 +333,6 @@ function ShoppingCart() {
 }
 ```
 
----
-
 ## Controlled Components
 
 In controlled components, **input values come from state and update state when the user makes changes**.
@@ -394,8 +379,6 @@ function LoginForm() {
   );
 }
 ```
-
----
 
 ## React Hooks
 
@@ -558,8 +541,6 @@ function OptimizedComponent({ items }) {
 }
 ```
 
----
-
 ## Effects and Side Effects in React
 
 **What is an Effect?**
@@ -635,8 +616,6 @@ useEffect(() => {
 }, []);
 ```
 
----
-
 ## Refs — Direct DOM Access
 
 **What is a Ref?**
@@ -701,8 +680,6 @@ function VideoPlayer({ src }) {
 - `useRef(null)` creates a "box" whose value React doesn't change
 - Changing `ref.current` doesn't cause re-render
 - If you need persistent information without re-rendering → `useRef`
-
----
 
 ## Context — Passing Data Without Prop Drilling
 
@@ -772,8 +749,6 @@ function Header() {
 
 **Best practices:** Don't overuse Context. It's great for truly global data (theme, auth, language), but for component-specific data, props are often better.
 
----
-
 ## Portals — Rendering Outside the Main DOM Tree
 
 Normally, every React component renders inside a specific DOM structure (the main app tree). But sometimes we need to render content **outside this tree**—for example:
@@ -829,8 +804,6 @@ function App() {
 }
 ```
 
----
-
 ## Suspense — Simple Loading Management
 
 When a component is **lazy loaded** or needs **data fetching** in the future, you need to show a "loading..." state.
@@ -878,8 +851,6 @@ function App() {
   );
 }
 ```
-
----
 
 ## Error Boundaries — Preventing Full App Crashes
 
@@ -949,8 +920,6 @@ function App() {
   );
 }
 ```
-
----
 
 ## Final Words
 

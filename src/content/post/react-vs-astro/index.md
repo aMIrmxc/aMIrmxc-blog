@@ -124,9 +124,7 @@ src/
 #### ✅ Astro:
 
 ```astro
----
 const name = "Ali";
----
 <html>
   <head>
     <title>My Astro App</title>
@@ -172,18 +170,14 @@ export default function App() {
 #### ✅ Astro Component (`src/components/Greeting.astro`)
 
 ```astro
----
 const { name } = Astro.props;
----
 <h2>Hello {name} 🌟</h2>
 ```
 
 استفاده در صفحه:
 
 ```astro
----
 import Greeting from "../components/Greeting.astro";
----
 <html>
   <body>
     <Greeting name="Sara" />
@@ -235,9 +229,7 @@ export default defineConfig({
 #### استفاده:
 
 ```astro
----
 import MyButton from "../components/MyButton.jsx";
----
 <html>
   <body>
     <h1>Mixing Astro + React</h1>
@@ -257,9 +249,7 @@ Layout مثل یک قالب کلیه که برای چندین صفحه استف�
 #### ✅ Layout در Astro (`src/layouts/BaseLayout.astro`)
 
 ```astro
----
 const { title } = Astro.props;
----
 <html lang="en">
   <head>
     <title>{title}</title>
@@ -277,9 +267,7 @@ const { title } = Astro.props;
 #### استفاده از Layout (`src/pages/about.astro`)
 
 ```astro
----
 import BaseLayout from "../layouts/BaseLayout.astro";
----
 <BaseLayout title="About Page">
   <h1>About Us 📖</h1>
   <p>This is an Astro site with layouts!</p>
@@ -333,9 +321,7 @@ src/pages/
 ### ✅ Dynamic Route (`src/pages/blog/[slug].astro`)
 
 ```astro
----
 const { slug } = Astro.params;
----
 <html>
   <body>
     <h1>Blog Post: {slug}</h1>
@@ -390,9 +376,7 @@ export default function Counter() {
 `src/pages/index.astro`
 
 ```astro
----
 import Counter from "../components/Counter.jsx";
----
 <html>
   <body>
     <h1>Astro Island Example 🏝️</h1>
@@ -437,10 +421,8 @@ Astro می‌تونه مستقیماً داده‌ها رو در **Server-side b
 ### ✅ مثال گرفتن داده از API (`src/pages/users.astro`)
 
 ```astro
----
 const res = await fetch("https://jsonplaceholder.typicode.com/users");
 const users = await res.json();
----
 <html>
   <body>
     <h1>Users 👥</h1>
@@ -542,9 +524,7 @@ export default defineConfig({
 ### ✅ صفحه SSR (`src/pages/time.astro`)
 
 ```astro
----
 const now = new Date().toLocaleTimeString();
----
 <html>
   <body>
     <h1>Server Time ⏰: {now}</h1>
@@ -577,10 +557,8 @@ export default function Time({ time }) {
 ### ✅ `src/pages/blog/first-post.md`
 
 ```md
----
 title: "اولین پست وبلاگ"
 date: "2025-09-16"
----
 
 ## Astro + Markdown
 ```
@@ -588,9 +566,7 @@ date: "2025-09-16"
 ### ✅ `src/pages/blog/index.astro`
 
 ```astro
----
 import Post from "./first-post.md";
----
 <html>
   <body>
     <h1>📝 Blog</h1>
@@ -623,10 +599,8 @@ export default function Blog() {
 #### ✅ Astro (`src/pages/conditional.astro`)
 
 ```astro
----
 const loggedIn = true;
 const user = "Ali";
----
 <html>
   <body>
     {loggedIn ? <h1>Welcome {user} 🎉</h1> : <a href="/login">Login</a>}
@@ -656,13 +630,11 @@ export default function Conditional() {
 #### ✅ Astro (`src/pages/products.astro`)
 
 ```astro
----
 const products = [
   { id: 1, name: "Laptop 💻", price: 1200 },
   { id: 2, name: "Phone 📱", price: 800 },
   { id: 3, name: "Headphones 🎧", price: 150 },
 ];
----
 <html>
   <body>
     <h1>Products</h1>
@@ -704,9 +676,7 @@ Astro بهت اجازه میده هم **Scoped CSS** داشته باشی هم ف
 ### ✅ `src/components/Card.astro`
 
 ```astro
----
 const { title, text } = Astro.props;
----
 <div class="card">
   <h2>{title}</h2>
   <p>{text}</p>
@@ -769,9 +739,7 @@ export default function Card({ title, text }) {
 ### استفاده در صفحه
 
 ```astro
----
 import Layout from "../components/Layout.astro";
----
 <Layout>
   <h1>Welcome to Slot Example 🌟</h1>
   <p>This content goes inside the layout.</p>
@@ -808,9 +776,7 @@ export default function Page() {
 #### ✅ Astro (`src/pages/counter.astro`)
 
 ```astro
----
 import Counter from "../components/Counter.jsx";
----
 <html>
   <body>
     <h1>Astro Counter Example ⏱️</h1>
@@ -837,9 +803,7 @@ export default function Counter() {
 #### ✅ Astro
 
 ```astro
----
 import data from "../data/users.json";
----
 <html>
   <body>
     <h1>Users List</h1>
@@ -898,10 +862,8 @@ src/
 ### ✅ `src/pages/blog/first-post.md`
 
 ```md
----
 title: "اولین پست"
 date: "2025-09-16"
----
 
 # سلام دنیا 🌍
 
@@ -911,11 +873,9 @@ date: "2025-09-16"
 ### ✅ `src/pages/blog/index.astro`
 
 ```astro
----
 import First from "./first-post.md";
 import Second from "./second-post.md";
 import BlogLayout from "../../layouts/BlogLayout.astro";
----
 <BlogLayout>
   <h1>All Posts</h1>
   <First />
@@ -996,9 +956,7 @@ export default function Todo() {
 ### ✅ `src/pages/todo.astro`
 
 ```astro
----
 import Todo from "../components/Todo.jsx";
----
 <html>
   <body>
     <h1>✅ ToDo App</h1>
@@ -1082,9 +1040,7 @@ src/
 ### ✅ `src/pages/index.astro`
 
 ```astro
----
 import Layout from "../layouts/PortfolioLayout.astro";
----
 <Layout>
   <h1>👋 Hi, I'm Ali</h1>
   <p>Frontend Developer</p>
@@ -1094,10 +1050,8 @@ import Layout from "../layouts/PortfolioLayout.astro";
 ### ✅ `src/pages/projects.astro`
 
 ```astro
----
 import Layout from "../layouts/PortfolioLayout.astro";
 const projects = ["Astro Blog", "ToDo App", "Portfolio"];
----
 <Layout>
   <h1>💼 Projects</h1>
   <ul>

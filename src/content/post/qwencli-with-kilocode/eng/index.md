@@ -11,7 +11,6 @@ eng: true
 
 ![alt text](img.png)
 
-
 _Unlock 2,000 FREE AI coding requests per day with this powerful combination_
 
 ## Introduction
@@ -296,8 +295,6 @@ Congratulations! You now have a professional-grade AI coding assistant that's co
 4. **Share** this guide with fellow developers who could benefit from free AI coding
 
 Remember: This free tier is promotional and may change in the future, so take advantage while it lasts!
-
----
 
 _Did this guide help you? Follow for more tutorials on AI-assisted development and open-source tools. Happy coding!_
 

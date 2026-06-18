@@ -17,6 +17,8 @@ demoUrl: "https://www.aparat.com/v/tcy26we"
 
 # Next.js Load Balancing & Failover Demo
 
+![img](img.png)
+
 A practical demonstration of load balancing and failover using Next.js, Nginx, Docker, and Docker Compose.
 
 

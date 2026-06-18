@@ -10,6 +10,11 @@ githubUrl: "https://github.com/aMIrmxc/Diacritics-search"
 demoUrl: "https://amirmxc.github.io/Diacritics-search/"
 ---
 
+# Pro Search in Persian/Arabic Vocalized Text
+
+![img](img.png)
+
+
 A smart search tool for Persian & Arabic text that recognizes diacritics.
 
 ## Features

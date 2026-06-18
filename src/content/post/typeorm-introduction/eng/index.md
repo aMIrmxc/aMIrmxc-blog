@@ -7,16 +7,11 @@ tags: ["TypeORM", "ORM", "Node.js", "TypeScript", "Database", "SQL"]
 eng: true
 ---
 
-
-
 # TypeORM: The Most Powerful Traditional ORM in the Node.js Ecosystem
 
  ![alt text](img.png)
 
-
 Welcome! Before diving into the world of ORMs, you should have a basic familiarity with SQL and a backend framework like Express.js. In this post, we'll explore TypeORM — one of the most widely used ORMs in the Express.js ecosystem. Learning TypeORM will also give you a solid grasp of ORM concepts in general, which you can apply across different programming languages.
-
-
 
 ## What is an ORM?
 
@@ -67,8 +62,6 @@ console.log(user.name);
 
 The ORM version is cleaner, safer, and reads almost like plain English.
 
----
-
 ## ORMs Across Different Programming Languages
 
 Every major backend language has its own ORM ecosystem, because each language has its own data structures (classes in Java/C#, objects in JS, structs in Go), and the ORM needs to map database rows into those native structures.
@@ -82,8 +75,6 @@ Every major backend language has its own ORM ecosystem, because each language ha
 | **Go** 🐹 | GORM |
 | **Node.js** | TypeORM, Prisma, Drizzle |
 
----
-
 ## TypeORM: A Deep Dive
 
 TypeORM is a mature, feature-rich ORM that supports both **Active Record** and **Data Mapper** patterns. You define database tables as **TypeScript/JavaScript classes**, decorate them with special annotations, and TypeORM handles translating your code into SQL queries behind the scenes.
@@ -91,8 +82,6 @@ TypeORM is a mature, feature-rich ORM that supports both **Active Record** and *
 Unlike Prisma (which uses a central `schema` file), TypeORM is built around **classes and decorators** — a more object-oriented approach that will feel familiar to Java or C# developers.
 
 Let's walk through it in **6 essential steps**.
-
----
 
 ## Step 1: Installation & Initial Setup
 
@@ -138,8 +127,6 @@ export const AppDataSource = new DataSource({
 
 > **`synchronize: false`** is important. When `true`, TypeORM auto-alters your database schema on every app start to match your entities — convenient for quick demos, but dangerous in production because it can drop columns or tables without warning.
 
----
-
 ## Step 2: Data Modeling (Entities)
 
 In TypeORM, each database **table** is represented by a **class** called an **Entity**. Create `src/entity/User.ts`:
@@ -173,8 +160,6 @@ export class User {
 | `@Column({ unique: true })` | Column with a unique constraint |
 | `@Column({ nullable: true })` | Column that allows NULL values |
 | `@CreateDateColumn()` | Automatically set to the current timestamp on record creation |
-
----
 
 ## Step 3: Managing Database Changes (Migrations)
 
@@ -223,8 +208,6 @@ npx typeorm-ts-node-commonjs schema:drop -d ./data-source.ts
 
 ⚠️ **Warning:** This deletes all tables and data. Run `migration:run` afterwards to rebuild from scratch.
 
----
-
 ### Pro Tip: Simplify Commands with `package.json`
 
 Typing `npx typeorm-ts-node-commonjs ...` every time is tedious. Add shortcuts to your `package.json`:
@@ -243,8 +226,6 @@ Now you can simply run:
 - `npm run migration:generate -- ./src/migration/NewChange`
 - `npm run migration:run`
 
----
-
 ### TypeORM CLI Command Reference
 
 | Command | Environment | Purpose | Creates a file? |
@@ -254,8 +235,6 @@ Now you can simply run:
 | `schema:drop` | Local (Dev) | Drops all tables | ❌ No |
 | `migration:show` | Anywhere | Lists applied/pending migrations | ❌ No |
 | `migration:revert` | Anywhere | Undoes the last applied migration | ❌ No |
-
----
 
 ## Step 4: CRUD Operations
 
@@ -297,8 +276,6 @@ AppDataSource.initialize().then(async () => {
 ```
 
 > **Method 1 vs Method 2 for updates:** The fetch-then-save approach is generally recommended because it fires TypeORM lifecycle hooks (like `@BeforeUpdate`) and returns the complete updated entity. The direct `update()` is more performant for bulk operations where you don't need the full entity back.
-
----
 
 ## Step 5: Relationships Between Tables
 
@@ -365,8 +342,6 @@ const users = await userRepository.find({
 
 > By default, TypeORM uses **lazy loading** — related data is NOT fetched unless you explicitly ask for it via `relations`. This is a good default for performance, but remember to include `relations` when you need nested data.
 
----
-
 ## Step 6: Integrating with Express.js
 
 Here's a complete working example of TypeORM inside an Express server:
@@ -408,8 +383,6 @@ AppDataSource.initialize().then(() => {
 ```
 
 > A key pattern here: `AppDataSource.initialize()` is async, so the Express routes are registered only *after* the database connection is confirmed. This prevents requests from coming in before the DB is ready.
-
----
 
 ## Final Thoughts
 

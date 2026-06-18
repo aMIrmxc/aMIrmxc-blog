@@ -23,10 +23,8 @@ tags: ["astro", "nextjs", "performance", "react", "ssr", "ssg"]
 Astro از روش **multi-page application (MPA)** استفاده میکنه، دقیقا مثل سایت‌های سنتی که با WordPress یا Wix ساخته میشن. وقتی کاربرا بین صفحات حرکت میکنن، هر بار که روی یه لینک کلیک میکنن، یه HTTP request جدید به server فرستاده میشه.
 
 ```astro
----
 // src/pages/index.astro
 const title = "به Astro خوش اومدی"
----
 
 <html>
   <head>
@@ -82,10 +80,8 @@ export default function Home() {
 - performance بهتری برای سایت‌های محتوا محور
 
 ```astro
----
 // مثال Astro - JavaScript کم
 const posts = await fetch('/api/posts').then(r => r.json())
----
 
 <div>
   {posts.map(post => (
@@ -142,12 +138,10 @@ export default function Blog() {
 - **Alpine.js**
 
 ```astro
----
 // میتونی تو یه پروژه Astro framework های مختلف رو ترکیب کنی
 import ReactComponent from '../components/ReactComponent.jsx'
 import VueComponent from '../components/VueComponent.vue'
 import SvelteComponent from '../components/SvelteComponent.svelte'
----
 
 <div>
   <ReactComponent client:load />
@@ -226,7 +220,6 @@ export async function getStaticProps() {
 Astro روی static site generation تمرکز داره ولی از طریق adapter ها از server-side rendering هم پشتیبانی میکنه:
 
 ```astro
----
 // src/pages/blog/[slug].astro
 export async function getStaticPaths() {
   const posts = await fetchAllPosts()
@@ -237,7 +230,6 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props
----
 
 <html>
   <head>
@@ -302,9 +294,7 @@ export default defineConfig({
 
 ```astro
 <!-- عالیه برای صفحه landing marketing -->
----
 const features = await fetchFeatures()
----
 
 <html>
   <head>
@@ -424,10 +414,8 @@ export default function BlogPost({ post }) {
 
 ```astro
 <!-- بعد: Astro component -->
----
 // src/components/BlogPost.astro
 const { post } = Astro.props
----
 
 <article>
   <h1>{post.title}</h1>
