@@ -2,12 +2,12 @@
 title: Write for the Blog — Share Your Knowledge
 description: A step-by-step guide to publishing your own tutorial, deep dive, or cheat sheet on the blog under your name. Fork the repo, add your markdown post, and open a PR.
 publishDate: "2025-10-14T01:20:00Z"
+eng: true
 ---
 
 # 📝 Publish Your Post on the Blog!
 
 If you have something worth sharing — a tutorial, a deep dive, a cheat sheet, or a concept explained clearly — you're welcome to publish it here **under your own name**.
-
 
 ## How to Contribute
 
@@ -43,7 +43,7 @@ src/content/post/
 ```
 
 > **Naming rules for the folder:**
-> 
+>
 > - Lowercase letters and hyphens only — no spaces, no uppercase, no special characters
 > - Keep it short and descriptive
 > - It becomes the URL: `/post/your-post-url/`
@@ -64,13 +64,9 @@ git push origin main
 
 Go to the [original repository](https://github.com/aMIrmxc/aMIrmxc-blog) on GitHub and open a Pull Request from your fork. Your post will be reviewed and merged if it meets the guidelines below.
 
-
-
 ## Post Format
 
 Every post **must** follow this structure exactly.
-
-
 
 ### 1. Frontmatter
 
@@ -89,24 +85,21 @@ eng: true
 ---
 ```
 
-|Field|Type|Required|Description|
-|---|---|---|---|
-|`title`|string|✅|The title shown on the blog|
-|`description`|string|✅|1–2 sentences for SEO and preview cards|
-|`post_id`|string|✅|Must exactly match your folder name. Lowercase + hyphens only.|
-|`publishDate`|string|✅|Format: `"DD Mon YYYY"` — e.g. `"15 Jun 2025"`|
-|`updatedDate`|string|❌|Only add if you revise the post after publishing|
-|`tags`|array|✅|At least one tag. Lowercase. Relevant to the topic.|
-|`author`|string|✅|Your name as you want it to appear|
-|`authorUrl`|string|❌|Link to your GitHub profile, personal site, or LinkedIn|
-|`eng`|boolean|✅|`true` if the post is in English, `false` if in Persian|
-
-
+| Field         | Type    | Required | Description                                                    |
+| ------------- | ------- | -------- | -------------------------------------------------------------- |
+| `title`       | string  | ✅       | The title shown on the blog                                    |
+| `description` | string  | ✅       | 1–2 sentences for SEO and preview cards                        |
+| `post_id`     | string  | ✅       | Must exactly match your folder name. Lowercase + hyphens only. |
+| `publishDate` | string  | ✅       | Format: `"DD Mon YYYY"` — e.g. `"15 Jun 2025"`                 |
+| `updatedDate` | string  | ❌       | Only add if you revise the post after publishing               |
+| `tags`        | array   | ✅       | At least one tag. Lowercase. Relevant to the topic.            |
+| `author`      | string  | ✅       | Your name as you want it to appear                             |
+| `authorUrl`   | string  | ❌       | Link to your GitHub profile, personal site, or LinkedIn        |
+| `eng`         | boolean | ✅       | `true` if the post is in English, `false` if in Persian        |
 
 ### 2. Article Structure
 
 Your post body must follow this order:
-
 
 #### ① H1 Title — _Required_
 
@@ -118,8 +111,6 @@ The first line of content must be an `# H1` heading. This is the visible title o
 
 It can be the same as or slightly different from the `title` in the frontmatter.
 
-
-
 #### ② Hero Image — _Optional, recommended_
 
 Directly after the H1, you may add a cover or diagram image:
@@ -129,8 +120,6 @@ Directly after the H1, you may add a cover or diagram image:
 ```
 
 Place the image file in the **same folder** as your `.md` file.
-
-
 
 #### ③ Introduction — _Required_
 
@@ -150,8 +139,6 @@ scratch, it's recommended to first [suggestion]. If you already know [X] and wan
 to go deeper, this article is for you.
 ```
 
-
-
 #### ④ "What You'll Learn" List — _Recommended for posts over 500 words_
 
 After the intro, add a structured overview so readers know what to expect:
@@ -164,7 +151,6 @@ After the intro, add a structured overview so readers know what to expect:
 - **Practical Examples**: Hands-on code you can use immediately
 - **Summary**: Key takeaways to remember
 ```
-
 
 #### ⑤ Main Content Sections — _Required_
 
@@ -181,6 +167,7 @@ Explanation paragraph.
 
 ```language
 // code example
+```
 ````
 
 **Explanation**: Describe what this code does and _why_ it works this way. Keep this grounded — don't just repeat what the code says.
@@ -211,8 +198,6 @@ Every post **must end** with a conclusion section:
 ````
 
 The conclusion should leave the reader with a clear sense of what they just learned and where to go next. It should not introduce new concepts.
-
-
 
 ### 3. Ready-to-Use Template
 
@@ -258,7 +243,6 @@ Explanation of the concept in plain language.
 // Your code example here
 ```
 
-
 **Explanation**: What this code does and why it's written this way.
 
 ### Second Subsection
@@ -276,9 +260,4 @@ Explanation of the concept in plain language.
 ## Conclusion
 
 Summarize the key points from the post in 2–4 sentences. Mention what the reader should now be able to do, and optionally suggest next steps.
-
-
 ````
-
-
-
