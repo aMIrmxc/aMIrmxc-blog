@@ -1,7 +1,7 @@
 ---
 title: "Medusa.js v2 — The Headless Commerce Engine That Changed the Rules"
 description: "Why are developers migrating from Shopify and WooCommerce to Medusa? From modular architecture and Workflows to deployment — the complete guide to Medusa v2"
-post_id: "introduce-medusa-v2-en"
+post_id: "introduce-medusa-v2"
 publishDate: "8 Jun 2026"
 tags: ["Medusa.js", "Headless Commerce", "E-commerce", "TypeScript", "Next.js", "Open-Source", "Node.js"]
 pinned: true
@@ -10,7 +10,7 @@ eng: true
 
 # Medusa.js — The E-commerce Engine That Changed the Rules
 
-![Medusa.js cover image](img2.png)
+![Medusa.js cover image](img.png)
 
 If you've ever burned hours fighting incompatible WooCommerce plugins, or hit Shopify's customization ceiling, this article is for you.
 
