@@ -5,6 +5,8 @@ post_id: "git-recap"
 publishDate: "14 Jan 2024"
 updatedDate: "27 Feb 2025"
 tags: ["git", "cheatsheet"]
+author: "amirmxc"
+authorUrl: "https://github.com/amirmxc"
 ---
 
 

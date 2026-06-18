@@ -36,6 +36,8 @@ const post = defineCollection({
 					.string()
 					.optional()
 					.transform((str) => (str ? new Date(str) : undefined)),
+				author: z.string().optional(),
+				authorUrl: z.string().optional()
 			}),
 });
 
@@ -79,6 +81,7 @@ const project = defineCollection({
 			techStack: z.array(z.string()).default([]),
 			githubUrl: z.string().optional(),
 			demoUrl: z.string().optional(),
+
 		}),
 });
 
