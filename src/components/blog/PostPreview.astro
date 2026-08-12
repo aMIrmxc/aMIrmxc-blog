@@ -61,7 +61,7 @@ if (coverImageSrc) {
  />
  <Tag>
   {post.data.draft && <span class="text-red-500">(Draft) </span>}
-  <a dir="rtl" class="mxc-link text-l font-bold" data-astro-prefetch href={`/posts/${post.id}/`}>
+  <a dir={post.data.eng ? "ltr" : "rtl"} class="mxc-link text-l font-bold" data-astro-prefetch href={`/posts/${post.id}/`}>
    {post.data.title}
   </a>
  </Tag>

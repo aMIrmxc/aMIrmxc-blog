@@ -37,9 +37,8 @@ import MenuLinks from "../MenuLinks.astro";
 			<MenuLinks />
 		</nav>
 	</div>
-	<div class="flex w-full items-center justify-center gap-x-1 sm:w-auto sm:ms-auto sm:justify-end">
+	<div class="flex w-full items-center justify-center gap-2 sm:w-auto sm:ms-auto sm:justify-end">
 		<SearchIcon />
-		<ThemeToggleIcon />
 		{
 			Astro.url.pathname === "/" ||
 			Astro.url.pathname === "/eng/" ||
@@ -48,20 +47,11 @@ import MenuLinks from "../MenuLinks.astro";
 				<TranslateIcon />
 			) : null
 		}
+		<ThemeToggleIcon />
 		<AuthStatus client:load />
 		<AuthIcon />
 		<Auth />
-		<button
-			aria-expanded="false"
-			aria-haspopup="menu"
-			class="group relative h-7 w-7 sm:hidden"
-			id="toggle-navigation-menu"
-			type="button"
-		>
-			<span class="sr-only">Open main menu</span>
-			
-			
-		</button>
+
 	</div>
 </header>
 
