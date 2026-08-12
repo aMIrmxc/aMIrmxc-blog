@@ -21,8 +21,8 @@
 	},
 	"tailwindCSS.experimental.configFile": "./src/styles/global.css",
 	"workbench.colorCustomizations": {
-		"activityBar.background": "#4F1647",
-		"titleBar.activeBackground": "#6F1F63",
+		"activityBar.background": "#38164f",
+		"titleBar.activeBackground": "#5f1f6f",
 		"titleBar.activeForeground": "#FDF8FC",
 		"titleBar.inactiveBackground": "#4F1647",
 		"titleBar.inactiveForeground": "#FDF8FC",

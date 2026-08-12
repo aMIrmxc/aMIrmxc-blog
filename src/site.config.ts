@@ -14,7 +14,7 @@ export const siteConfig: SiteConfig = {
 		},
 	},
 	// Used as the default description meta property and webmanifest description
-	description: "The blog of aMIrmxc, built with Astro",
+	description: "The website of aMIrmxc, built with Astro",
 	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
 	lang: "fa-IR",
 	// Meta property, found in src/components/BaseHead.astro L:42
@@ -25,7 +25,7 @@ export const siteConfig: SiteConfig = {
 		- The link value found in src/components/layout/Header.astro L:35
 		- In the footer found in src/components/layout/Footer.astro L:12
 	*/
-	title: "aMIrmxc-blog ⚙",
+	title: "aMIrmxc ⚙",
 	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
 	url: 'https://amirmxc.ir',
 };
