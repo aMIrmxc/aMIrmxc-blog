@@ -1,6 +1,6 @@
 ---
-title: "A Quick Docker Overview"
-description: "Learn how to package your applications into containers with Docker and run them anywhere without worries"
+title: "Docker Tutorial: The Complete Beginner's Guide to Containers"
+description: "Learn Docker from the ground up — containers, images, volumes, and networking explained with practical examples. Everything you need to start deploying apps with confidence."
 post_id: "learn-docker-fast"
 publishDate: "1 Feb 2024"
 updatedDate: "23 Jan 2025"

@@ -1,9 +1,9 @@
 ---
-title: "Express.js Fundamentals Tutorial"
-description: "Complete Express.js guide covering routing, middleware, view engines and advanced techniques for building powerful backends"
+title: "Express.js Fundamentals: Complete Guide to Routing & Middleware"
+description: "A complete guide to Express.js covering routing, middleware, view engines, and advanced techniques for building powerful Node.js backends."
 post_id: "learn-expressjs-fundamentals"
 publishDate: "17 Sep 2024"
-updatedDate: "03 Apr 2025"
+updatedDate: "7 Sep 2026"
 tags: ["expressjs", "nodejs", "backend", "javascript"]
 eng: true
 ---

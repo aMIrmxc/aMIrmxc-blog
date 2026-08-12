@@ -1,8 +1,9 @@
 ---
-title: "Astro درمقابل Next.js "
-description: "مقایسه جامع Astro و Next.js از نظر performance، معماری، انعطاف‌پذیری و انتخاب مناسب برای پروژه‌های مختلف"
+title: "Astro در مقابل Next.js: کدام فریم‌ورک را انتخاب کنیم؟"
+description: "مقایسه کامل Astro و Next.js از نظر عملکرد، معماری، انعطاف‌پذیری و SSR در برابر SSG؛ راهنمای انتخاب فریم‌ورک مناسب برای پروژه شما."
 post_id: "astro-vs-nextjs"
 publishDate: "17 Apr 2025"
+updatedDate: "03 Mar 2026"
 tags: ["astro", "nextjs", "performance", "react", "ssr", "ssg"]
 ---
 

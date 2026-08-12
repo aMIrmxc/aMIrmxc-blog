@@ -1,6 +1,6 @@
 ---
-title: "React، Vue، Angular – مقایسه‌ی هم‌زمان سه غول Frontend"
-description: "در این پست به‌صورت جانبی و هم‌زمان React، Vue و Angular را بررسی می‌کنیم؛ اشتراکات معماری کامپوننتی، رندرینگ واکنشی و مدیریت وضعیت را کنار هم برسی می کنیم. "
+title: "مقایسه React، Vue و Angular؛ کدام فریم‌ورک بهتر است؟"
+description: "مقایسه‌ای جامع بین React، Vue و Angular از نظر معماری، مدیریت State و عملکرد؛ راهنمای انتخاب فریم‌ورک مناسب برای پروژه شما"
 post_id: "react-vue-angular"
 publishDate: "10 Nov 2024"
 tags: ["Vue", "React" , "Angular", "Learn"]

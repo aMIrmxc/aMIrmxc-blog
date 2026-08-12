@@ -1,6 +1,6 @@
 ---
-title: "بررسی TypeORM؛ قدرتمندترین ORM سنتی در اکوسیستم Node.js"
-description: "آشنایی با TypeORM و قابلیت‌های آن برای مدیریت دیتابیس در Node.js، از مفاهیم پایه تا پیاده‌سازی عملی"
+title: "آموزش TypeORM؛ قدرتمندترین ORM در اکوسیستم Node.js"
+description: "آموزش کامل TypeORM، قدرتمندترین ORM سنتی در Node.js. با مفاهیم پایه ORM آشنا شوید و آن را در پروژه‌های Express.js به‌کار ببرید."
 post_id: "typeorm-introduction"
 publishDate: "10 Feb 2026"
 tags: ["TypeORM", "ORM", "Node.js", "TypeScript", "Database", "SQL"]

@@ -1,6 +1,6 @@
 ---
-title: "برسی Next.js 15  "
-description: "هر آنچه برای ارتقاء به Next.js 15 نیاز دارید؛ از Codemod خودکار تا breaking changeهای caching و async APIها"
+title: "آموزش کامل Next.js 15: تغییرات Breaking، Codemod و Async API"
+description: "هر آنچه برای ارتقا به Next.js 15 باید بدانید: Codemod خودکار، تغییرات کش (caching) و API‌های Async با مثال‌های عملی."
 post_id: "introduce-new-nextjs15"
 publishDate: "04 Apr 2024"
 updatedDate: "13 Mar 2025"

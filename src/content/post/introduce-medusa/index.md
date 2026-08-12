@@ -1,11 +1,10 @@
 ---
-title: "Medusa.js v2 — موتور Headless Commerce که قوانین بازی را عوض کرد"
-description: "چرا توسعه‌دهنده‌ها دارند از Shopify و WooCommerce به Medusa مهاجرت می‌کنند؟ از معماری ماژولار و Workflows تا دیپلوی  — راهنمای کامل Medusa v2"
+title: "Medusa.js v2؛ جایگزین متن‌باز Shopify که توسعه‌دهندگان عاشقش شدند"
+description: "چرا توسعه‌دهندگان از Shopify و WooCommerce به سراغ Medusa.js می‌روند؟ راهنمای کامل معماری، Workflow ها و ماژول‌های Medusa v2 به همراه مثال عملی"
 post_id: "introduce-medusa-v2"
-publishDate: "8 Jun 2026"
+publishDate: "08 Jun 2026"
 pinned: true
 tags: ["Medusa.js", "Headless Commerce", "E-commerce", "TypeScript", "Next.js", "Open-Source", "Node.js"]
-
 ---
 # Medusa.js  — موتور تجارت الکترونیک که قوانین بازی را عوض کرد
 

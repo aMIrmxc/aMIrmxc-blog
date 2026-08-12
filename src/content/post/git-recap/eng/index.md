@@ -1,6 +1,6 @@
 ---
-title: "Quick Git Commands Recap"
-description: "A comprehensive, condensed cheat-sheet covering Git commands from beginner to advanced"
+title: "Git Commands Cheat Sheet: The Complete Guide from Basics to Advanced"
+description: "A comprehensive, practical Git cheat sheet covering commands, branching strategies, merge vs rebase, resets, tagging, and fixes for common Git problems."
 post_id: "git-recap"
 publishDate: "14 Jan 2024"
 updatedDate: "27 Feb 2025"

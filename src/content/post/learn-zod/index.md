@@ -1,9 +1,9 @@
 ---
-title: "برسی Zod : راهنمای جامع TypeScript Schema Validation"
-description: "یاد بگیرید چطور با Zod validation قدرتمند و type-safe برای TypeScript بسازید؛ با مثال‌های عملی"
+title: "راهنمای کامل Zod: اعتبارسنجی اسکیما در TypeScript"
+description: "با Zod، کتابخانه اعتبارسنجی اسکیمای مخصوص TypeScript آشنا شوید؛ ترکیبی از اعتبارسنجی در زمان اجرا و ایمنی نوع در زمان کامپایل، همراه با مثال‌های عملی."
 post_id: "learn-zod"
 publishDate: "14 Sep 2024"
-updatedDate: "03 Mar 2025"
+pupdatedDatee: "9 Sep 2026"
 tags: ["typescript", "zod", "validation"]
 ---
 

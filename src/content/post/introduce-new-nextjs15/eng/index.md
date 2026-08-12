@@ -1,6 +1,6 @@
 ---
-title: "Next.js 15 Review"
-description: "Everything you need to upgrade to Next.js 15: from the automatic Codemod to caching breaking changes and async APIs"
+title: "Next.js 15 Guide: Breaking Changes, Codemod & Async APIs"
+description: "Everything you need to upgrade to Next.js 15: automatic codemod, caching changes & async APIs explained with real examples."
 post_id: "introduce-new-nextjs15"
 publishDate: "04 Apr 2024"
 updatedDate: "13 Mar 2025"

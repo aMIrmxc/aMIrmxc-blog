@@ -1,6 +1,6 @@
 ---
-title: "React, Vue, Angular – A Side-by-Side Comparison of the Three Frontend Giants"
-description: "In this post we examine React, Vue and Angular in parallel; we look at their shared component architecture, reactive rendering and state management side-by-side."
+title: "React vs Vue vs Angular: The Ultimate 2026 Comparison"
+description: "A side-by-side comparison of React, Vue, and Angular covering architecture, state management, and performance to help you pick the right framework."
 post_id: "react-vue-angular"
 publishDate: "10 Nov 2024"
 tags: ["Vue", "React", "Angular", "Learn"]

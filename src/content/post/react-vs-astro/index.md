@@ -1,6 +1,6 @@
 ---
-title: "یادگیری Astro برای React Developer ها"
-description: "راهنمای جامع مهاجرت از React به Astro با مثال‌های کاربردی و مقایسه کد‌به‌کد"
+title: "آموزش Astro برای برنامه‌نویسان React: راهنمای کامل مهاجرت"
+description: "راهنمای کاربردی یادگیری Astro از دید یک توسعه‌دهنده React، با مقایسه کد به کد، مفاهیم کلیدی و مثال‌های عملی برای ساخت وب‌سایت‌های سریع با کمترین جاوااسکریپت."
 post_id: "react-vs-astro"
 publishDate: "17 Aug 2025"
 tags: ["astro", "react" ] 

@@ -1,9 +1,9 @@
 ---
-title: "Introduction to All React Hooks"
-description: "A comprehensive reference for getting to know every React Hook, their use-cases and a practical example for each"
+title: "React Hooks Explained: The Complete Guide (All 8 Types)"
+description: "Master every React Hook — State, Effect, Ref, Performance, Context, Transition, Utility, and React 19 Hooks — with clear explanations and real-world examples."
 post_id: "all-react-hooks"
 publishDate: "02 Mar 2024"
-updatedDate: "03 Jan 2025"
+updatedDate: "03 june 2026"
 tags: ["React", "Hooks", "JavaScript", "Frontend"]
 eng: true
 ---

@@ -1,6 +1,6 @@
 ---
-title: "Exploring Prisma: The Most Popular ORM in the Node.js Ecosystem"
-description: "Getting to know Prisma and how to connect, model, and query SQL databases securely using TypeScript"
+title: "Prisma ORM Tutorial: The Most Popular ORM for Node.js"
+description: "A beginner-friendly guide to Prisma ORM, the most popular ORM in the Node.js ecosystem. Learn core concepts, prerequisites, and how it powers modern backends."
 post_id: "prisma-introduction"
 publishDate: "14 Jan 2026"
 tags: ["Prisma", "ORM", "Node", "TypeScript", "PostgreSQL", "MySQL", "SQL"]

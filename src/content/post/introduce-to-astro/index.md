@@ -1,6 +1,6 @@
 ---
-title: "چرا Astro فوق‌العاده سریعه ؟"
-description: "بررسی کامل architecture، مزایای performance و اینکه چرا Astro طرز فکرمون رو نسبت به web development عوض کرده"
+title: "چرا Astro اینقدر سریع است؟ نگاهی عمیق به معماری بدون جاوااسکریپت"
+description: "بررسی جامع دلایل سرعت فوق‌العاده Astro؛ از فلسفه Zero JavaScript by Default تا معماری Islands و مقایسه با React، Vue و Angular"
 post_id: "introduce-to-astro"
 publishDate: "14 Aug 2025"
 tags: ["astro", "performance"]

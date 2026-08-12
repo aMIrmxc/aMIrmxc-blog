@@ -1,8 +1,9 @@
 ---
-title: "Learning Vue.js Alongside React Code Examples"
-description: By reading this post you'll walk through 13 practical, comparative steps—from component structure and state to Context vs. Provide/Inject and Redux vs. Pinia.
+title: "Vue.js for React Developers: The Complete Comparison Guide"
+description: "A practical 13-step guide comparing React and Vue.js: components, state, hooks vs composables, Context vs Provide/Inject, and Redux vs Pinia."
 post_id: "vue-vs-react"
 publishDate: "09 Oct 2024"
+updatedDate: "19 Oct 2026"
 tags: ["Vue", "Learn", "React"]
 eng: true
 ---

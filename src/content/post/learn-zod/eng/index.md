@@ -1,9 +1,9 @@
 ---
-title: "Zod Review: A Comprehensive Guide to TypeScript Schema Validation"
-description: "Learn how to build powerful, type-safe validation for TypeScript with Zod; complete with practical examples"
+title: "Zod TypeScript Schema Validation: The Complete Guide"
+description: "Master Zod, the TypeScript-first schema validation library that combines runtime validation with compile-time type safety, with practical examples."
 post_id: "learn-zod"
 publishDate: "14 Sep 2024"
-updatedDate: "03 Mar 2025"
+updatedDate: "9 Sep 2026"
 tags: ["typescript", "zod", "validation"]
 eng: true
 ---

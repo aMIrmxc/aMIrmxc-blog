@@ -1,8 +1,9 @@
 ---
-title: "از React تا Angular: یادگیری گام‌به‌گام Angular برای توسعه‌دهندگان React"
-description: "اگر React کار می‌کنید و می‌خواهید Angular را هم یاد بگیرید، این مقاله دقیقاً برای شماست. بدون شروع از صفر، با مقایسه‌ی مفاهیم React و Angular، سریع‌ترین مسیر یادگیری را طی کنید."
+title: "از React به Angular: راهنمای کامل یادگیری Angular برای توسعه‌دهندگان React"
+description: "دیگر Angular را از صفر یاد نگیرید؛ با مقایسه مفاهیم آشنای React مثل useState و useEffect با معادل‌هایشان در Angular، سریع‌ترین مسیر یادگیری را طی کنید."
 post_id: "angular-vs-react"
 publishDate: "22 Nov 2025"
+updatedDate: "03 Feb 2026"
 tags: ["React", "Angular", "Frontend"]
 ---
 

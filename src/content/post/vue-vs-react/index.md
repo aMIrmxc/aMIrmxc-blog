@@ -1,12 +1,11 @@
 ---
-title: " یادگیری Vue.js در کنار نمونه کد های React.js "
-description: با خواندن این پست ۱۳ قدمِ مقایسه‌ایِ کاملاً عملی را طی می‌کنید؛ از ساختار کامپوننت و state گرفته تا Context vs. Provide/Inject و Redux vs. Pinia."
+title: "آموزش Vue.js برای برنامه‌نویسان React: راهنمای کامل ۱۳ مرحله‌ای"
+description: "راهنمای عملی ۱۳ مرحله‌ای مقایسه React و Vue.js؛ کامپوننت، مدیریت state، Context در برابر Provide/Inject و Redux در برابر Pinia، همراه با یک پروژه واقعی."
 post_id: "vue-vs-react"
 publishDate: "09 Oct 2024"
+updatedDate: "19 Oct 2026"
 tags: ["Vue", "Learn", "React"]
 ---
-
-
 
 
 # یادگیری Vue.js برای توسعه دهندگان React 

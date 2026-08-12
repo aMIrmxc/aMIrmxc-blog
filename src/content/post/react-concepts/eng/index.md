@@ -1,6 +1,6 @@
 ---
-title: "React JS Fundamental Concepts"
-description: "This post covers all the fundamental concepts of React—from components and JSX to Context, Portals, and Error Boundaries—with practical examples and simple explanations."
+title: "Essential React.js Concepts: A Complete Guide for Beginners"
+description: "A complete guide to core React.js concepts — components, JSX, state, props and more — explained simply with practical, real-world examples."
 post_id: "react-concepts"
 publishDate: "15 Apr 2024"
 updatedDate: "03 Jan 2025"

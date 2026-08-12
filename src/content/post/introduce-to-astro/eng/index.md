@@ -1,6 +1,6 @@
 ---
-title: "Why is Astro incredibly fast?"
-description: "A comprehensive look at its architecture, performance benefits, and how Astro has changed the way we think about web development"
+title: "Why Astro Is So Fast: Zero-JavaScript Architecture Explained"
+description: "Discover why Astro outperforms React, Vue, and Angular with its zero-JS-by-default philosophy, islands architecture, and blazing-fast page loads."
 post_id: "introduce-to-astro"
 publishDate: "14 Aug 2025"
 tags: ["astro", "performance"]
