@@ -5,8 +5,8 @@ export interface SiteConfig {
 		options: Intl.DateTimeFormatOptions;
 	};
 	description: string;
-	lang: string;
-	ogLocale: string;
+	lang?: string;
+	ogLocale?: string;
 	title: string;
 	url: string;
 }

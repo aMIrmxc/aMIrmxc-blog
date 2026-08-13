@@ -6,7 +6,7 @@ export const siteConfig: SiteConfig = {
 	author: "aMIrmxc",
 	// Date.prototype.toLocaleDateString() parameters, found in src/utils/date.ts.
 	date: {
-		locale: "en-GB",
+		locale: "en-US",
 		options: {
 			day: "numeric",
 			month: "short",
@@ -15,17 +15,15 @@ export const siteConfig: SiteConfig = {
 	},
 	// Used as the default description meta property and webmanifest description
 	description: "The website of aMIrmxc, built with Astro",
-	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
-	lang: "fa-IR",
-	// Meta property, found in src/components/BaseHead.astro L:42
-	ogLocale: "fa_IR",
+	// // webmanifest language found in  astro.config.ts L:48
+	// lang: "fa_IR",
 	/*
 		- Used to construct the meta title property found in src/components/BaseHead.astro L:11
 		- The webmanifest name found in astro.config.ts L:42
 		- The link value found in src/components/layout/Header.astro L:35
 		- In the footer found in src/components/layout/Footer.astro L:12
 	*/
-	title: "aMIrmxc ⚙",
+	title: "aMIrmxc",
 	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
 	url: 'https://amirmxc.ir',
 };

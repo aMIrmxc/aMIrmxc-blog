@@ -51,7 +51,7 @@ export default defineConfig({
 			name: siteConfig.title,
 			// short_name: "aMIrmxc-blog ⚙", // optional
 			description: siteConfig.description,
-			lang: siteConfig.lang,
+			lang: "en_US",
 			icon: "/icon.png", // the source for generating favicon & icons
 			icons: [
 				{

@@ -9,9 +9,13 @@ type Props = SiteMeta;
 const { articleDate, description, ogImage, title } = Astro.props;
 
 const titleSeparator = "•";
-const pagesWithSiteTitle = ["/", "/posts/", "/notes/", "/about/"];
-const shouldAddSiteTitle = pagesWithSiteTitle.includes(Astro.url.pathname);
-const siteTitle = shouldAddSiteTitle ? `${title} ${titleSeparator} ${siteConfig.title}` : title;
+
+// const pagesWithSiteTitle = ["/", "/posts/", "/notes/", "/about/"];
+// const shouldAddSiteTitle = pagesWithSiteTitle.includes(Astro.url.pathname);
+// const pageTitle = shouldAddSiteTitle ? `${title} ${titleSeparator} ${siteConfig.title}` : title;
+
+const pageTitle =  title;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url).href;
 
@@ -20,12 +24,24 @@ const noIndexPaths = ['/tags', '/projects'];
 const isNoIndexsPage = noIndexPaths.some((path) =>
 	Astro.url.pathname.startsWith(path)
 );
+
+
+// استراکچرد دیتا برای ثبت نام سایت در گوگل(متنی که در بالاترین قسمت گوگل و بالای url نمایش داده میشود)
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"name": siteConfig.title,
+	"url": Astro.site?.href || canonicalURL.origin,
+};
 ---
 
 <meta charset="utf-8" />
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 {isNoIndexsPage && <meta name="robots" content="noindex" />}
-<title>{siteTitle}</title>
+<title>{`${title} ${titleSeparator} ${siteConfig.title}`}</title>
+
+{/* Google Site Name Schema */}
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
 {/* Icons */}
 <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -38,7 +54,7 @@ const isNoIndexsPage = noIndexPaths.some((path) =>
 <link href={canonicalURL} rel="canonical" />
 
 {/* Primary Meta Tags */}
-<meta content={siteTitle} name="title" />
+<meta content={pageTitle} name="title" />
 <meta content={description} name="description" />
 <meta content={siteConfig.author} name="author" />
 
@@ -48,8 +64,10 @@ const isNoIndexsPage = noIndexPaths.some((path) =>
 <meta content={description} property="og:description" />
 <meta content={canonicalURL} property="og:url" />
 <meta content={siteConfig.title} property="og:site_name" />
-<meta content={siteConfig.ogLocale} property="og:locale" />
 <meta content={socialImageURL} property="og:image" />
+<!-- <meta content={siteConfig.ogLocale} property="og:locale" /> -->
+<meta property="og:locale" content="fa_IR">
+<meta property="og:locale:alternate" content="en_US">
 <meta content="1200" property="og:image:width" />
 <meta content="630" property="og:image:height" />
 {
