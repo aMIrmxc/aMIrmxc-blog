@@ -14,7 +14,7 @@ export const siteConfig: SiteConfig = {
 		},
 	},
 	// Used as the default description meta property and webmanifest description
-	description: "The website of aMIrmxc, built with Astro",
+	description: "This is Amirmxc's website, a software developer focused on the node.js ecosystem. Here I share ideas,experiments, and practical lessons I’ve found genuinely useful in real projects.",
 	// // webmanifest language found in  astro.config.ts L:48
 	// lang: "fa_IR",
 	/*
