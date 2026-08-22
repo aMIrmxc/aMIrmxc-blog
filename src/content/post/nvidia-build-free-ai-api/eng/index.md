@@ -2,7 +2,7 @@
 title: "NVIDIA Build: A Complete Guide to Free API Access for 100+ AI Models"
 description: "Get a free NVIDIA API key and connect it to Cursor, Cline, Open Code, Open WebUI, and VS Code extensions — a step-by-step setup guide plus the real credit and rate limits."
 post_id: "nvidia-build-free-ai-api"
-publishDate: "13 Aug 2026"
+publishDate: "13 june 2026"
 tags: ["NVIDIA", "AI", "API", "Coding Tools"]
 eng: true
 ---

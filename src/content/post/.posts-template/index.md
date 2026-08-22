@@ -8,7 +8,7 @@ tags: ["tag1", "tag2"]
 
 # Your Post Title
 
-![Cover image description](img.png)
+![Cover image](img.png)
 
 **Bold opening sentence that sets the tone and grabs attention.**
 
@@ -21,7 +21,6 @@ Mention what prior knowledge is helpful.
 - **Second topic**: Brief description
 - **Third topic**: Brief description
 
----
 
 ## First Main Section
 
@@ -42,13 +41,11 @@ Explanation of the concept in plain language.
 
 ...
 
----
 
 ## Second Main Section
 
 ...
 
----
 
 ## Conclusion
 

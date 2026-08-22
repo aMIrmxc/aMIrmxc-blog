@@ -2,7 +2,7 @@
 title: "NVIDIA Build: راهنمای کامل دسترسی رایگان به API بیش از ۱۰۰ مدل هوش مصنوعی"
 description: "یک کلید API رایگان از NVIDIA بگیرید و آن را به Cursor، Cline، Open Code، Open WebUI و افزونه‌های VS Code وصل کنید — راهنمای گام‌به‌گام همراه با محدودیت‌های واقعی اعتبار و نرخ درخواست."
 post_id: "nvidia-build-free-ai-api"
-publishDate: "13 Aug 2026"
+publishDate: "13 june 2026"
 tags: ["NVIDIA", "هوش مصنوعی", "API", "ابزارهای کدنویسی"]
 ---
 

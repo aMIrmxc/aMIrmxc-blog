@@ -73,7 +73,6 @@ Every post **must** follow this structure exactly.
 Every post starts with a YAML block between `---` markers. This is required.
 
 ```yaml
----
 title: "Your Post Title"
 description: "A one or two sentence summary of what this post covers"
 post_id: "your-post-url"
@@ -82,7 +81,6 @@ tags: ["tag1", "tag2"]
 author: "Your Name"
 authorUrl: "https://github.com/your-username"
 eng: true
----
 ```
 
 | Field         | Type    | Required | Description                                                    |
@@ -181,14 +179,12 @@ Explanation paragraph.
 - Use `---` between major sections to create visual breathing room.
 - If a section has multiple sub-scenarios, use `#### H4` headings for them.
 
----
 
 #### ⑦ Conclusion / Summary — *Required*
 
 Every post **must end** with a conclusion section:
 
 ```markdown
----
 
 ## Conclusion
 
@@ -204,7 +200,6 @@ The conclusion should leave the reader with a clear sense of what they just lear
 Copy this template and fill it in:
 
 ````markdown
----
 title: "Your Post Title"
 description: "Short description of your post for search engines and previews"
 post_id: "your-post-url"
@@ -212,7 +207,6 @@ publishDate: "01 Jan 2025"
 tags: ["tag1", "tag2"]
 author: "Your Name"
 authorUrl: "https://github.com/your-username"
----
 
 # Your Post Title
 
@@ -229,7 +223,6 @@ Mention what prior knowledge is helpful.
 - **Second topic**: Brief description
 - **Third topic**: Brief description
 
----
 
 ## First Main Section
 
@@ -249,13 +242,11 @@ Explanation of the concept in plain language.
 
 ...
 
----
 
 ## Second Main Section
 
 ...
 
----
 
 ## Conclusion
 

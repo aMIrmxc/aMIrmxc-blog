@@ -1,5 +1,5 @@
 ---
-title: "Medusa.js v2؛ جایگزین متن‌باز Shopify که توسعه‌دهندگان عاشقش شدند"
+title: "Medusa.js ؛ جایگزین متن‌باز Shopify که توسعه‌دهندگان عاشقش شدند"
 description: "چرا توسعه‌دهندگان از Shopify و WooCommerce به سراغ Medusa.js می‌روند؟ راهنمای کامل معماری، Workflow ها و ماژول‌های Medusa v2 به همراه مثال عملی"
 post_id: "introduce-medusa-v2"
 publishDate: "08 Jun 2026"

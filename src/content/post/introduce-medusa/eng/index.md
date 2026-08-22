@@ -1,5 +1,5 @@
 ---
-title: "Medusa.js v2: The Open-Source Shopify Alternative Developers Love"
+title: "Medusa.js: The Open-Source Shopify Alternative Developers Love"
 description: "Why are developers migrating from Shopify and WooCommerce to Medusa.js? A complete guide to v2's architecture, Workflows, Modules, and hands-on development."
 post_id: "introduce-medusa-v2"
 publishDate: "08 Jun 2026"
