@@ -1,7 +1,7 @@
-
+---
 title: "Next.js Load Balancing & Failover Demo"
 description: "A practical demonstration of load balancing and failover using Next.js, Nginx, Docker, and Docker Compose."
-publishDate: 2026-06-08
+publishDate: "2026-06-18"
 techStack:
   - Next.js
   - Nginx
@@ -11,7 +11,7 @@ techStack:
   - Health-aware Upstream Configuration
 githubUrl: "https://github.com/aMIrmxc/nginx-failover-loadbalancer"
 demoUrl: "https://www.aparat.com/v/tcy26we"
-
+---
 
 # Next.js Load Balancing & Failover Demo
 
