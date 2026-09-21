@@ -3,10 +3,12 @@ title: "Medusa.js: The Open-Source Shopify Alternative Developers Love"
 description: "Why are developers migrating from Shopify and WooCommerce to Medusa.js? A complete guide to v2's architecture, Workflows, Modules, and hands-on development."
 post_id: "introduce-medusa-v2"
 publishDate: "08 Jun 2026"
+publishDate: "20 sep 2026"
 tags: ["Medusa.js", "Headless Commerce", "E-commerce", "TypeScript", "Next.js", "Open-Source", "Node.js"]
 pinned: true
 eng: true
 ---
+
 
 # Medusa.js — The E-commerce Engine That Changed the Rules
 
@@ -23,7 +25,7 @@ Choosing Medusa.js as the core of an e-commerce project has become hugely popula
 This post covers:
 
 1. **What "headless" means** — decoupling the backend from the frontend, and why that matters
-2. **Why Medusa** — how it compares to competitors, what open-source buys you, and why it's a great fit for markets like Iran
+2. **Why Medusa** — how it compares to competitors, what open-source buys you, and why it's a great fit for modern, scalable businesses
 3. **The v2 architecture** — the four core concepts: Routes, Workflows, Subscribers, and Modules
 4. **Hands-on development** — building Subscribers, custom APIs, custom Modules, Workflows, and more
 5. **Admin panel extensions** — adding widgets to the admin UI without touching the core
@@ -40,7 +42,7 @@ Medusa is built on Node.js and TypeScript, so if your team already knows JavaScr
 Unlike SaaS platforms such as Shopify or BigCommerce, you own 100% of your code and data with Medusa. Nothing stops you from migrating, switching hosts, or changing how the system behaves — a critical point for companies worried about being locked into someone else's platform.
 
 **4. High extensibility**
-Medusa has a powerful plugin system. You can easily add local payment gateways (*such as ZarinPal or NextPay, popular providers in Iran*), custom shipping methods, or complex business rules — conditional discounts, for example — as plugins.
+Medusa has a powerful plugin system. You can easily add global payment gateways (*such as Stripe, PayPal, or Adyen*), custom shipping providers (*like DHL or FedEx*), or complex business rules — conditional discounts, for example — as plugins.
 
 **5. Lower total cost of ownership at scale**
 SaaS platforms tend to charge more as you grow — higher transaction fees, or enterprise plans like Shopify Plus that run into thousands of dollars a month. Medusa itself is free; you only pay for infrastructure (servers, databases) and your dev team, which is far more cost-effective at scale.
@@ -57,7 +59,7 @@ Medusa is not a drag-and-drop tool for non-technical users. Setting it up, custo
 If you run the open-source, self-hosted version, security, backups, database administration (PostgreSQL), Redis, and server updates are entirely on your team. (Medusa now also offers a managed **Medusa Cloud** option that takes this burden off your hands — for a price.)
 
 **3. A smaller ecosystem than the big players**
-Medusa has far fewer plugins, extensions, and ready-made themes than Shopify or WooCommerce. Integrating with a niche service — say, a particular Iranian accounting package — may mean building that integration yourself from scratch.
+Medusa has far fewer plugins, extensions, and ready-made themes than Shopify or WooCommerce. Integrating with a niche service — say, a specific regional ERP or an accounting software like Xero or NetSuite — may mean building that integration yourself from scratch.
 
 **4. A learning curve**
 Medusa's DX is great once you're up to speed, but understanding its specific architecture — Services, Repositories, Subscribers, Loaders — takes time for developers new to the framework.
@@ -236,7 +238,7 @@ Create a `.env.local` file:
 # .env.local
 NEXT_PUBLIC_MEDUSA_BACKEND_URL=http://localhost:9000
 NEXT_PUBLIC_BASE_URL=http://localhost:8000
-NEXT_PUBLIC_DEFAULT_REGION=ir
+NEXT_PUBLIC_DEFAULT_REGION=us
 REVALIDATE_WINDOW=600
 ```
 
@@ -288,7 +290,7 @@ export const listProducts = async ({
 This code:
 
 1. Calls the `/store/products` API on the backend
-2. Returns prices in whatever currency the given `region_id` is configured for (Iranian Rial, in this example)
+2. Returns prices in whatever currency the given `region_id` is configured for (US Dollars, in this example)
 3. Uses Next.js cache `tags` for revalidation
 
 You can call this function from the products page (`app/[countryCode]/(main)/store/page.tsx`) to render your catalog.
